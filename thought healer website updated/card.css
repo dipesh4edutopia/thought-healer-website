@@ -1,0 +1,363 @@
+/* ============================
+   Thought Healer Card Styles
+   (namespaced with th-)
+   ============================ */
+
+/* ––––––––––––––––––––––––––––––
+   Variables & Resets
+–––––––––––––––––––––––––––––– */
+:root {
+  --primary: #5e72e4;
+  --primary-light: #825ee4;
+  --secondary: #8a2be2;
+  --dark: #2d3748;
+  --light: #f7fafc;
+  --gold: #FFD700;
+  --gold-dark: #D4AF37;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.05);
+  --shadow-gold: 0 0 15px rgba(255, 215, 0, 0.7);
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #0f172a;
+  --card-bg: #ffffff;
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --card-bg: #1e293b;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+h1 {
+  padding: 5rem 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+/* Grid Layout */
+.th-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .th-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Core */
+.th-card {
+  perspective: 1500px;
+  cursor: pointer;
+  position: relative;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.th-card:nth-child(1) { animation-delay: 0.1s; }
+.th-card:nth-child(2) { animation-delay: 0.2s; }
+.th-card:nth-child(3) { animation-delay: 0.3s; }
+.th-card:nth-child(4) { animation-delay: 0.4s; }
+
+.th-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: var(--transition);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.th-card:hover .th-card-inner {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.th-card.is-flipped .th-card-inner {
+  transform: rotateY(180deg);
+  box-shadow: 0 0 25px var(--gold);
+}
+
+/* Card Faces */
+.th-card-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+/* Front */
+.th-card-front {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.th-card-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.th-card-front-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.th-card-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 4px 12px rgba(94, 114, 228, 0.3);
+}
+
+.th-card-front h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: black;
+}
+
+.th-card-front p {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.th-flip-badge {
+  position: absolute;
+  top: 0; left: 0;
+  background: var(--gold);
+  color: #000;
+  padding: 0.5rem 1.2rem;
+  border-radius: 16px 0 16px 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-gold);
+  z-index: 1;
+  transform: translate(-1px, -1px);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: none;
+  border-left: none;
+}
+
+/* Back */
+.th-card-back {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  transform: rotateY(180deg);
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.th-card-back-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Per-card image tweaks */
+.th-card-grid .th-card:nth-child(1) .th-card-back-image {
+  background-color: #e0f7fa !important;
+  object-position: top center;
+  transform: translateY(-12%);
+}
+.th-card-grid .th-card:nth-child(2) .th-card-back-image {
+  background-color: #f3e5f5 !important;
+  height: 50%;
+  object-position: center;
+  transform: translateY(-20%);
+}
+
+/* Back Buttons */
+.th-card-back .th-card-buttons {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+[data-category="anxiety"]   .th-card-back .th-card-btn { background: #45396b; color: white; }
+[data-category="depression"] .th-card-back .th-card-btn { background: #8662b8; color: white; }
+[data-category="stress"]     .th-card-back .th-card-btn { background: #b848c8; color: white; }
+
+.th-card-back .th-card-btn {
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.th-card-back .th-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.th-card-front .th-card-buttons {
+  display: none;                                                   #f1e4f5
+}
+
+/* ============================
+   Theme Toggle Button
+   ============================ */
+.theme-toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--bg-secondary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .theme-toggle::after {
+  transform: translateX(30px);
+  background-color: var(--secondary);
+}
+
+.th-card-front,
+.dark .th-card-front,
+.th-card-back,
+.dark .th-card-back {
+  background-color: #ffffff !important;
+  color: #1f2937 !important; /* dark text for contrast */
+}
+
+.th-card:nth-child(2) .th-card-back {
+  background-color: #f3e5f5 !important; /* Light lavender background */
+}
+
+
+/* Update the card grid for mobile */
+@media (max-width: 768px) {
+  .th-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .th-card {
+    min-height: 240px;
+  }
+  
+  .th-card-face {
+    padding: 1.5rem;
+  }
+  
+  .th-card-front h3 {
+    font-size: 1.2rem;
+  }
+  
+  .th-card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .th-card-back .th-card-buttons {
+    flex-wrap: wrap;
+    padding: 0.8rem;
+  }
+  
+  .th-card-back .th-card-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,730 @@
+function App() {
+  const [selectedPlan, setSelectedPlan] = React.useState('Premium');
+  const [isAnnual, setIsAnnual] = React.useState(false);
+  const [isDark, setIsDark] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem('th-theme');
+      if (saved === 'dark') return true;
+      if (saved === 'light') return false;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch {
+      return false;
+    }
+  });
+  const [isMobileOpen, setIsMobileOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    try {
+      localStorage.setItem('th-theme', isDark ? 'dark' : 'light');
+    } catch {}
+  }, [isDark]);
+
+  // Close mobile menu with Escape key
+  React.useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key === 'Escape') setIsMobileOpen(false);
+    }
+    if (isMobileOpen) {
+      document.addEventListener('keydown', onKeyDown);
+    }
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isMobileOpen]);
+
+  const features = [
+    {
+      icon: "📊",
+      title: "Self-Monitor 16 Vital Parameters",
+      description: "Track stress, productivity, mood, sleep quality, and 12 other essential mental health indicators with precision."
+    },
+    {
+      icon: "🎯",
+      title: "Personalized Interventions",
+      description: "Get tailored recommendations and actionable insights based on your unique mental health profile and patterns."
+    },
+    {
+      icon: "💡",
+      title: "Primary Interventions",
+      description: "Receive useful, evidence-based suggestions to tackle everyday mental health challenges and improve wellbeing."
+    },
+    {
+      icon: "👨‍⚕️",
+      title: "Professional Guidance",
+      description: "Access pro suggestions curated by licensed mental health professionals for deeper support."
+    },
+    {
+      icon: "🤝",
+      title: "One-on-One Mentoring",
+      description: "Connect with qualified mental health mentors for personalized support and guidance."
+    },
+    {
+      icon: "🎮",
+      title: "Gamification & Rewards",
+      description: "Earn points, unlock achievements, and level up your mental wellness journey with engaging challenges and milestones."
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      role: "Software Engineer",
+      image: "https://placehold.co/60x60",
+      text: "                ThoughtHealer Pro helped me identify stress patterns I never noticed. The interventions are practical and really work!"
+    },
+    {
+      name: "Rajesh Kumar",
+      role: "Marketing Manager",
+      image: "https://placehold.co/60x60",
+      text: "The professional guidance feature is amazing. It's like having a therapist in my pocket."
+    },
+    {
+      name: "Anita Patel",
+      role: "Student",
+      image: "https://placehold.co/60x60",
+      text: "The productivity tracking helped me optimize my study schedule. My grades improved significantly!"
+    }
+  ];
+
+  const pricingPlans = [
+    {
+      name: "Free",
+      price: { monthly: 0, annual: 0 },
+      features: [
+        "Self-monitor stress, productivity & 10 other vital parameters",
+        "Basic tracking and insights",
+        "Limited interventions"
+      ],
+      cta: "Get Started Free",
+      popular: false
+    },
+    {
+      name: "Premium",
+      price: { monthly: 299, annual: 999 },
+      features: [
+        "All Free features",
+        "10+ Advanced Scans",
+        "Primary & Secondary Interventions",
+        "Video Tertiary Content",
+        "Detailed analytics"
+      ],
+      cta: "Start Premium",
+      popular: true
+    },
+    {
+      name: "Ultra",
+      price: { monthly: 599, annual: 2599 },
+      features: [
+        "All Premium features",
+        "100+ Advanced Scans",
+        "Priority support",
+        "1-on-1 sessions with professionals",
+        "₹500-800 per session"
+      ],
+      cta: "Go Ultra",
+      popular: false
+    }
+  ];
+
+  return (
+    <>
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+          }
+          @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+          }
+          @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+          @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(94, 114, 228, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(94, 114, 228, 0.8), 0 0 30px rgba(138, 43, 226, 0.6); }
+          }
+          @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+          }
+          @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+          }
+          @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          .animate-float { animation: float 6s ease-in-out infinite; }
+          .animate-float-reverse { animation: float-reverse 7s ease-in-out infinite; }
+          .animate-pulse-slow { animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+          .animate-spin-slow { animation: spin 8s linear infinite; }
+          .animate-shimmer { 
+            animation: shimmer 2s linear infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+          }
+          .animate-glow { animation: glow 2s ease-in-out infinite alternate; }
+          .animate-gradient { 
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+          }
+          .animate-morph { animation: morph 8s ease-in-out infinite; }
+          .animate-wave { animation: wave 8s linear infinite; }
+        `}
+      </style>
+      <div className="min-h-screen" style={{backgroundColor: 'var(--bg-secondary)'}}>
+        {/* Header */}
+  <header className="sticky top-0 z-50 glass" style={{
+    background: isDark ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(20px)',
+    borderBottom: `1px solid var(--border-color)`,
+    boxShadow: 'var(--card-shadow)'
+  }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <img
+                src="assets/thoughtpro_logo.png"
+                alt="ThoughtPro Logo"
+                className="w-8 h-8 rounded-lg object-contain"
+                style={{
+                  filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                }}
+              />
+              <span className="text-xl font-bold" style={{color: 'var(--text-primary)'}}>ThoughtPro</span>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <a href="#features" className="hover:text-purple-600 transition-colors" style={{color: 'var(--text-primary)', opacity: 0.8}}>Features</a>
+              <a href="#clients" className="hover:text-purple-600 transition-colors" style={{color: 'var(--text-primary)', opacity: 0.8}}>Clients</a>
+              <a href="#pricing" className="hover:text-purple-600 transition-colors" style={{color: 'var(--text-primary)', opacity: 0.8}}>Pricing</a>
+              <a href="#testimonials" className="hover:text-purple-600 transition-colors" style={{color: 'var(--text-primary)', opacity: 0.8}}>Reviews</a>
+            </nav>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.thoughtpro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex text-white px-4 py-2 rounded-lg transition-all duration-300 items-center justify-center hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                  boxShadow: 'var(--card-shadow)',
+                  backdropFilter: 'blur(10px)'
+                }}
+              >
+                Download App
+              </a>
+              <button
+                aria-label="Toggle theme"
+                onClick={() => setIsDark(!isDark)}
+                className="theme-toggle"
+              ></button>
+              <button
+                aria-label="Open menu"
+                className="md:hidden p-2 rounded-lg transition-all duration-300 hover:scale-105"
+                onClick={() => setIsMobileOpen(v => !v)}
+                aria-expanded={isMobileOpen}
+                aria-controls="mobile-menu"
+                style={{ 
+                  background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: isDark 
+                    ? '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.1)'
+                    : '0 2px 8px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.8)'
+                }}
+              >
+                <span style={{display:'block',width:20,height:2,background:'var(--text-primary)'}}></span>
+                <span style={{display:'block',width:20,height:2,background:'var(--text-primary)',marginTop:4}}></span>
+                <span style={{display:'block',width:20,height:2,background:'var(--text-primary)',marginTop:4}}></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Mobile menu */}
+        <div
+          id="mobile-menu"
+          className="md:hidden overflow-hidden transition-all duration-300 ease-out"
+          style={{
+            backgroundColor: isDark ? 'rgba(15,23,42,0.9)' : 'rgba(255,255,255,0.9)',
+            backdropFilter: 'blur(20px) saturate(180%)',
+            border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
+            boxShadow: isDark
+              ? '0 12px 40px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2)'
+              : '0 12px 40px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.05)',
+            maxHeight: isMobileOpen ? '26rem' : 0,
+            opacity: isMobileOpen ? 1 : 0
+          }}
+        >
+          <div className="px-4 pb-4 space-y-3">
+            <div className="flex items-center justify-between py-2">
+              <span style={{color: 'var(--text-primary)', opacity: 0.9}}>Menu</span>
+              <button aria-label="Close menu" className="p-2 rounded-lg transition-all duration-300 hover:scale-105" onClick={() => setIsMobileOpen(false)}
+                style={{ 
+                  background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: isDark 
+                    ? '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.1)'
+                    : '0 2px 8px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.8)'
+                }}>
+                <span style={{display:'block',width:16,height:2,transform:'rotate(45deg) translateY(1px)',background:'var(--text-primary)'}}></span>
+                <span style={{display:'block',width:16,height:2,transform:'rotate(-45deg) translateY(-1px)',background:'var(--text-primary)'}}></span>
+              </button>
+            </div>
+            {/* Theme toggle inside mobile panel */}
+            <div className="flex items-center justify-between py-2">
+              <span style={{color: 'var(--text-primary)'}}>Theme</span>
+              <button
+                aria-label="Toggle theme"
+                onClick={() => setIsDark(!isDark)}
+                className="theme-toggle"
+              ></button>
+            </div>
+            <a href="#features" onClick={() => setIsMobileOpen(false)} className="block py-2" style={{color: 'var(--text-primary)'}}>Features</a>
+            <a href="#clients" onClick={() => setIsMobileOpen(false)} className="block py-2" style={{color: 'var(--text-primary)'}}>Clients</a>
+            <a href="#pricing" onClick={() => setIsMobileOpen(false)} className="block py-2" style={{color: 'var(--text-primary)'}}>Pricing</a>
+            <a href="#testimonials" onClick={() => setIsMobileOpen(false)} className="block py-2" style={{color: 'var(--text-primary)'}}>Reviews</a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.thoughtpro"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileOpen(false)}
+              className="block py-2"
+              style={{color: 'var(--text-primary)'}}
+            >
+              Download App
+            </a>
+            <a
+              href="https://wa.me/919422421316?text=I%20want%20to%20know%20more"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileOpen(false)}
+              className="block py-2"
+              style={{color: 'var(--text-primary)'}}
+            >
+              Schedule Demo
+            </a>
+          </div>
+        </div>
+        {/* Click-away overlay below header to close menu */}
+        {isMobileOpen && (
+          <div
+            className="fixed inset-0 z-40 md:hidden"
+            onClick={() => setIsMobileOpen(false)}
+            style={{ backgroundColor: isDark ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.3)' }}
+          />
+        )}
+      </header>
+
+      {/* Hero Section */}
+  <section className="py-20" style={{background: isDark ? 'linear-gradient(135deg, var(--bg-primary), var(--bg-secondary))' : 'linear-gradient(135deg, var(--bg-secondary), #e6e8ff)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl lg:text-6xl font-display font-bold mb-6" style={{color: 'var(--text-primary)'}}>
+                Healing the world, one thought at a time with 
+                <span className="text-gradient"> ThoughtPro</span>
+              </h1>
+              <p className="text-xl mb-8" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                Monitor stress, productivity, and 10+ other vital mental health parameters. 
+                Get evidence-based interventions from licensed mental health professionals.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.thoughtpro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105 hover:shadow-2xl"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                    boxShadow: 'var(--card-shadow)',
+                    backdropFilter: 'blur(10px)'
+                  }}
+                >
+                  Download Free
+                </a>
+                <a href="#features" className="border-2 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105 glass" 
+                  style={{
+                    borderColor: 'var(--accent-primary)', 
+                    color: 'var(--accent-primary)',
+                    boxShadow: 'var(--card-shadow)'
+                  }}>
+                  Read More
+                </a>
+              </div>
+            </div>
+            <div className="relative">
+              {/* Floating logo */}
+              <img
+                src="assets/logo.png"
+                alt="ThoughtPro App Logo"
+                className="w-full max-w-md mx-auto rounded-2xl object-contain transition-all duration-300 hover:scale-105 animate-float"
+                style={{ 
+                  border: isDark ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(94, 114, 228, 0.3)',
+                  boxShadow: isDark
+                    ? '0 20px 60px rgba(0,0,0,0.5), 0 8px 32px rgba(94, 114, 228, 0.2), inset 0 1px 2px rgba(255,255,255,0.1)'
+                    : '0 20px 60px rgba(0,0,0,0.15), 0 8px 32px rgba(94, 114, 228, 0.3), inset 0 1px 2px rgba(255,255,255,0.8)',
+                  backdropFilter: 'blur(10px)'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+  <section id="features" className="py-20" style={{backgroundColor: isDark ? 'var(--bg-primary)' : 'var(--bg-secondary)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4" style={{color: 'var(--text-primary)'}}>
+              Comprehensive Mental Health Support
+            </h2>
+            <p className="text-xl max-w-3xl mx-auto" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+              From basic self-monitoring to professional guidance, ThoughtPro provides 
+              evidence-based digital mental health solutions for comprehensive wellness support.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="card-glass p-6 transition-all duration-300"
+              >
+                <div className="text-3xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-3" style={{color: 'var(--text-primary)'}}>{feature.title}</h3>
+                <p style={{color: 'var(--text-primary)', opacity: 0.8}}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Intervention Levels */}
+  <section className="py-20" style={{backgroundColor: isDark ? 'var(--bg-secondary)' : 'rgba(230, 232, 255, 0.3)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4" style={{color: 'var(--text-primary)'}}>
+              Three Levels of Support
+            </h2>
+            <p className="text-xl" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+              Progressive intervention system designed to meet you where you are
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="card-glass p-8"
+            style={{
+              border: `1px solid var(--accent-secondary)`,
+            }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-6" style={{
+                background: `linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))`,
+                boxShadow: 'var(--card-shadow)',
+                backdropFilter: 'blur(10px)'
+              }}>
+                <span className="font-bold text-white">1°</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Primary Interventions</h3>
+              <p className="mb-6" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                Useful suggestions to tackle everyday issues. Quick, actionable tips 
+                for immediate relief and daily mental health maintenance.
+              </p>
+              <ul className="space-y-2 text-sm" style={{color: 'var(--text-primary)', opacity: 0.85}}>
+                <li>✓ Daily wellness tips</li>
+                <li>✓ Stress management techniques</li>
+                <li>✓ Productivity boosters</li>
+              </ul>
+            </div>
+            <div className="card-glass p-8 border-2" style={{
+              borderColor: 'var(--accent-primary)',
+              boxShadow: 'var(--card-shadow), 0 0 30px rgba(255, 215, 0, 0.3)',
+            }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-6" style={{
+                background: `linear-gradient(135deg, var(--accent-primary), var(--gold))`,
+                boxShadow: 'var(--card-shadow), var(--shadow-gold)',
+                backdropFilter: 'blur(10px)'
+              }}>
+                <span className="font-bold text-white">2°</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Secondary Interventions</h3>
+              <p className="mb-6" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                Pro suggestions curated by mental health professionals. 
+                Evidence-based strategies for deeper mental health support.
+              </p>
+              <ul className="space-y-2 text-sm" style={{color: 'var(--text-primary)', opacity: 0.85}}>
+                <li>✓ Professional-grade techniques</li>
+                <li>✓ Cognitive behavioral strategies</li>
+                <li>✓ Advanced coping mechanisms</li>
+              </ul>
+            </div>
+            <div className="card-glass p-8" style={{
+              border: `1px solid var(--gold)`,
+              boxShadow: isDark
+                ? '0 20px 50px rgba(0,0,0,0.5), 0 8px 25px rgba(255, 215, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.05)'
+                : '0 20px 50px rgba(0,0,0,0.1), 0 8px 25px rgba(255, 215, 0, 0.2), inset 0 1px 2px rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(20px) saturate(180%)'
+            }}>
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-6" style={{
+                background: `linear-gradient(135deg, var(--gold), var(--gold-dark))`,
+                boxShadow: 'var(--card-shadow), var(--shadow-gold)',
+                backdropFilter: 'blur(10px)'
+              }}>
+                <span className="font-bold text-white">3°</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Tertiary Interventions</h3>
+              <p className="mb-6" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                Advanced suggestions with video-based guidance and one-on-one 
+                calls with qualified mental health mentors.
+              </p>
+              <ul className="space-y-2 text-sm" style={{color: 'var(--text-primary)', opacity: 0.85}}>
+                <li>✓ Video guidance sessions</li>
+                <li>✓ Personal mentor calls</li>
+                <li>✓ Customized treatment plans</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+  <section id="testimonials" className="py-20" style={{backgroundColor: isDark ? 'var(--bg-primary)' : 'var(--bg-secondary)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4" style={{color: 'var(--text-primary)'}}>
+              Trusted by Thousands
+            </h2>
+            <p className="text-xl" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+              See how Thought Pro is transforming mental health journeys
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="card-glass p-6">
+                <div className="flex items-center mb-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full mr-4"
+                    style={{
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                      border: isDark ? '2px solid rgba(255,255,255,0.1)' : '2px solid rgba(0,0,0,0.1)'
+                    }}
+                  />
+                  <div>
+                    <h4 className="font-semibold" style={{color: 'var(--text-primary)'}}>{testimonial.name}</h4>
+                    <p className="text-sm" style={{color: 'var(--text-primary)', opacity: 0.8}}>{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="italic" style={{color: 'var(--text-primary)', opacity: 0.9}}>"{testimonial.text}"</p>
+                <div className="mt-4 text-yellow-400">★★★★★</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Clients Section */}
+  <section id="clients" className="py-20" style={{backgroundColor: isDark ? 'var(--bg-primary)' : 'var(--bg-secondary)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4" style={{color: 'var(--text-primary)'}}>Our Clients</h2>
+            <p className="text-xl mb-8" style={{color: 'var(--text-primary)', opacity: 0.8}}>Partners who trust ThoughtPro</p>
+          </div>
+          <div className="flex items-center justify-center gap-12 flex-wrap">
+            <img src="assets/nokasa.png" alt="NoKasa" className="h-10 opacity-80 hover:opacity-100 transition-opacity" />
+            <img src="assets/sptronics.png" alt="SPtronics" className="h-10 opacity-80 hover:opacity-100 transition-opacity" />
+          </div>
+        </div>
+      </section>
+
+        {/* Divider between Clients and Benefits */}
+    <div className="border-t" style={{borderColor: 'var(--border-color)'}}></div>
+
+      {/* Pricing Section */}
+  <section id="pricing" className="py-20" style={{backgroundColor: isDark ? 'var(--bg-secondary)' : 'rgba(230, 232, 255, 0.3)'}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4" style={{color: 'var(--text-primary)'}}>
+              Choose Your Mental Health Journey
+            </h2>
+            <p className="text-xl mb-8" style={{color: 'var(--text-secondary)'}}>
+              Start free, upgrade when you're ready for more advanced features
+            </p>
+            <div className="flex items-center justify-center space-x-4">
+              <span style={{color: 'var(--text-primary)', opacity: !isAnnual ? 1 : 0.7, fontWeight: !isAnnual ? 600 : 400}}>Monthly</span>
+              <button 
+                onClick={() => setIsAnnual(!isAnnual)}
+                className={`relative w-12 h-6 rounded-full transition-colors`}
+                style={{background: isAnnual ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'var(--border-color)'}}
+              >
+                <div className={`absolute w-5 h-5 bg-white rounded-full top-0.5 transition-transform ${isAnnual ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
+              </button>
+              <span style={{color: 'var(--text-primary)', opacity: isAnnual ? 1 : 0.7, fontWeight: isAnnual ? 600 : 400}}>Annual</span>
+              <span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: 'rgba(255, 215, 0, 0.2)', color: '#D4AF37'}}>Save 67%</span>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <div key={index} className="card-glass p-8 relative" style={{
+                border: plan.popular ? `2px solid var(--accent-primary)` : `1px solid var(--border-color)`,
+                boxShadow: plan.popular 
+                  ? 'var(--card-shadow), var(--shadow-gold)'
+                  : 'var(--card-shadow)'
+              }}>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="text-white px-4 py-1 rounded-full text-sm font-semibold" style={{
+                      background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                      boxShadow: 'var(--card-shadow), var(--shadow-gold)',
+                      backdropFilter: 'blur(10px)'
+                    }}>Most Popular</span>
+                  </div>
+                )}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-4" style={{color: 'var(--text-primary)'}}>{plan.name}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold" style={{color: 'var(--text-primary)'}}>
+                      ₹{isAnnual ? plan.price.annual : plan.price.monthly}
+                    </span>
+                    <span style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                      {plan.price.monthly === 0 ? '' : isAnnual ? '/year' : '/month'}
+                    </span>
+                  </div>
+                  {isAnnual && plan.price.monthly > 0 && (
+                    <p className="text-sm" style={{color: 'var(--text-primary)', opacity: 0.8}}>
+                      ₹{Math.round(plan.price.annual / 12)}/month billed annually
+                    </p>
+                  )}
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start">
+                      <span className="text-green-500 mr-2 mt-1">✓</span>
+                      <span style={{color: 'var(--text-primary)', opacity: 0.9}}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a 
+                  href={plan.name === 'Free' ? 'https://play.google.com/store/apps/details?id=com.thoughtpro' : '#'}
+                  target={plan.name === 'Free' ? '_blank' : undefined}
+                  rel={plan.name === 'Free' ? 'noopener noreferrer' : undefined}
+                  className="w-full py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 inline-flex items-center justify-center"
+                  style={plan.popular 
+                    ? {
+                        background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', 
+                        color: 'white', 
+                        boxShadow: 'var(--card-shadow)',
+                        backdropFilter: 'blur(10px)'
+                      } 
+                    : {
+                        border: `2px solid var(--accent-primary)`, 
+                        color: 'var(--accent-primary)', 
+                        background: 'transparent',
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: 'var(--card-shadow)'
+                      }
+                  }>
+                  {plan.cta}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+  <section className="py-20" style={{background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'}}>
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
+            Start Your Mental Health Journey Today
+          </h2>
+          <p className="text-xl text-purple-100 mb-8">
+            Join thousands who are already improving their mental wellbeing with ThoughtPro
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.thoughtpro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105"
+              style={{
+                color: 'var(--accent-primary)',
+                boxShadow: 'var(--card-shadow)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              Download Free App
+            </a>
+            <a
+              href="https://wa.me/919422421316?text=I%20want%20to%20know%20more"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105"
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: 'var(--card-shadow)'
+              }}
+            >
+              Schedule Demo
+            </a>
+          </div>
+          {/* Removed footnote per request */}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{backgroundColor: isDark ? 'var(--bg-primary)' : 'var(--bg-secondary)', color: 'var(--text-primary)'}} className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-8">
+            <div className="col-span-3 md:col-span-1">
+              <div className="flex items-center space-x-2 mb-4">
+                <img
+                  src="assets/thoughtpro_logo.png"
+                  alt="ThoughtPro Logo"
+                  className="w-8 h-8 rounded-lg object-contain"
+                />
+                <span className="text-xl font-display font-bold">ThoughtPro</span>
+              </div>
+              <p style={{color: 'var(--text-secondary)'}}>
+                Supporting your journey towards emotional well-being with compassion, understanding, and innovative technology.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-2" style={{color: 'var(--text-secondary)'}}>
+                <li><a href="#features" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Features</a></li>
+                <li><a href="#pricing" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Pricing</a></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.thoughtpro" target="_blank" rel="noopener noreferrer" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Download</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2" style={{color: 'var(--text-secondary)'}}>
+                <li><a href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Help Center</a></li>
+                <li><a href="https://wa.me/919422421316?text=I%20want%20to%20know%20more" target="_blank" rel="noopener noreferrer" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Contact Us</a></li>
+                <li><a href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Connect</h4>
+              <ul className="space-y-2" style={{color: 'var(--text-secondary)'}}>
+                <li><a href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Twitter</a></li>
+                <li><a href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/thought__healer/" target="_blank" rel="noopener noreferrer" className="transition-colors" onMouseEnter={(e) => e.target.style.color = 'var(--accent-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Instagram</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-8 text-center" style={{borderColor: 'var(--border-color)', color: 'var(--text-secondary)'}}>
+            <p>&copy; 2025 ThoughtPro by Synept Labs. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      </div>
+    </>
+  );
+}
