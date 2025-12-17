@@ -68,8 +68,15 @@ function App() {
             } 
           />
           
-          {/* Admin Routes with Sidebar Layout */}
-          <Route path="/admin" element={<AdminLayout />}>
+          {/* Admin Routes with Sidebar Layout - Protected */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="/admin/users" replace />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="coupons" element={<CouponManagement />} />

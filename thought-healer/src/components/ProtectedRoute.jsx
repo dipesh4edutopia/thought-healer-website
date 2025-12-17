@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
+  const [isReady, setIsReady] = useState(false);
+  
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   const authToken = localStorage.getItem('authToken');
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
+
+  if (!isReady) {
+    return null;
+  }
 
   if (!isAuthenticated || !authToken) {
     // Save the current location and plan data to redirect back after login
