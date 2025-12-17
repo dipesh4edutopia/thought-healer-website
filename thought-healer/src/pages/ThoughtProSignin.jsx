@@ -46,65 +46,86 @@ const ThoughtProSignin = () => {
     setError('');
     
     try {
-      // Check for hardcoded admin login
-      if (formData.role === 'admin' && formData.email === 'admin@example.com' && formData.password === 'admin1234') {
-        // Admin login successful
-        localStorage.setItem('authToken', 'admin-token-demo');
+      console.log('🔄 Login attempt:', { email: formData.email, role: formData.role });
+      
+      // Call login API - role is determined by backend based on credentials
+      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+          // Don't send role - backend determines it
+        })
+      });
+      
+      console.log('📡 API Response Status:', response.status);
+      const data = await response.json();
+      console.log('📦 API Response Data:', data);
+      console.log('📦 Full Response:', JSON.stringify(data, null, 2));
+      
+      if (data.success && data.data && data.data.token) {
+        // Extract token from response
+        const token = data.data.token;
+        const userRole = data.data.user?.role || 'user'; // Get role from response
+        
+        console.log('✅ Token received from API:', token);
+        console.log('👤 User role from API:', userRole);
+        
+        // Store auth token and user info in localStorage
+        localStorage.setItem('authToken', token);
         localStorage.setItem('userEmail', formData.email);
-        localStorage.setItem('userId', 'admin-1');
-        localStorage.setItem('userName', 'Admin User');
-        localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userId', data.data.user?.id || data.data.user_id || 'user-' + Date.now());
+        localStorage.setItem('userName', data.data.user?.username || data.data.user?.name || formData.email.split('@')[0]);
+        localStorage.setItem('userRole', userRole); // Use role from API response
         localStorage.setItem('isAuthenticated', 'true');
         
-        // Navigate to admin dashboard
-        navigate('/admin/users');
-        return;
-      }
-
-      // Regular user login via API
-      if (formData.role === 'user') {
-        const response = await fetch(`${API_BASE_URL}/api/users/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password
-          })
-        });
+        console.log('💾 LocalStorage updated with token:', localStorage.getItem('authToken'));
         
-        const data = await response.json();
+        // Verify token was stored
+        const storedToken = localStorage.getItem('authToken');
+        if (!storedToken) {
+          throw new Error('Failed to store authentication token');
+        }
         
-        if (data.success) {
-          // Store auth token and user info in localStorage (persistent)
-          localStorage.setItem('authToken', data.data.token);
-          localStorage.setItem('userEmail', formData.email);
-          localStorage.setItem('userId', data.data.user.id);
-          localStorage.setItem('userName', data.data.user.username || formData.email.split('@')[0]);
-          localStorage.setItem('userRole', 'user');
-          localStorage.setItem('isAuthenticated', 'true');
-          
+        console.log('✨ Login successful. Stored token:', storedToken);
+        
+        if (userRole === 'admin') {
+          // Navigate to admin dashboard
+          console.log('➡️ Navigating to admin dashboard');
+          navigate('/admin/users');
+        } else {
           // Check if there's a return URL (user was trying to access payment)
           const returnUrl = sessionStorage.getItem('returnUrl');
           const selectedPlan = sessionStorage.getItem('selectedPlan');
           
           if (returnUrl && selectedPlan) {
             sessionStorage.removeItem('returnUrl');
+            console.log('➡️ Navigating to return URL:', returnUrl);
             navigate(returnUrl, { state: { plan: JSON.parse(selectedPlan) } });
           } else {
             // Navigate to plans page after successful login
+            console.log('➡️ Navigating to thoughtpro-plans');
             navigate('/thoughtpro-plans');
           }
-        } else {
-          throw new Error(data.message || 'Login failed');
         }
       } else {
-        // Admin role but wrong credentials
-        throw new Error('Invalid admin credentials');
+        // Log detailed error info
+        console.error('❌ Login failed - Response details:');
+        console.error('   success:', data.success);
+        console.error('   data exists:', !!data.data);
+        console.error('   token exists:', !!data.data?.token);
+        console.error('   message:', data.message);
+        console.error('   error:', data.error);
+        
+        const errorMsg = data.message || data.error || 'Login failed. Please check your credentials.';
+        console.error('❌ Login failed:', errorMsg);
+        throw new Error(errorMsg);
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('❌ Login error:', error);
       setError(error.message || 'Error signing in. Please try again.');
     } finally {
       setLoading(false);
