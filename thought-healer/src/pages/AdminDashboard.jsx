@@ -258,8 +258,15 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = () => {
+    // Clear all local storage to remove credentials
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userEmail');
     localStorage.clear();
-    navigate('/thoughtpro-signin');
+    
+    // Redirect to login
+    navigate('/thoughtpro-signin', { replace: true });
   };
 
   const handleCreateCoupon = () => {

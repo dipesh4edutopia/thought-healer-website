@@ -204,60 +204,90 @@ const PsychologistManagement = () => {
         </div>
 
         {psychologistError && (
-          <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
             {psychologistError}
           </div>
         )}
 
         {loadingPsychologists ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-500 border-t-transparent mx-auto"></div>
-            <p className="text-dark-600 dark:text-dark-300 mt-4">Loading psychologists...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto"></div>
+            <p className="text-gray-600 mt-4">Loading psychologists...</p>
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {psychologists.map((psychologist) => (
-                <div key={psychologist.id} className="bg-dark-50 dark:bg-dark-700 rounded-lg p-6 border border-dark-200 dark:border-dark-600">
+                <div key={psychologist.id} className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-dark-900 dark:text-white">
+                      <h3 className="text-lg font-bold text-gray-900">
                         {psychologist.name || 'Psychologist'}
                       </h3>
-                      <p className="text-sm text-primary-600 dark:text-primary-400">
-                        {psychologist.specialization}
+                      <p className="text-sm text-blue-600">
+                        {psychologist.degree || psychologist.psychologist_type?.[0] || 'Professional'}
                       </p>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      psychologist.is_active 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                        : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
-                    }`}>
-                      {psychologist.is_active ? 'active' : 'inactive'}
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                      inactive
                     </span>
                   </div>
                   
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
                       <span>🗣️</span>
                       <span>{psychologist.languages?.join(', ') || 'N/A'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
-                      <span>💼</span>
-                      <span>{psychologist.experience_years} years experience</span>
+                    
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span>👨‍⚕️</span>
+                      <span>{psychologist.psychologist_type?.join(', ') || 'N/A'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
+                    
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
                       <span>💰</span>
-                      <span>₹{psychologist.hourly_rate}/hour</span>
+                      <span>₹{psychologist.session_45_minute_rate || psychologist.emergency_call_rate}/hour</span>
                     </div>
-                    <div className="text-sm text-dark-600 dark:text-dark-300 mt-2">
-                      <p className="line-clamp-2">{psychologist.bio || 'No bio available'}</p>
+
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span>📞</span>
+                      <span>{psychologist.mobile_number || 'Not available'}</span>
                     </div>
+
+                    {psychologist.about_section && (
+                      <div className="text-sm text-gray-600 mt-3 pt-2 border-t border-gray-200">
+                        <p className="line-clamp-2">{psychologist.about_section}</p>
+                      </div>
+                    )}
+
+                    {psychologist.skills && psychologist.skills.length > 0 && (
+                      <div className="text-sm mt-3 pt-2 border-t border-gray-200">
+                        <p className="text-gray-700 font-medium mb-1">Skills:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {psychologist.skills.slice(0, 3).map((skill, idx) => (
+                            <span key={idx} className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
+                              {skill}
+                            </span>
+                          ))}
+                          {psychologist.skills.length > 3 && (
+                            <span className="px-2 py-1 text-gray-600 text-xs">+{psychologist.skills.length - 3} more</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {(psychologist.banking_name || psychologist.bank_name) && (
+                      <div className="text-sm text-gray-600 mt-3 pt-2 border-t border-gray-200">
+                        <p className="text-gray-700 font-medium">Banking:</p>
+                        <p className="text-xs">{psychologist.banking_name || 'N/A'}</p>
+                        <p className="text-xs">{psychologist.bank_name || 'N/A'}</p>
+                      </div>
+                    )}
                   </div>
 
                   <button
                     onClick={() => handleRemovePsychologist(psychologist.id)}
-                    className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all"
+                    className="w-full px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all font-medium"
                   >
                     Remove
                   </button>
@@ -267,7 +297,7 @@ const PsychologistManagement = () => {
 
             {psychologists.length === 0 && !loadingPsychologists && (
               <div className="text-center py-12">
-                <p className="text-dark-500 dark:text-dark-400">
+                <p className="text-gray-500">
                   No psychologists found. Try a different filter.
                 </p>
               </div>

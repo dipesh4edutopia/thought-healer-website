@@ -73,7 +73,9 @@ const CouponManagement = () => {
       console.log('📦 Coupon Details API Response:', result);
       
       if (result.success) {
-        setCouponDetails(result.data);
+        // Handle nested data structure from API
+        const couponData = result.data?.data || result.data;
+        setCouponDetails(couponData);
         // Fetch redemptions for this coupon
         fetchCouponRedemptions(couponId, 1);
       } else {
@@ -247,7 +249,7 @@ const CouponManagement = () => {
         validUntilValue: payload.validUntil
       });
 
-      const response = await fetch(`${API_BASE_URL}/api/admin/coupons`, {
+      const response = await fetch(`${API_BASE_URL}/api/coupons`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
