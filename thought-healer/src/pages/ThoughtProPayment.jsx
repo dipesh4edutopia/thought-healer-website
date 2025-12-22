@@ -42,12 +42,32 @@ const ThoughtProPayment = () => {
         throw new Error('Please fill in all required fields');
       }
 
+      // Validate phone number format
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(userInfo.phone)) {
+        throw new Error('Please enter a valid 10-digit mobile number');
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(userInfo.email)) {
+        throw new Error('Please enter a valid email address');
+      }
+
       const authToken = localStorage.getItem('authToken');
-      if (!authToken) {
-        throw new Error('Please login to continue');
+      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      
+      console.log('Auth check:', { authToken: authToken ? 'exists' : 'missing', isAuthenticated });
+      console.log('LocalStorage keys:', Object.keys(localStorage));
+      
+      if (!authToken || authToken === 'undefined' || authToken === 'null') {
+        console.error('❌ No valid auth token found');
+        // Try to get from alternative storage or redirect to login
+        throw new Error('Please login to continue. Token missing.');
       }
 
       console.log('Creating order with plan_id:', plan.planId);
+      console.log('User info:', { name: userInfo.name, email: userInfo.email, phone: userInfo.phone });
       
       const response = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/create-order', {
         method: 'POST',
@@ -57,6 +77,10 @@ const ThoughtProPayment = () => {
         },
         body: JSON.stringify({
           plan_id: plan.planId,
+          user_name: userInfo.name,
+          user_email: userInfo.email,
+          user_phone: userInfo.phone,
+          user_token: authToken,
           currency: 'INR'
         })
       });

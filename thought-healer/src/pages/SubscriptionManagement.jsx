@@ -16,42 +16,77 @@ const SubscriptionManagement = () => {
   const fetchSubscriptionData = async () => {
     try {
       setLoading(true);
+      setError(null);
+      
+      const authToken = localStorage.getItem('authToken');
+      console.log('Fetching subscription data with token:', authToken ? 'Token present' : 'No token');
       
       // Fetch current subscription status
       const statusResponse = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/status', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}` // Add auth token
+          'Authorization': `Bearer ${authToken}`,
+          'Content-Type': 'application/json'
         }
       });
 
+      console.log('Subscription status response:', statusResponse.status);
+      
       if (statusResponse.ok) {
         const statusResult = await statusResponse.json();
-        if (statusResult.success && statusResult.data) {
+        console.log('Full API Response:', statusResult);
+        
+        if (statusResult.success && statusResult.data && statusResult.data.data) {
+          // Handle nested data structure: response.data.data
+          const subscriptionData = statusResult.data.data;
+          console.log('Parsed subscription data:', subscriptionData);
+          setSubscriptionStatus(subscriptionData);
+        } else if (statusResult.success && statusResult.data) {
+          // Fallback for direct data structure
+          console.log('Using direct data structure:', statusResult.data);
           setSubscriptionStatus(statusResult.data);
+        } else {
+          console.log('No subscription data found in response');
+          setSubscriptionStatus(null);
         }
+      } else {
+        const errorResult = await statusResponse.json();
+        console.error('API Error Response:', errorResult);
+        setError(errorResult.message || `HTTP ${statusResponse.status}: Failed to fetch subscription data`);
       }
 
       // Fetch subscription history
       const historyResponse = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/history', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}` // Add auth token
+          'Authorization': `Bearer ${authToken}`,
+          'Content-Type': 'application/json'
         }
       });
 
+      console.log('History response status:', historyResponse.status);
+      
       if (historyResponse.ok) {
         const historyResult = await historyResponse.json();
+        console.log('History API Response:', historyResult);
+        
         if (historyResult.success && historyResult.data) {
-          setSubscriptionHistory(historyResult.data);
+          // Handle both nested and direct data structures
+          const historyData = historyResult.data.data || historyResult.data;
+          setSubscriptionHistory(Array.isArray(historyData) ? historyData : []);
         }
+      } else {
+        const historyErrorResult = await historyResponse.json();
+        console.error('History API Error:', historyErrorResult);
       }
     } catch (err) {
       console.error('Error fetching subscription data:', err);
-      setError('Failed to load subscription information');
+      setError('Failed to load subscription information: ' + err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // COMMENTED OUT: Subscription cancellation flow
+  /*
   const handleCancelSubscription = async () => {
     if (!subscriptionStatus?.subscription_id) {
       setError('No active subscription found');
@@ -87,6 +122,7 @@ const SubscriptionManagement = () => {
       setCancelLoading(false);
     }
   };
+  */
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -132,46 +168,83 @@ const SubscriptionManagement = () => {
         <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl mb-8">
           <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Current Subscription</h2>
           
+          {/* Debug Info - Remove in production */}
+          {subscriptionStatus && (
+            <details className="mb-6 bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                🐛 Debug: Raw API Data (Click to expand)
+              </summary>
+              <pre className="text-xs text-gray-600 dark:text-gray-400 overflow-auto max-h-40 bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                {JSON.stringify(subscriptionStatus, null, 2)}
+              </pre>
+            </details>
+          )}
+          
           {subscriptionStatus ? (
             <>
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div className="grid md:grid-cols-3 gap-6 mb-6">
                 <div>
-                  <p className="text-dark-600 dark:text-dark-400 mb-2">Plan</p>
-                  <p className="text-xl font-semibold text-dark-900 dark:text-white">
-                    {subscriptionStatus.plan_name || 'Premium'}
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Plan Type</p>
+                  <p className="text-xl font-semibold text-dark-900 dark:text-white capitalize">
+                    {subscriptionStatus.plan_type || 'Unknown'}
                   </p>
                 </div>
                 <div>
                   <p className="text-dark-600 dark:text-dark-400 mb-2">Status</p>
                   <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-                    subscriptionStatus.status === 'active' 
+                    subscriptionStatus.is_active 
                       ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                      : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
+                      : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
                   }`}>
-                    {subscriptionStatus.status || 'Active'}
+                    {subscriptionStatus.is_active ? 'Active' : 'Inactive'}
                   </span>
                 </div>
                 <div>
-                  <p className="text-dark-600 dark:text-dark-400 mb-2">Start Date</p>
-                  <p className="text-dark-900 dark:text-white">
-                    {formatDate(subscriptionStatus.start_date)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-dark-600 dark:text-dark-400 mb-2">End Date</p>
-                  <p className="text-dark-900 dark:text-white">
-                    {formatDate(subscriptionStatus.end_date)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-dark-600 dark:text-dark-400 mb-2">Amount</p>
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Days Remaining</p>
                   <p className="text-xl font-semibold text-dark-900 dark:text-white">
-                    ₹{subscriptionStatus.amount}
+                    {subscriptionStatus.days_remaining || 0} days
+                  </p>
+                </div>
+                <div>
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Plan ID</p>
+                  <p className="text-dark-900 dark:text-white font-mono text-sm">
+                    {subscriptionStatus.plan_id || 'N/A'}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Subscription ID</p>
+                  <p className="text-dark-900 dark:text-white font-mono">
+                    #{subscriptionStatus.subscription_id || 'N/A'}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Source</p>
+                  <p className="text-dark-900 dark:text-white capitalize">
+                    {subscriptionStatus.source || 'Unknown'}
+                  </p>
+                </div>
+                <div className="md:col-span-3">
+                  <p className="text-dark-600 dark:text-dark-400 mb-2">Expiry Date</p>
+                  <p className="text-lg font-semibold text-dark-900 dark:text-white">
+                    {subscriptionStatus.expiry_date ? formatDate(subscriptionStatus.expiry_date) : 'Not available'}
                   </p>
                 </div>
               </div>
+              
+              {/* Additional Info Section */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-6">
+                <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">Subscription Details</h3>
+                <div className="text-sm text-blue-700 dark:text-blue-400">
+                  <p className="mb-1"><strong>Plan:</strong> {subscriptionStatus.plan_type} ({subscriptionStatus.plan_id})</p>
+                  <p className="mb-1"><strong>Status:</strong> {subscriptionStatus.is_active ? 'Active' : 'Inactive'}</p>
+                  <p className="mb-1"><strong>Time Remaining:</strong> {subscriptionStatus.days_remaining} days</p>
+                  <p><strong>Subscription Source:</strong> {subscriptionStatus.source}</p>
+                </div>
+              </div>
 
-              {subscriptionStatus.status === 'active' && (
+              {/* COMMENTED OUT: Cancel subscription button */}
+              {/*
+              {subscriptionStatus.is_active && (
                 <button
                   onClick={() => setShowCancelModal(true)}
                   className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
@@ -179,6 +252,7 @@ const SubscriptionManagement = () => {
                   Cancel Subscription
                 </button>
               )}
+              */}
             </>
           ) : (
             <div className="text-center py-8">
@@ -242,7 +316,8 @@ const SubscriptionManagement = () => {
         </div>
       </div>
 
-      {/* Cancel Confirmation Modal */}
+      {/* COMMENTED OUT: Cancel Confirmation Modal */}
+      {/*
       {showCancelModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
           <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 max-w-md w-full">
@@ -271,6 +346,7 @@ const SubscriptionManagement = () => {
           </div>
         </div>
       )}
+      */}
     </div>
   );
 };

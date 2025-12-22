@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [userInfo, setUserInfo] = useState({
+    email: 'admin@thoughthealer.com',
+    role: 'Administrator'
+  });
+
+  useEffect(() => {
+    // Get user information from localStorage
+    const userEmail = localStorage.getItem('userEmail');
+    const userRole = localStorage.getItem('userRole');
+    
+    if (userEmail) {
+      setUserInfo({
+        email: userEmail,
+        role: userRole === 'admin' ? 'Administrator' : 'User'
+      });
+    }
+  }, []);
 
   const handleLogout = () => {
     // Clear all local storage to remove credentials
@@ -12,10 +29,11 @@ const AdminLayout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userRole');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('product');
     localStorage.clear();
     
-    // Redirect to login
-    navigate('/thoughtpro-signin', { replace: true });
+    // Redirect to unified login
+    navigate('/login', { replace: true });
   };
 
   const isActive = (path) => location.pathname === path;
@@ -23,6 +41,12 @@ const AdminLayout = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  const adminStats = [
+    { label: 'Total Users', value: '1,234', icon: '👥' },
+    { label: 'Active Coupons', value: '45', icon: '🎟️' },
+    { label: 'Psychologists', value: '78', icon: '👨‍⚕️' },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-dark-50 to-primary-50 dark:from-dark-900 dark:to-dark-800">
@@ -57,16 +81,24 @@ const AdminLayout = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  {userInfo.email.charAt(0).toUpperCase()}
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+              </div>
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-medium text-dark-900 dark:text-white">Admin User</p>
-                <p className="text-xs text-dark-600 dark:text-dark-300">admin@example.com</p>
+                <p className="text-sm font-medium text-dark-900 dark:text-white">{userInfo.role}</p>
+                <p className="text-xs text-dark-600 dark:text-dark-300">{userInfo.email}</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all flex items-center gap-2"
+                className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105"
               >
-                <span>🚪</span>
-                <span className="hidden sm:inline">Logout</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span className="hidden sm:inline font-medium">Logout</span>
               </button>
             </div>
           </div>
@@ -132,11 +164,32 @@ const AdminLayout = () => {
 
         {/* Main Content */}
         <main
-          className={`flex-1 p-6 transition-all duration-300 ${
+          className={`flex-1 transition-all duration-300 ${
             sidebarOpen ? 'lg:ml-64' : 'lg:ml-0'
           }`}
         >
-          <Outlet />
+          {/* Stats Overview */}
+          {location.pathname === '/admin' && (
+            <div className="p-6 bg-white dark:bg-dark-800 border-b border-dark-200 dark:border-dark-700">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {adminStats.map((stat, index) => (
+                  <div key={index} className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 p-4 rounded-lg border border-primary-200 dark:border-primary-800">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-primary-600 dark:text-primary-400">{stat.label}</p>
+                        <p className="text-2xl font-bold text-primary-900 dark:text-primary-100">{stat.value}</p>
+                      </div>
+                      <div className="text-3xl opacity-80">{stat.icon}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          <div className="p-6">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
