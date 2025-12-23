@@ -210,7 +210,10 @@ const ThoughtProPayment = () => {
         throw new Error('Order ID not received from backend');
       }
 
-      const razorpayKey = process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_RYmnsGH2otvaV2';
+      const razorpayKey = orderData.key_id || process.env.REACT_APP_RAZORPAY_KEY_ID;
+      if (!razorpayKey) {
+        throw new Error('Razorpay key not available');
+      }
       console.log('Using Razorpay key:', razorpayKey.substring(0, 15) + '...');
 
       // Razorpay options
