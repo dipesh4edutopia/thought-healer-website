@@ -22,7 +22,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark-900/50 to-dark-800/50 dark:from-dark-950/50 dark:to-dark-900/50"></div>
 
@@ -39,17 +39,17 @@ const ContactSection = () => {
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-secondary-500/5 dark:bg-secondary-400/5 blur-3xl"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
-          <span className="text-primary-500 dark:text-primary-400 font-medium">Get in Touch</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mt-2 mb-4 text-dark-900 dark:text-white">
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 px-4" data-aos="fade-up">
+          <span className="text-primary-500 dark:text-primary-400 font-medium text-sm sm:text-base">Get in Touch</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mt-2 mb-3 sm:mb-4 text-dark-900 dark:text-white">
             Start Your <span className="gradient-text">Healing</span> Journey Today
           </h2>
-          <p className="text-dark-600 dark:text-dark-300 text-lg">
+          <p className="text-dark-600 dark:text-dark-300 text-base sm:text-lg">
             Reach out to schedule a consultation or learn more about our services
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Form */}
           <div data-aos="fade-right">
             <div className="relative">
@@ -57,13 +57,13 @@ const ContactSection = () => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500/30 to-secondary-500/30 dark:from-primary-400/30 dark:to-secondary-400/30 rounded-xl blur opacity-70"></div>
 
               {/* Form card */}
-              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   {/* Name field */}
                   <div>
-                    <label htmlFor="name" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">Full Name</label>
+                    <label htmlFor="name" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium text-sm sm:text-base">Full Name</label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 pointer-events-none">
                         <i className="fas fa-user text-dark-400 dark:text-dark-500"></i>
                       </div>
                       <input
@@ -72,7 +72,7 @@ const ContactSection = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-3 bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
+                        className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
                         placeholder="Your name"
                       />
                     </div>
@@ -80,9 +80,9 @@ const ContactSection = () => {
 
                   {/* Email field */}
                   <div>
-                    <label htmlFor="email" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">Email Address</label>
+                    <label htmlFor="email" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium text-sm sm:text-base">Email Address</label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 pointer-events-none">
                         <i className="fas fa-envelope text-dark-400 dark:text-dark-500"></i>
                       </div>
                       <input
@@ -91,7 +91,7 @@ const ContactSection = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-3 bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
+                        className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
                         placeholder="Your email"
                       />
                     </div>
@@ -99,9 +99,9 @@ const ContactSection = () => {
 
                   {/* Subject field */}
                   <div>
-                    <label htmlFor="subject" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">Subject</label>
+                    <label htmlFor="subject" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium text-sm sm:text-base">Subject</label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 pointer-events-none">
                         <i className="fas fa-tag text-dark-400 dark:text-dark-500"></i>
                       </div>
                       <select
@@ -109,7 +109,7 @@ const ContactSection = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-3 bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white"
+                        className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white"
                       >
                         <option value="">Select a subject</option>
                         <option value="therapy">Therapy Services</option>
@@ -122,9 +122,9 @@ const ContactSection = () => {
 
                   {/* Message field */}
                   <div>
-                    <label htmlFor="message" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">Message</label>
+                    <label htmlFor="message" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium text-sm sm:text-base">Message</label>
                     <div className="relative">
-                      <div className="absolute top-3 left-0 flex items-start pl-4 pointer-events-none">
+                      <div className="absolute top-2.5 sm:top-3 left-0 flex items-start pl-3 sm:pl-4 pointer-events-none">
                         <i className="fas fa-comment-alt text-dark-400 dark:text-dark-500"></i>
                       </div>
                       <textarea
@@ -133,14 +133,14 @@ const ContactSection = () => {
                         rows="5"
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-3 bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
+                        className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white/5 dark:bg-dark-700/30 border border-white/10 rounded-lg focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none text-dark-900 dark:text-white placeholder-dark-400 dark:placeholder-dark-500"
                         placeholder="Your message"
                       ></textarea>
                     </div>
                   </div>
 
                   {/* Submit button */}
-                  <button type="submit" className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary-400 dark:to-secondary-400 w-full px-6 py-4 font-medium text-white shadow-lg transition-all duration-300">
+                  <button type="submit" className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary-400 dark:to-secondary-400 w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-medium text-white shadow-lg transition-all duration-300">
                     <span className="relative z-10 flex items-center justify-center">
                       Send Message
                       <i className="fas fa-paper-plane ml-2 group-hover:translate-x-1 transition-transform"></i>
@@ -155,24 +155,24 @@ const ContactSection = () => {
           {/* Contact Information */}
           <div data-aos="fade-left">
             {/* Contact info card */}
-            <div className="relative mb-8">
+            <div className="relative mb-6 sm:mb-8">
               {/* Glow effect */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary-500/30 to-primary-500/30 dark:from-secondary-400/30 dark:to-primary-400/30 rounded-xl blur opacity-70"></div>
 
-              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
-                <h3 className="text-xl font-semibold mb-6 text-dark-900 dark:text-white">Contact Information</h3>
+              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-dark-900 dark:text-white">Contact Information</h3>
 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Address */}
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500/20 to-primary-500/5 dark:from-primary-400/20 dark:to-primary-400/5 flex items-center justify-center">
-                        <i className="fas fa-map-marker-alt text-primary-500 dark:text-primary-400 text-xl"></i>
+                    <div className="flex-shrink-0 mr-3 sm:mr-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-primary-500/20 to-primary-500/5 dark:from-primary-400/20 dark:to-primary-400/5 flex items-center justify-center">
+                        <i className="fas fa-map-marker-alt text-primary-500 dark:text-primary-400 text-lg sm:text-xl"></i>
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-lg font-medium text-dark-900 dark:text-white mb-1">Office Location</h4>
-                      <p className="text-dark-600 dark:text-dark-300">
+                      <h4 className="text-base sm:text-lg font-medium text-dark-900 dark:text-white mb-1">Office Location</h4>
+                      <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300">
                         S 26/A Siddhivinayak Nagari, Krishna R-14 Pune, Nigdi,<br />
                         Yamunanagar, Pune-411044, Maharashtra
                       </p>
@@ -181,14 +181,14 @@ const ContactSection = () => {
 
                   {/* Email */}
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 mr-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary-500/20 to-secondary-500/5 dark:from-secondary-400/20 dark:to-secondary-400/5 flex items-center justify-center">
-                        <i className="fas fa-envelope text-secondary-500 dark:text-secondary-400 text-xl"></i>
+                    <div className="flex-shrink-0 mr-3 sm:mr-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-secondary-500/20 to-secondary-500/5 dark:from-secondary-400/20 dark:to-secondary-400/5 flex items-center justify-center">
+                        <i className="fas fa-envelope text-secondary-500 dark:text-secondary-400 text-lg sm:text-xl"></i>
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-lg font-medium text-dark-900 dark:text-white mb-1">Email Us</h4>
-                      <p className="text-dark-600 dark:text-dark-300">
+                      <h4 className="text-base sm:text-lg font-medium text-dark-900 dark:text-white mb-1">Email Us</h4>
+                      <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300">
                         <a href="mailto:connect@thoughthealer.org" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
                           connect@thoughthealer.org
                         </a>
@@ -204,10 +204,10 @@ const ContactSection = () => {
               {/* Glow effect */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 dark:from-primary-400/20 dark:to-primary-400/5 rounded-xl blur opacity-70"></div>
 
-              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
-                <h3 className="text-xl font-semibold mb-6 text-dark-900 dark:text-white">Office Hours</h3>
+              <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-dark-900 dark:text-white">Office Hours</h3>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                   <div className="flex justify-between">
                     <span className="text-dark-600 dark:text-dark-300">Monday - Friday</span>
                     <span className="text-dark-900 dark:text-white font-medium">9:00 AM - 7:00 PM</span>

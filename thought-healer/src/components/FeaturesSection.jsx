@@ -59,28 +59,28 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="py-24" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+    <section id="features" className="py-16 sm:py-20 md:py-24" style={{ backgroundColor: 'var(--bg-secondary)' }}>
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <span className="text-primary-500 font-medium">Feature</span>
-          <h2 className="text-4xl font-display font-bold mt-2" style={{ color: 'var(--text-primary)' }}>
+        <div className="text-center mb-8 sm:mb-12 px-4" data-aos="fade-up">
+          <span className="text-primary-500 font-medium text-sm sm:text-base">Feature</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mt-2" style={{ color: 'var(--text-primary)' }}>
             Our Products
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {products.map((product, index) => (
             <div
               key={index}
-              className="relative border-2 border-primary-500 rounded-lg p-6 shadow-sm"
+              className="relative border-2 border-primary-500 rounded-lg p-4 sm:p-6 shadow-sm"
               style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text-primary)' }}
               data-aos="fade-up"
               data-aos-delay={product.delay}
             >
-              <h3 className="text-2xl font-semibold text-primary-500 mb-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-primary-500 mb-3 sm:mb-4">
                 {product.name}
               </h3>
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 text-sm sm:text-base">
                 {product.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className="text-primary-500 mr-2 mt-1">✔️</span>
@@ -88,18 +88,18 @@ const FeaturesSection = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                 <a
                   href={product.downloadLink}
                   target={product.downloadLink.startsWith('http') ? '_blank' : '_self'}
                   rel={product.downloadLink.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="flex-1 bg-primary-500 text-white py-2 rounded-lg text-center hover:bg-primary-600 transition-colors"
+                  className="flex-1 bg-primary-500 text-white py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-600 transition-colors"
                 >
                   Download
                 </a>
                 <a
                   href="#"
-                  className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                  className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
                 >
                   Read More
                 </a>

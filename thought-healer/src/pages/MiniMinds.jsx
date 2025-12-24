@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MiniMinds = () => {
+  const navigate = useNavigate();
+  const [isAnnual, setIsAnnual] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     try {
       const saved = localStorage.getItem('th-theme');
@@ -160,6 +162,7 @@ const MiniMinds = () => {
               <span className="text-xl font-bold text-dark-900 dark:text-white">MiniMinds</span>
             </Link>
             <nav className="hidden md:flex items-center space-x-8">
+              <button onClick={() => navigate('/')} className="text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-bold">Home</button>
               <a href="#features" className="text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Features</a>
               <a href="#interventions" className="text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Interventions</a>
               <a href="#issues" className="text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Issues We Cover</a>
@@ -172,12 +175,12 @@ const MiniMinds = () => {
               >
                 Get Started
               </Link>
-              <button 
-                onClick={() => setIsDark(!isDark)} 
-                className="p-2 rounded-full hover:bg-dark-200/50 dark:hover:bg-dark-700/50 transition-colors"
-                aria-label="Toggle theme"
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className="theme-toggle"
+                aria-label="Toggle dark mode"
               >
-                {isDark ? '🌙' : '☀️'}
+                <span className="sr-only">Toggle dark mode</span>
               </button>
             </nav>
             <button 
@@ -198,16 +201,25 @@ const MiniMinds = () => {
 
         {/* Mobile Menu */}
         {isMobileOpen && (
-          <div className="md:hidden border-t border-dark-200/50 dark:border-white/10 bg-white dark:bg-dark-800">
+          <div className="md:hidden border-t border-dark-200/50 dark:border-white/10 bg-white dark:bg-dark-800 shadow-lg">
             <nav className="px-4 py-4 space-y-3">
-              <a href="#features" onClick={() => setIsMobileOpen(false)} className="block text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Features</a>
-              <a href="#interventions" onClick={() => setIsMobileOpen(false)} className="block text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Interventions</a>
-              <a href="#issues" onClick={() => setIsMobileOpen(false)} className="block text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Issues We Cover</a>
-              <a href="#pricing" onClick={() => setIsMobileOpen(false)} className="block text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Pricing</a>
-              <a href="#testimonials" onClick={() => setIsMobileOpen(false)} className="block text-dark-600 dark:text-dark-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Testimonials</a>
+              <button 
+                onClick={() => { 
+                  setIsMobileOpen(false); 
+                  navigate('/'); 
+                }} 
+                className="block w-full text-left py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-bold text-lg"
+              >
+                Home
+              </button>
+              <a href="#features" onClick={() => setIsMobileOpen(false)} className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Features</a>
+              <a href="#interventions" onClick={() => setIsMobileOpen(false)} className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Interventions</a>
+              <a href="#issues" onClick={() => setIsMobileOpen(false)} className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Issues We Cover</a>
+              <a href="#pricing" onClick={() => setIsMobileOpen(false)} className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Pricing</a>
+              <a href="#testimonials" onClick={() => setIsMobileOpen(false)} className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium">Testimonials</a>
               <Link 
                 to="/thoughtpro-signin"
-                className="block px-6 py-2.5 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-full font-semibold text-center hover:shadow-xl transition-all"
+                className="block px-6 py-3 mt-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-full font-semibold text-center hover:shadow-xl transition-all"
                 onClick={() => {
                   setIsMobileOpen(false);
                   sessionStorage.setItem('productContext', 'miniminds');
@@ -441,9 +453,20 @@ const MiniMinds = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-4">
               Choose Your Child's Wellness Plan
             </h2>
-            <p className="text-lg md:text-xl text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-dark-600 dark:text-dark-300 max-w-2xl mx-auto mb-8">
               Start free and upgrade when ready for more comprehensive mental health support
             </p>
+            <div className="flex items-center justify-center space-x-4">
+              <span className={`${!isAnnual ? 'font-semibold text-dark-900 dark:text-white' : 'text-dark-600 dark:text-dark-400'}`}>Monthly</span>
+              <button 
+                onClick={() => setIsAnnual(!isAnnual)}
+                className={`relative w-12 h-6 rounded-full transition-colors ${isAnnual ? 'bg-gradient-to-r from-orange-500 to-yellow-500' : 'bg-dark-300 dark:bg-dark-700'}`}
+              >
+                <div className={`absolute w-5 h-5 bg-white rounded-full top-0.5 transition-transform ${isAnnual ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
+              </button>
+              <span className={`${isAnnual ? 'font-semibold text-dark-900 dark:text-white' : 'text-dark-600 dark:text-dark-400'}`}>Annual</span>
+              <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Save 67%</span>
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Free Plan */}
@@ -490,9 +513,14 @@ const MiniMinds = () => {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">Premium</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹199</span>
-                  <span className="text-dark-600 dark:text-dark-300">/month</span>
+                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 999 : 299}</span>
+                  <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
                 </div>
+                {isAnnual && (
+                  <p className="text-sm text-dark-500 dark:text-dark-400">
+                    ₹{Math.round(999 / 12)}/month billed annually
+                  </p>
+                )}
               </div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start">
@@ -529,9 +557,14 @@ const MiniMinds = () => {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">Ultra</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹299</span>
-                  <span className="text-dark-600 dark:text-dark-300">/month</span>
+                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 2599 : 599}</span>
+                  <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
                 </div>
+                {isAnnual && (
+                  <p className="text-sm text-dark-500 dark:text-dark-400">
+                    ₹{Math.round(2599 / 12)}/month billed annually
+                  </p>
+                )}
               </div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start">

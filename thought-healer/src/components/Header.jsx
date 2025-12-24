@@ -90,31 +90,31 @@ const Header = () => {
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3 shadow-sm' : 'bg-transparent py-5'
+        scrolled ? 'glass py-3 shadow-sm' : 'glass py-4 sm:py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <span className="text-2xl font-display font-bold">
+            <span className="text-xl sm:text-2xl font-display font-bold">
               <span className="text-primary-500 dark:text-primary-400">Synept</span>
               <span className="text-dark-900 dark:text-white">Labs</span>
             </span>
           </a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
-            <a href="#" className="text-dark-900 dark:text-white font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</a>
-            <a href="#about" className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About Us</a>
-            <a href="#team" className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Doctors</a>
+          <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
+            <a href="#" className="text-dark-900 dark:text-white font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</a>
+            <a href="#about" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About Us</a>
+            <a href="#team" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Doctors</a>
             
             {/* Products Dropdown */}
             <div className="relative">
               <button 
                 onClick={() => setProductDropdownOpen(!productDropdownOpen)}
                 onBlur={() => setTimeout(() => setProductDropdownOpen(false), 200)}
-                className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center"
+                className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center"
               >
                 Our Products
                 <svg 
@@ -146,7 +146,7 @@ const Header = () => {
               )}
             </div>
             
-            <a href="#contact" className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</a>
+            <a href="#contact" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</a>
 
             {/* User Authentication Section */}
             {isAuthenticated ? (
@@ -201,7 +201,7 @@ const Header = () => {
             ) : (
               <Link 
                 to="/login"
-                className="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-medium hover:shadow-lg transition-all"
+                className="px-3 lg:px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm lg:text-base rounded-lg font-medium hover:shadow-lg transition-all"
               >
                 Sign In
               </Link>
@@ -242,26 +242,26 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 glass shadow-lg rounded-b-lg p-4 mt-0.5">
+          <div className="absolute top-full left-0 right-0 bg-white dark:bg-dark-800 shadow-lg rounded-b-lg p-4 sm:p-6 mt-0.5 border-t border-gray-200 dark:border-gray-700">
             <div className="flex flex-col space-y-4">
               <a 
                 href="#" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-dark-900 dark:text-white font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                className="text-dark-900 dark:text-white font-medium text-base sm:text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
               >
                 Home
               </a>
               <a 
                 href="#about" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                className="text-dark-600 dark:text-dark-300 font-medium text-base sm:text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
               >
                 About Us
               </a>
               <a 
                 href="#team" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                className="text-dark-600 dark:text-dark-300 font-medium text-base sm:text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
               >
                 Doctors
               </a>
@@ -270,7 +270,7 @@ const Header = () => {
               <div className="flex flex-col">
                 <button 
                   onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                  className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center justify-center gap-2"
+                  className="text-dark-600 dark:text-dark-300 font-medium text-base sm:text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center justify-center gap-2"
                 >
                   Our Products
                   <svg 
@@ -305,7 +305,7 @@ const Header = () => {
               <a 
                 href="#contact" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                className="text-dark-600 dark:text-dark-300 font-medium text-base sm:text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
               >
                 Contact
               </a>

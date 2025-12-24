@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-900 dark:bg-dark-950 text-white py-16 relative overflow-hidden">
+    <footer className="bg-dark-900 dark:bg-dark-950 text-white py-12 sm:py-14 md:py-16 relative overflow-hidden">
       {/* Animated background pattern */}
       <div className="absolute inset-0 bg-neural-pattern bg-repeat opacity-5"></div>
 
@@ -10,11 +10,11 @@ const Footer = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-primary-500/5 dark:bg-primary-400/5 blur-3xl"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
           {/* Company Info */}
           <div data-aos="fade-up">
-            <div className="mb-6">
-              <h3 className="text-2xl font-display font-bold mb-2">
+            <div className="mb-4 sm:mb-6">
+              <h3 className="text-xl sm:text-2xl font-display font-bold mb-2">
                 <span className="gradient-text">Thought</span>Healer
               </h3>
               <p className="text-dark-400 text-sm">
@@ -41,7 +41,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div data-aos="fade-up" data-aos-delay="100">
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#home" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
@@ -78,7 +78,7 @@ const Footer = () => {
 
           {/* Services */}
           <div data-aos="fade-up" data-aos-delay="200">
-            <h4 className="text-lg font-semibold mb-6">Our Products</h4>
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Our Products</h4>
             <ul className="space-y-3">
               <li>
                 <a href="thoughtpro.html" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
@@ -109,7 +109,7 @@ const Footer = () => {
 
           {/* Legal */}
           <div data-aos="fade-up" data-aos-delay="300">
-            <h4 className="text-lg font-semibold mb-6">Legal</h4>
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Legal</h4>
             <ul className="space-y-3">
               <li>
                 <a href="/terms&condition.html" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">

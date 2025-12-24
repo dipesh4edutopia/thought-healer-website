@@ -35,7 +35,7 @@ const CardSection = () => {
   ];
 
   return (
-    <section id="support-cards" className="py-16">
+    <section id="support-cards" className="py-12 sm:py-14 md:py-16">
       <h1 className="card-section-title">
         Click the problem you have
       </h1>

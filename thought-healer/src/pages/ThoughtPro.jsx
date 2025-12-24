@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ThoughtPro = () => {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState('Premium');
   const [isAnnual, setIsAnnual] = useState(false);
   const [isDark, setIsDark] = useState(() => {
@@ -148,10 +149,47 @@ const ThoughtPro = () => {
               <span className="text-xl font-bold text-dark-900 dark:text-white">ThoughtPro</span>
             </Link>
             <nav className="hidden md:flex space-x-8">
-              <a href="#features" className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Features</a>
-              <a href="#clients" className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Clients</a>
-              <a href="#pricing" className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Pricing</a>
-              <a href="#testimonials" className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Reviews</a>
+              <button onClick={() => navigate('/')} className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-semibold">Home</button>
+              <a 
+                href="#features" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }} 
+                className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              >
+                Features
+              </a>
+              <a 
+                href="#clients" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('clients')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }} 
+                className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              >
+                Clients
+              </a>
+              <a 
+                href="#pricing" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }} 
+                className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              >
+                Pricing
+              </a>
+              <a 
+                href="#testimonials" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }} 
+                className="text-dark-700 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              >
+                Reviews
+              </a>
             </nav>
             <div className="flex items-center gap-3">
               <Link
@@ -169,11 +207,11 @@ const ThoughtPro = () => {
                 Download App
               </a>
               <button
-                aria-label="Toggle theme"
                 onClick={() => setIsDark(!isDark)}
-                className="relative w-14 h-7 bg-dark-300 dark:bg-dark-700 rounded-full border-none cursor-pointer transition-all duration-300"
+                className="theme-toggle"
+                aria-label="Toggle dark mode"
               >
-                <div className={`absolute top-1 ${isDark ? 'right-1' : 'left-1'} w-5 h-5 bg-dark-900 dark:bg-white rounded-full transition-all duration-300`}></div>
+                <span className="sr-only">Toggle dark mode</span>
               </button>
               <button
                 aria-label="Open menu"
@@ -191,16 +229,70 @@ const ThoughtPro = () => {
         {/* Mobile menu */}
         {isMobileOpen && (
           <>
-            <div className="md:hidden bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl border-t border-dark-200/50 dark:border-white/10">
-              <div className="px-4 pb-4 space-y-3">
-                <a href="#features" onClick={() => setIsMobileOpen(false)} className="block py-2 text-dark-900 dark:text-white">Features</a>
-                <a href="#clients" onClick={() => setIsMobileOpen(false)} className="block py-2 text-dark-900 dark:text-white">Clients</a>
-                <a href="#pricing" onClick={() => setIsMobileOpen(false)} className="block py-2 text-dark-900 dark:text-white">Pricing</a>
-                <a href="#testimonials" onClick={() => setIsMobileOpen(false)} className="block py-2 text-dark-900 dark:text-white">Reviews</a>
+            <div
+              className="fixed inset-0 z-40 bg-black/30 dark:bg-black/60"
+              onClick={() => setIsMobileOpen(false)}
+            />
+            <div className="md:hidden bg-white dark:bg-dark-800 backdrop-blur-xl border-t border-dark-200/50 dark:border-white/10 shadow-lg relative z-50">
+              <div className="px-4 pb-4 pt-2 space-y-3">
+                <Link
+                  to="/"
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
+                  className="block w-full text-left py-2.5 text-dark-900 dark:text-white font-semibold text-lg hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  Home
+                </Link>
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('features')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                  }}
+                  className="block w-full text-left py-2.5 text-dark-900 dark:text-white font-medium text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  Features
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('clients')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                  }}
+                  className="block w-full text-left py-2.5 text-dark-900 dark:text-white font-medium text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  Clients
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                  }}
+                  className="block w-full text-left py-2.5 text-dark-900 dark:text-white font-medium text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  Pricing
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                  }}
+                  className="block w-full text-left py-2.5 text-dark-900 dark:text-white font-medium text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  Reviews
+                </button>
                 <Link
                   to="/thoughtpro-signin"
                   onClick={() => setIsMobileOpen(false)}
-                  className="block py-2 px-4 text-center rounded-lg text-white bg-gradient-to-r from-primary-500 to-secondary-500"
+                  className="block py-3 px-4 mt-2 text-center rounded-lg text-white font-semibold bg-gradient-to-r from-primary-500 to-secondary-500 hover:shadow-lg transition-all"
                 >
                   Login
                 </Link>
@@ -208,16 +300,12 @@ const ThoughtPro = () => {
                   href="https://play.google.com/store/apps/details?id=com.thoughtpro"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block py-2 text-dark-900 dark:text-white"
+                  className="block py-2.5 text-dark-900 dark:text-white font-medium text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                 >
                   Download App
                 </a>
               </div>
             </div>
-            <div
-              className="fixed inset-0 z-40 bg-black/30 dark:bg-black/60"
-              onClick={() => setIsMobileOpen(false)}
-            />
           </>
         )}
       </header>

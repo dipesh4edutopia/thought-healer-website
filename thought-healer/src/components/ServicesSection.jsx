@@ -38,7 +38,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
+    <section id="services" className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-neural-pattern bg-repeat opacity-5"></div>
 
@@ -47,19 +47,19 @@ const ServicesSection = () => {
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-secondary-500/5 dark:bg-secondary-400/5 blur-3xl"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16" data-aos="fade-up">
           <span className="text-primary-500 dark:text-primary-400 font-medium"></span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mt-2 mb-4 text-dark-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mt-2 mb-3 sm:mb-4 text-dark-900 dark:text-white px-4">
             Welcome to Our Synept Labs
           </h2>
-          <p className="text-dark-600 dark:text-dark-300 text-lg">
+          <p className="text-dark-600 dark:text-dark-300 text-base sm:text-lg px-4">
             The founders of Synept Labs serendipitously found out that tech mainly software and AI could help solve the raging issue of Mental healthcare faster.
             Through Multiple discussions and iterations they came up with Thought Healer, Thought Pro and Miniminds blueprint that suits the respective target audience.
             Their mission is to provide affordable mental healthcare for all and free mental healthcare for the most weaker sections of the society.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div 
               key={index}
