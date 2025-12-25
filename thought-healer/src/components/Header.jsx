@@ -87,6 +87,18 @@ const Header = () => {
     }
   }, [darkMode]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (productDropdownOpen && !event.target.closest('.relative')) {
+        setProductDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [productDropdownOpen]);
+
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -113,7 +125,6 @@ const Header = () => {
             <div className="relative">
               <button 
                 onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                onBlur={() => setTimeout(() => setProductDropdownOpen(false), 200)}
                 className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center"
               >
                 Our Products
@@ -131,14 +142,20 @@ const Header = () => {
                   <Link 
                     to="/thoughtpro" 
                     className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                    onClick={() => setProductDropdownOpen(false)}
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     ThoughtPro
                   </Link>
                   <Link 
                     to="/miniminds" 
                     className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                    onClick={() => setProductDropdownOpen(false)}
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     MiniMinds
                   </Link>

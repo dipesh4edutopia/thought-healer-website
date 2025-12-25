@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FeaturesSection = () => {
   const products = [
@@ -12,6 +13,7 @@ const FeaturesSection = () => {
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mentors'
       ],
       downloadLink: 'https://play.google.com/store/apps/details?id=com.thoughtpro',
+      pageLink: '/thoughtpro',
       color: 'primary',
       delay: '0'
     },
@@ -26,6 +28,7 @@ const FeaturesSection = () => {
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
       downloadLink: '#',
+      pageLink: '#',
       color: 'primary',
       delay: '100'
     },
@@ -38,7 +41,8 @@ const FeaturesSection = () => {
         'Secondary interventions – pro suggestions curated by mental health professionals',
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
-      downloadLink: '#',
+      downloadLink: 'https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds',
+      pageLink: '/miniminds',
       color: 'primary',
       delay: '200'
     },
@@ -53,6 +57,7 @@ const FeaturesSection = () => {
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
       downloadLink: '#',
+      pageLink: '#',
       color: 'secondary',
       delay: '300'
     }
@@ -97,12 +102,22 @@ const FeaturesSection = () => {
                 >
                   Download
                 </a>
-                <a
-                  href="#"
-                  className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
-                >
-                  Read More
-                </a>
+                {product.pageLink !== '#' ? (
+                  <Link
+                    to={product.pageLink}
+                    onClick={() => window.scrollTo(0, 0)}
+                    className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                  >
+                    Read More
+                  </Link>
+                ) : (
+                  <a
+                    href="#"
+                    className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                  >
+                    Read More
+                  </a>
+                )}
               </div>
             </div>
           ))}

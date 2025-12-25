@@ -174,7 +174,7 @@ const PricingSection = () => {
                 </ul>
               </div>
               <div className="p-6 sm:p-8 pt-0">
-                <a href="#signup" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 transition-colors">
+                <a href="/miniminds" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 transition-colors">
                   Get Started
                 </a>
               </div>

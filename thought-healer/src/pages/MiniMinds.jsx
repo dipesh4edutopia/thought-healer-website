@@ -175,6 +175,14 @@ const MiniMinds = () => {
               >
                 Get Started
               </Link>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex text-dark-900 dark:text-white px-4 py-2 rounded-lg border border-orange-500 transition-all duration-300 items-center justify-center hover:scale-105 hover:bg-orange-50 dark:hover:bg-orange-900/20"
+              >
+                Download App
+              </a>
               <button
                 onClick={() => setIsDark(!isDark)}
                 className="theme-toggle"
@@ -227,6 +235,15 @@ const MiniMinds = () => {
               >
                 Get Started
               </Link>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileOpen(false)}
+                className="block py-2.5 text-dark-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-medium"
+              >
+                Download App
+              </a>
             </nav>
           </div>
         )}
@@ -259,10 +276,12 @@ const MiniMinds = () => {
                   Start Free Trial
                 </Link>
                 <a 
-                  href="#features"
+                  href="https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-8 py-4 bg-white dark:bg-dark-800 text-dark-900 dark:text-white rounded-full font-semibold text-lg hover:shadow-xl transition-all border border-dark-200 dark:border-dark-700 text-center"
                 >
-                  Learn More
+                  Download App
                 </a>
               </div>
             </div>
@@ -649,6 +668,7 @@ const MiniMinds = () => {
                 <li><a href="#interventions" className="hover:text-orange-400 transition-colors">Interventions</a></li>
                 <li><a href="#issues" className="hover:text-orange-400 transition-colors">Issues</a></li>
                 <li><Link to="/thoughtpro-plans" className="hover:text-orange-400 transition-colors">Pricing</Link></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Download App</a></li>
               </ul>
             </div>
             <div>
