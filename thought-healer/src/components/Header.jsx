@@ -150,6 +150,16 @@ const Header = () => {
                     ThoughtPro
                   </Link>
                   <Link 
+                    to="/thoughtpro-b2b" 
+                    className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    ThoughtPro B2B
+                  </Link>
+                  <Link 
                     to="/miniminds" 
                     className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                     onClick={() => {
@@ -158,6 +168,16 @@ const Header = () => {
                     }}
                   >
                     MiniMinds
+                  </Link>
+                  <Link 
+                    to="/hermind" 
+                    className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    HerMind
                   </Link>
                 </div>
               )}
@@ -309,11 +329,25 @@ const Header = () => {
                       ThoughtPro
                     </Link>
                     <Link 
+                      to="/thoughtpro-b2b" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors py-1"
+                    >
+                      ThoughtPro B2B
+                    </Link>
+                    <Link 
                       to="/miniminds" 
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors py-1"
                     >
                       MiniMinds
+                    </Link>
+                    <Link 
+                      to="/hermind" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-dark-500 dark:text-dark-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors py-1"
+                    >
+                      HerMind
                     </Link>
                   </div>
                 )}

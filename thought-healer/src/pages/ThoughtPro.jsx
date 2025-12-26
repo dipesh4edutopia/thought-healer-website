@@ -342,7 +342,7 @@ const ThoughtPro = () => {
             </div>
             <div className="relative">
               <img
-                src="/assets/logo.png"
+                src="/assets/thoughtpro_logo.png"
                 alt="ThoughtPro App Logo"
                 className="w-full max-w-md mx-auto rounded-2xl object-contain transition-all duration-300 hover:scale-105 animate-float"
                 style={{
@@ -610,7 +610,7 @@ const ThoughtPro = () => {
               Download Free App
             </a>
             <a
-              href="https://wa.me/919422421316?text=I%20want%20to%20know%20more"
+              href="https://wa.me/917020037124?text=I%20want%20to%20know%20more"
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105 hover:bg-white/10"
@@ -650,7 +650,7 @@ const ThoughtPro = () => {
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-dark-600 dark:text-dark-300">
                 <li><a href="#" className="hover:text-primary-500 transition-colors">Help Center</a></li>
-                <li><a href="https://wa.me/919422421316?text=I%20want%20to%20know%20more" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500 transition-colors">Contact Us</a></li>
+                <li><a href="https://wa.me/917020037124?text=I%20want%20to%20know%20more" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500 transition-colors">Contact Us</a></li>
                 <li><a href="#" className="hover:text-primary-500 transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
