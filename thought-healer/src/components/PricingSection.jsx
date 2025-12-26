@@ -101,9 +101,52 @@ const PricingSection = () => {
             </div>
           </div>
 
-          {/* Similar structure for other products - Thought Healer, MiniMinds, HerMind */}
-          {/* Adding just Thought Healer as example - you can expand */}
+          {/* ThoughtPro B2B */}
           <div className="relative flex flex-col h-full" data-aos="fade-up" data-aos-delay="100">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500/40 to-secondary-500/40 rounded-xl blur opacity-70"></div>
+            <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl border shadow-xl flex-1 flex flex-col">
+              <div className="absolute top-0 inset-x-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-center py-2 text-sm font-medium rounded-t-xl">
+                ThoughtPro B2B
+              </div>
+              <div className="p-6 sm:p-8 pt-12 flex-1">
+                <div className="bg-primary-500/10 rounded-lg w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                  <i className="fas fa-building text-primary-500 text-xl sm:text-2xl"></i>
+                </div>
+                <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-2">ThoughtPro B2B</h3>
+                <p className="text-base sm:text-lg font-medium text-primary-500 mb-4 sm:mb-6">Enterprise</p>
+                <ul className="space-y-2 sm:space-y-3 text-dark-600 dark:text-dark-300 mb-6 sm:mb-8 text-xs sm:text-sm">
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    Comprehensive team assessments
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    Real-time analytics dashboard
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    Expert-led programs
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    Enterprise-grade security
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    Dedicated account manager
+                  </li>
+                </ul>
+              </div>
+              <div className="p-6 sm:p-8 pt-0">
+                <a href="/thoughtpro-b2b" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg transition-all">
+                  Contact Sales
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Thought Healer - Commented out */}
+          {/* <div className="relative flex flex-col h-full" data-aos="fade-up" data-aos-delay="100">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500/40 to-secondary-500/40 rounded-xl blur opacity-70"></div>
             <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl border shadow-xl flex-1 flex flex-col">
               <div className="absolute top-0 inset-x-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-center py-2 text-sm font-medium rounded-t-xl">
@@ -146,7 +189,7 @@ const PricingSection = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* MiniMinds & HerMind - simplified version */}
           <div className="relative flex flex-col h-full" data-aos="fade-up" data-aos-delay="200">
@@ -174,7 +217,7 @@ const PricingSection = () => {
                 </ul>
               </div>
               <div className="p-6 sm:p-8 pt-0">
-                <a href="#signup" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 transition-colors">
+                <a href="/miniminds" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 transition-colors">
                   Get Started
                 </a>
               </div>
@@ -206,7 +249,7 @@ const PricingSection = () => {
                 </ul>
               </div>
               <div className="p-8 pt-0">
-                <a href="#signup" className="block w-full py-3 px-6 text-center rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg transition-all">
+                <a href="/hermind" className="block w-full py-3 px-6 text-center rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg transition-all">
                   Get Started
                 </a>
               </div>

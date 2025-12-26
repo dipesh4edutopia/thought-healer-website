@@ -81,25 +81,31 @@ const Footer = () => {
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Our Products</h4>
             <ul className="space-y-3">
               <li>
-                <a href="thoughtpro.html" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <a href="/thoughtpro" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   ThoughtPro
                 </a>
               </li>
               <li>
+                <a href="/thoughtpro-b2b" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                  <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                  ThoughtPro B2B
+                </a>
+              </li>
+              {/* <li>
                 <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   Thought Healer
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <a href="/miniminds" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   MiniMinds
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <a href="/hermind" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   HerMind
                 </a>

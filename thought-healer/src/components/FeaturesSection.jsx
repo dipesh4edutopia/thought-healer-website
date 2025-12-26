@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FeaturesSection = () => {
   const products = [
@@ -12,23 +13,40 @@ const FeaturesSection = () => {
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mentors'
       ],
       downloadLink: 'https://play.google.com/store/apps/details?id=com.thoughtpro',
+      pageLink: '/thoughtpro',
       color: 'primary',
       delay: '0'
     },
     {
-      name: 'Thought Healer',
+      name: 'ThoughtPro B2B',
       features: [
-        'Monitor your most pressing mental health issues like depression, anxiety and 100+ others',
-        'Track your EQ and personality disorders',
+        'Professional mental wellness platform for your enterprise',
+        'Comprehensive mental health assessments for teams',
         'Get personalized help in the form of interventions',
         'Primary interventions – useful suggestions to tackle everyday issues',
         'Secondary interventions – pro suggestions curated by mental health professionals',
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
-      downloadLink: '#',
+      downloadLink: 'https://play.google.com/store/apps/details?id=com.thoughtpro.b2b',
+      pageLink: '/thoughtpro-b2b',
       color: 'primary',
       delay: '100'
     },
+    // {
+    //   name: 'Thought Healer',
+    //   features: [
+    //     'Monitor your most pressing mental health issues like depression, anxiety and 100+ others',
+    //     'Track your EQ and personality disorders',
+    //     'Get personalized help in the form of interventions',
+    //     'Primary interventions – useful suggestions to tackle everyday issues',
+    //     'Secondary interventions – pro suggestions curated by mental health professionals',
+    //     'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
+    //   ],
+    //   downloadLink: '#',
+    //   pageLink: '#',
+    //   color: 'primary',
+    //   delay: '100'
+    // },
     {
       name: 'MiniMinds',
       features: [
@@ -38,12 +56,13 @@ const FeaturesSection = () => {
         'Secondary interventions – pro suggestions curated by mental health professionals',
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
-      downloadLink: '#',
+      downloadLink: 'https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds',
+      pageLink: '/miniminds',
       color: 'primary',
       delay: '200'
     },
     {
-      name: 'herMind',
+      name: 'HerMind',
       features: [
         'Monitor pressing female issues like PCOS/PCOD/post-partum depression',
         'Unrealistic beauty standards and body image concerns',
@@ -53,6 +72,7 @@ const FeaturesSection = () => {
         'Tertiary interventions – advanced suggestions and video-based guidance, one-on-one calls with mental health professionals'
       ],
       downloadLink: '#',
+      pageLink: '/hermind',
       color: 'secondary',
       delay: '300'
     }
@@ -89,20 +109,41 @@ const FeaturesSection = () => {
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                <a
-                  href={product.downloadLink}
-                  target={product.downloadLink.startsWith('http') ? '_blank' : '_self'}
-                  rel={product.downloadLink.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="flex-1 bg-primary-500 text-white py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-600 transition-colors"
-                >
-                  Download
-                </a>
-                <a
-                  href="#"
-                  className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
-                >
-                  Read More
-                </a>
+                {product.name === 'HerMind' ? (
+                  <button
+                    disabled
+                    className="w-full bg-primary-500 text-white py-2 rounded-lg text-center text-sm sm:text-base opacity-75 cursor-not-allowed"
+                  >
+                    Coming Soon
+                  </button>
+                ) : (
+                  <>
+                    <a
+                      href={product.downloadLink}
+                      target={product.downloadLink.startsWith('http') ? '_blank' : '_self'}
+                      rel={product.downloadLink.startsWith('http') ? 'noopener noreferrer' : ''}
+                      className="flex-1 bg-primary-500 text-white py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-600 transition-colors"
+                    >
+                      Download
+                    </a>
+                    {product.pageLink !== '#' ? (
+                      <Link
+                        to={product.pageLink}
+                        onClick={() => window.scrollTo(0, 0)}
+                        className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                      >
+                        Read More
+                      </Link>
+                    ) : (
+                      <a
+                        href="#"
+                        className="flex-1 border-2 border-primary-500 text-primary-500 py-2 rounded-lg text-center text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                      >
+                        Read More
+                      </a>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           ))}

@@ -87,6 +87,18 @@ const Header = () => {
     }
   }, [darkMode]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (productDropdownOpen && !event.target.closest('.relative')) {
+        setProductDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [productDropdownOpen]);
+
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -113,7 +125,6 @@ const Header = () => {
             <div className="relative">
               <button 
                 onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                onBlur={() => setTimeout(() => setProductDropdownOpen(false), 200)}
                 className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors flex items-center"
               >
                 Our Products
@@ -131,16 +142,42 @@ const Header = () => {
                   <Link 
                     to="/thoughtpro" 
                     className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                    onClick={() => setProductDropdownOpen(false)}
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     ThoughtPro
                   </Link>
                   <Link 
+                    to="/thoughtpro-b2b" 
+                    className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    ThoughtPro B2B
+                  </Link>
+                  <Link 
                     to="/miniminds" 
                     className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                    onClick={() => setProductDropdownOpen(false)}
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     MiniMinds
+                  </Link>
+                  <Link 
+                    to="/hermind" 
+                    className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    HerMind
                   </Link>
                 </div>
               )}
@@ -292,11 +329,25 @@ const Header = () => {
                       ThoughtPro
                     </Link>
                     <Link 
+                      to="/thoughtpro-b2b" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors py-1"
+                    >
+                      ThoughtPro B2B
+                    </Link>
+                    <Link 
                       to="/miniminds" 
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors py-1"
                     >
                       MiniMinds
+                    </Link>
+                    <Link 
+                      to="/hermind" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-dark-500 dark:text-dark-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors py-1"
+                    >
+                      HerMind
                     </Link>
                   </div>
                 )}

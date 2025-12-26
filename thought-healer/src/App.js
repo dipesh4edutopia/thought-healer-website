@@ -7,9 +7,11 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Otp from './pages/Otp';
 import ThoughtPro from './pages/ThoughtPro';
+import ThoughtProB2B from './pages/ThoughtProB2B';
 import ThoughtProPlans from './pages/ThoughtProPlans';
 import ThoughtProSignin from './pages/ThoughtProSignin';
 import MiniMinds from './pages/MiniMinds';
+import HerMind from './pages/HerMind';
 import MiniMindsSignin from './pages/MiniMindsSignin';
 import MiniMindsSignup from './pages/MiniMindsSignup';
 import MiniMindsOtp from './pages/MiniMindsOtp';
@@ -50,7 +52,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/otp" element={<Otp />} />
           <Route path="/thoughtpro" element={<ThoughtPro />} />
+          <Route path="/thoughtpro-b2b" element={<ThoughtProB2B />} />
            <Route path="/miniminds" element={<MiniMinds />} />
+          <Route path="/hermind" element={<HerMind />} />
           <Route path="/thoughtpro-signin" element={<ThoughtProSignin />} />
           <Route path="/thoughtpro-signup" element={<ThoughtProSignup />} />
           <Route path="/thoughtpro-otp" element={<ThoughtProOtp />} />
