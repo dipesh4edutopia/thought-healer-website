@@ -147,16 +147,16 @@ const SubscriptionManagement = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-50 to-primary-100 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
       {/* Navigation */}
       <nav className="bg-white/80 dark:bg-dark-900/80 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
           <Link to="/thoughtpro" className="flex items-center space-x-2">
-            <span className="text-3xl">🧠</span>
-            <span className="text-xl font-bold text-dark-900 dark:text-white">ThoughtPro</span>
+            <span className="text-2xl sm:text-3xl">🧠</span>
+            <span className="text-lg sm:text-xl font-bold text-dark-900 dark:text-white">ThoughtPro</span>
           </Link>
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-dark-900 dark:text-white mb-8">Subscription Management</h1>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-8 sm:py-12">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-dark-900 dark:text-white mb-6 sm:mb-8">Subscription Management</h1>
 
         {error && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-6 text-red-700 dark:text-red-300">
@@ -165,8 +165,8 @@ const SubscriptionManagement = () => {
         )}
 
         {/* Current Subscription */}
-        <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl mb-8">
-          <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Current Subscription</h2>
+        <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-dark-900 dark:text-white mb-4 sm:mb-6">Current Subscription</h2>
           
           {/* Debug Info - Remove in production */}
           {subscriptionStatus && (
@@ -182,10 +182,10 @@ const SubscriptionManagement = () => {
           
           {subscriptionStatus ? (
             <>
-              <div className="grid md:grid-cols-3 gap-6 mb-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
                 <div>
-                  <p className="text-dark-600 dark:text-dark-400 mb-2">Plan Type</p>
-                  <p className="text-xl font-semibold text-dark-900 dark:text-white capitalize">
+                  <p className="text-xs sm:text-sm text-dark-600 dark:text-dark-400 mb-2">Plan Type</p>
+                  <p className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white capitalize">
                     {subscriptionStatus.plan_type || 'Unknown'}
                   </p>
                 </div>
@@ -268,8 +268,8 @@ const SubscriptionManagement = () => {
         </div>
 
         {/* Subscription History */}
-        <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
-          <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Subscription History</h2>
+        <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
+          <h2 className="text-xl sm:text-2xl font-bold text-dark-900 dark:text-white mb-4 sm:mb-6">Subscription History</h2>
           
           {subscriptionHistory.length > 0 ? (
             <div className="space-y-4">

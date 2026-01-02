@@ -344,22 +344,22 @@ const MiniMindsPayment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-50 to-primary-50 dark:from-dark-900 dark:to-dark-800 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-dark-50 to-primary-50 dark:from-dark-900 dark:to-dark-800 py-8 sm:py-12 px-3 sm:px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Order Summary */}
-          <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl h-fit">
-            <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Order Summary</h2>
+          <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl h-fit">
+            <h2 className="text-xl sm:text-2xl font-bold text-dark-900 dark:text-white mb-4 sm:mb-6">Order Summary</h2>
 
-            <div className="bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-xl p-6 mb-6">
-              <h3 className="text-xl font-semibold text-dark-900 dark:text-white mb-2">
+            <div className="bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-2">
                 {planNames[plan.planOption]}
               </h3>
-              <p className="text-dark-600 dark:text-dark-300">{planDescriptions[plan.planOption]}</p>
+              <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300">{planDescriptions[plan.planOption]}</p>
             </div>
 
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between text-dark-700 dark:text-dark-300">
+            <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+              <div className="flex justify-between text-sm sm:text-base text-dark-700 dark:text-dark-300">
                 <span>Subtotal</span>
                 <span>₹{plan.price}.00</span>
               </div>
@@ -367,7 +367,7 @@ const MiniMindsPayment = () => {
                 <span>Tax</span>
                 <span>₹0.00</span>
               </div>
-              <div className="border-t border-dark-200 dark:border-dark-700 pt-4 flex justify-between text-lg font-bold text-dark-900 dark:text-white">
+              <div className="border-t border-dark-200 dark:border-dark-700 pt-3 sm:pt-4 flex justify-between text-base sm:text-lg font-bold text-dark-900 dark:text-white">
                 <span>Total</span>
                 <span>₹{plan.price}.00</span>
               </div>
@@ -384,10 +384,10 @@ const MiniMindsPayment = () => {
           </div>
 
           {/* Payment Form */}
-          <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
-            <h1 className="text-3xl font-bold text-dark-900 dark:text-white mb-6">Complete Your Purchase</h1>
+          <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl">
+            <h1 className="text-2xl sm:text-3xl font-bold text-dark-900 dark:text-white mb-4 sm:mb-6">Complete Your Purchase</h1>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Error Message */}
               {error && (
                 <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-700 dark:text-red-300">
@@ -396,12 +396,12 @@ const MiniMindsPayment = () => {
               )}
 
               {/* Payment Method Info */}
-              <div className="bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">💳</span>
-                  <h3 className="text-lg font-semibold text-dark-900 dark:text-white">Razorpay Secure Payment</h3>
+              <div className="bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-xl p-4 sm:p-6">
+                <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                  <span className="text-2xl sm:text-3xl">💳</span>
+                  <h3 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white">Razorpay Secure Payment</h3>
                 </div>
-                <p className="text-sm text-dark-600 dark:text-dark-300">
+                <p className="text-xs sm:text-sm text-dark-600 dark:text-dark-300">
                   Pay securely with Credit/Debit Card, UPI, Net Banking, or Wallet
                 </p>
               </div>
@@ -488,7 +488,7 @@ const MiniMindsPayment = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full py-3 sm:py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-semibold text-base sm:text-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {loading ? (
                   <>
@@ -504,7 +504,7 @@ const MiniMindsPayment = () => {
               </button>
 
               {/* Security Badges */}
-              <div className="text-center text-sm text-dark-500 dark:text-dark-400">
+              <div className="text-center text-xs sm:text-sm text-dark-500 dark:text-dark-400">
                 🔒 Razorpay Secure | 🛡️ SSL Encrypted | ✓ PCI DSS Compliant
               </div>
             </form>

@@ -168,22 +168,22 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-6">
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold text-dark-900 dark:text-white">User Management</h2>
-          <div className="flex gap-3">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">User Management</h2>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <input
               type="text"
-              placeholder="Search by phone number (10 digits)..."
+              placeholder="Search by phone..."
               value={searchPhone}
               onChange={handleSearchChange}
-              className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 w-80"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 w-full sm:w-64 text-sm"
               maxLength="15"
             />
             <button
               onClick={fetchActiveUsers}
-              className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap text-sm"
             >
               <span>🔄</span>
               <span>Refresh</span>
@@ -192,54 +192,55 @@ const UserManagement = () => {
         </div>
 
         {userError && (
-          <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
+          <div className="bg-red-50 dark:bg-red-900/30 border border-red-300 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg">
             {userError}
           </div>
         )}
 
         {loadingUsers ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-500 border-t-transparent mx-auto"></div>
-            <p className="text-dark-600 dark:text-dark-300 mt-4">Loading users...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-500 border-t-transparent mx-auto"></div>
+            <p className="text-gray-600 dark:text-gray-300 mt-4">Loading users...</p>
           </div>
         ) : (
           <>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-dark-100 dark:bg-dark-700">
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+              <table className="w-full min-w-[800px]">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">ID</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Email</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Phone</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Plan</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Join Date</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Actions</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">ID</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Email</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Phone</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Plan</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Status</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Join Date</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-dark-800 divide-y divide-dark-200 dark:divide-dark-700">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-dark-50 dark:hover:bg-dark-700">
-                      <td className="px-4 py-4 text-sm text-dark-900 dark:text-white font-mono text-xs">{String(user.id).substring(0, 8)}...</td>
-                      <td className="px-4 py-4 text-sm font-medium text-dark-900 dark:text-white">{user.name}</td>
-                      <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.email}</td>
-                      <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.phone}</td>
-                      <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.plan}</td>
-                      <td className="px-4 py-4 text-sm">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                      <td className="px-4 py-3 text-xs text-gray-900 dark:text-gray-100 font-mono">{user.id}</td>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">{user.name}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{user.email}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">{user.phone}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 capitalize">{user.plan}</td>
+                      <td className="px-4 py-3 text-sm">
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
                           user.status === 'active' 
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                            : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'
+                            : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
                         }`}>
                           {user.status}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.joinDate}</td>
-                      <td className="px-4 py-4 text-sm">
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">{user.joinDate}</td>
+                      <td className="px-4 py-3 text-sm">
                         <button
                           onClick={() => handleDeleteUser(user.id)}
-                          className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium"
+                          className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium whitespace-nowrap"
                         >
                           Delete
                         </button>
@@ -250,9 +251,56 @@ const UserManagement = () => {
               </table>
             </div>
 
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-3">
+              {users.map((user) => (
+                <div key={user.id} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 space-y-3 border border-gray-200 dark:border-gray-600">
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-base">{user.name}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 font-mono break-all">ID: {user.id}</p>
+                    </div>
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0 ${
+                      user.status === 'active' 
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'
+                        : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
+                    }`}>
+                      {user.status}
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-500 dark:text-gray-400 min-w-[60px]">Email:</span>
+                      <span className="text-gray-900 dark:text-white break-all">{user.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-500 dark:text-gray-400 min-w-[60px]">Phone:</span>
+                      <span className="text-gray-900 dark:text-white">{user.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-500 dark:text-gray-400 min-w-[60px]">Plan:</span>
+                      <span className="text-gray-900 dark:text-white capitalize">{user.plan}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-500 dark:text-gray-400 min-w-[60px]">Joined:</span>
+                      <span className="text-gray-900 dark:text-white">{user.joinDate}</span>
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={() => handleDeleteUser(user.id)}
+                    className="w-full mt-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all font-medium text-sm"
+                  >
+                    Delete User
+                  </button>
+                </div>
+              ))}
+            </div>
+
             {users.length === 0 && !loadingUsers && (
-              <div className="text-center py-12">
-                <p className="text-dark-500 dark:text-dark-400">
+              <div className="text-center py-12 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-gray-500 dark:text-gray-400 text-lg">
                   {searchPhone ? `No users found with phone number "${searchPhone}"` : 'No active billing users found'}
                 </p>
               </div>

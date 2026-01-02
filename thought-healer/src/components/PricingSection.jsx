@@ -56,40 +56,60 @@ const PricingSection = () => {
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-1">Thought Pro</h3>
                 <p className="text-base sm:text-lg font-medium text-primary-500 mb-4 sm:mb-6">Free</p>
-                <ul className="space-y-2 sm:space-y-3 text-dark-600 dark:text-dark-300 mb-6 sm:mb-8 text-xs sm:text-sm">
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500 dark:text-primary-400"></i>
-                    Self-monitor stress, productivity & 10 other vital parameters
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500 dark:text-primary-400"></i>
+                    Self-monitor stress, productivity, & 10 other vital parameters
                   </li>
                 </ul>
-                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2 sm:mb-3">Premium</h4>
-                <ul className="space-y-2 sm:space-y-3 text-dark-600 dark:text-dark-300 mb-6 sm:mb-8 text-xs sm:text-sm">
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Premium</h4>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
-                    All-in free access, 10+ Scans
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    All-in free access
                   </li>
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    10+ Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
                     Primary & Secondary Interventions
                   </li>
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
                     ₹299/Month or ₹999/Yr
                   </li>
                 </ul>
-                <h4 className="text-lg font-semibold text-dark-900 dark:text-white mb-3">Ultra</h4>
-                <ul className="space-y-3 text-dark-600 dark:text-dark-300 text-sm">
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Ultra</h4>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 text-xs sm:text-sm">
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
-                    100+ Scans, All Interventions
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    All-in free access
                   </li>
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    100+ Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    Primary & Secondary Interventions
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
                     ₹599/Month or ₹2599/Yr
                   </li>
                   <li className="flex items-start">
-                    <i className="fas fa-check mt-1 mr-3 text-primary-500"></i>
-                    1-on-1 sessions (₹500-800)
+                    <i className="fas fa-check mt-1 mr-2 text-primary-500"></i>
+                    1-on-1 session with professionals (₹500-800/session)
                   </li>
                 </ul>
               </div>
@@ -191,7 +211,7 @@ const PricingSection = () => {
             </div>
           </div> */}
 
-          {/* MiniMinds & HerMind - simplified version */}
+          {/* MiniMinds - detailed version */}
           <div className="relative flex flex-col h-full" data-aos="fade-up" data-aos-delay="200">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary-500/20 to-primary-500/20 rounded-xl blur opacity-70"></div>
             <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl border shadow-xl flex-1 flex flex-col">
@@ -200,19 +220,68 @@ const PricingSection = () => {
               </div>
               <div className="p-6 sm:p-8 pt-12 flex-1">
                 <div className="bg-secondary-500/10 rounded-lg w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
-                  <i className="fas fa-building text-secondary-500 text-xl sm:text-2xl"></i>
+                  <i className="fas fa-child text-secondary-500 text-xl sm:text-2xl"></i>
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-2">MiniMinds</h3>
                 <p className="text-base sm:text-lg font-medium text-secondary-500 mb-4 sm:mb-6">Free</p>
-                <p className="text-xs sm:text-sm text-dark-600 dark:text-dark-300 mb-3 sm:mb-4">Premium: ₹199/Month, Ultra: ₹299/Month</p>
-                <ul className="space-y-2 text-dark-600 dark:text-dark-300 text-xs sm:text-sm">
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
                   <li className="flex items-start">
                     <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
-                    50+ Child mental health scans
+                    SOS services
                   </li>
                   <li className="flex items-start">
                     <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
-                    All interventions included
+                    10 Scans and Their Primary Interventions
+                  </li>
+                </ul>
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Premium</h4>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    SOS services
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    50+ Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Primary & Secondary Interventions
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    ₹199/Month or ₹799/Yr
+                  </li>
+                </ul>
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Ultra</h4>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 text-xs sm:text-sm">
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    SOS services
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    50+ Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Primary & Secondary Interventions
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    ₹299/Month or ₹1999/Yr
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    1-on-1 sessions
                   </li>
                 </ul>
               </div>
@@ -232,24 +301,73 @@ const PricingSection = () => {
               </div>
               <div className="p-6 sm:p-8 pt-12 flex-1">
                 <div className="bg-secondary-500/10 rounded-lg w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
-                  <i className="fas fa-building text-secondary-500 text-xl sm:text-2xl"></i>
+                  <i className="fas fa-venus text-secondary-500 text-xl sm:text-2xl"></i>
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-2">HerMind</h3>
                 <p className="text-base sm:text-lg font-medium text-secondary-500 mb-4 sm:mb-6">Free</p>
-                <p className="text-xs sm:text-sm text-dark-600 dark:text-dark-300 mb-3 sm:mb-4">Premium: ₹99/Month, Ultra: ₹99/Month</p>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    SOS services
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    10 Scans and Their Primary Interventions
+                  </li>
+                </ul>
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Premium</h4>
+                <ul className="space-y-2 text-dark-600 dark:text-dark-300 mb-6 text-xs sm:text-sm">
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    SOS services
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    20 Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Primary & Secondary Interventions
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    ₹99/Month or ₹599/Yr
+                  </li>
+                </ul>
+                <h4 className="text-base sm:text-lg font-semibold text-dark-900 dark:text-white mb-2">Ultra</h4>
                 <ul className="space-y-2 text-dark-600 dark:text-dark-300 text-xs sm:text-sm">
                   <li className="flex items-start">
                     <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
-                    Female-focused mental health
+                    SOS services
                   </li>
                   <li className="flex items-start">
                     <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
-                    PCOS/PCOD support
+                    50 Scans
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Primary & Secondary Interventions
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    Video Tertiary Content
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    ₹99/Month or ₹799/Yr
+                  </li>
+                  <li className="flex items-start">
+                    <i className="fas fa-check mt-1 mr-2 text-secondary-500"></i>
+                    1-on-1 sessions
                   </li>
                 </ul>
               </div>
-              <div className="p-8 pt-0">
-                <a href="/hermind" className="block w-full py-3 px-6 text-center rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg transition-all">
+              <div className="p-6 sm:p-8 pt-0">
+                <a href="/hermind" className="block w-full py-2.5 sm:py-3 px-4 sm:px-6 text-center text-sm sm:text-base rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg transition-all">
                   Get Started
                 </a>
               </div>

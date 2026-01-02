@@ -8,6 +8,7 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [userError, setUserError] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [coupons, setCoupons] = useState([
     { id: 1, code: 'WELCOME50', type: 'Percentage', value: '50%', usageLimit: 100, used: 45, status: 'active', validUntil: '2025-12-31', description: 'Welcome discount for new users' },
@@ -443,142 +444,200 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-50 to-primary-50 dark:from-dark-900 dark:to-dark-800">
-      {/* Header */}
-      <header className="bg-white dark:bg-dark-800 shadow-lg border-b border-dark-200 dark:border-dark-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-dark-900 dark:text-white">Admin Dashboard</h1>
-              <p className="text-sm text-dark-600 dark:text-dark-300">ThoughtPro Management Portal</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="text-right hidden sm:block">
-                <p className="text-sm font-medium text-dark-900 dark:text-white">Admin User</p>
-                <p className="text-xs text-dark-600 dark:text-dark-300">admin@example.com</p>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all flex items-center gap-2"
-              >
-                <span>🚪</span>
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-100">
+      {/* Hamburger Menu Button */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="fixed top-4 left-4 z-50 p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all lg:hidden"
+      >
+        <div className="w-6 h-5 flex flex-col justify-between">
+          <span className={`block h-0.5 w-full bg-gray-800 transition-all ${isSidebarOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block h-0.5 w-full bg-gray-800 transition-all ${isSidebarOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block h-0.5 w-full bg-gray-800 transition-all ${isSidebarOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
         </div>
-      </header>
+      </button>
 
-      {/* Tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg overflow-hidden">
-          <div className="flex border-b border-dark-200 dark:border-dark-700">
-            <button
-              onClick={() => setActiveTab('users')}
-              className={`flex-1 px-6 py-4 font-medium transition-all ${
-                activeTab === 'users'
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-white dark:bg-dark-800 text-dark-600 dark:text-dark-300 hover:bg-dark-50 dark:hover:bg-dark-700'
-              }`}
-            >
-              👥 User Management
-            </button>
-            <button
-              onClick={() => setActiveTab('coupons')}
-              className={`flex-1 px-6 py-4 font-medium transition-all ${
-                activeTab === 'coupons'
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-white dark:bg-dark-800 text-dark-600 dark:text-dark-300 hover:bg-dark-50 dark:hover:bg-dark-700'
-              }`}
-            >
-              🎟️ Coupon Management
-            </button>
-            <button
-              onClick={() => setActiveTab('psychologists')}
-              className={`flex-1 px-6 py-4 font-medium transition-all ${
-                activeTab === 'psychologists'
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-white dark:bg-dark-800 text-dark-600 dark:text-dark-300 hover:bg-dark-50 dark:hover:bg-dark-700'
-              }`}
-            >
-              👨‍⚕️ Psychologist Management
-            </button>
-          </div>
+      {/* Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
 
-          <div className="p-6">
-            {/* User Management Tab */}
-            {activeTab === 'users' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-dark-900 dark:text-white">User Management</h2>
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      placeholder="Search by phone number (10 digits)..."
-                      value={searchPhone}
-                      onChange={handleSearchChange}
-                      className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 w-80"
-                      maxLength="15"
-                    />
-                    <button
-                      onClick={fetchActiveUsers}
-                      className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all flex items-center gap-2"
-                    >
-                      <span>🔄</span>
-                      <span>Refresh</span>
-                    </button>
-                  </div>
+      {/* Sidebar Drawer */}
+      <aside
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-xl z-40 transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0 lg:static lg:shadow-none overflow-y-auto`}
+      >
+        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Close menu"
+          >
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <nav className="p-4">
+          <button
+            onClick={() => {
+              setActiveTab('users');
+              setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all mb-2 text-left ${
+              activeTab === 'users'
+                ? 'bg-teal-500 text-white shadow-md'
+                : 'text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            <span className="text-xl">👥</span>
+            <span className="font-medium text-sm">User Management</span>
+          </button>
+          
+          <button
+            onClick={() => {
+              setActiveTab('coupons');
+              setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all mb-2 text-left ${
+              activeTab === 'coupons'
+                ? 'bg-teal-500 text-white shadow-md'
+                : 'text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            <span className="text-xl">🎟️</span>
+            <span className="font-medium text-sm">Coupon Management</span>
+          </button>
+          
+          <button
+            onClick={() => {
+              setActiveTab('psychologists');
+              setIsSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-left ${
+              activeTab === 'psychologists'
+                ? 'bg-teal-500 text-white shadow-md'
+                : 'text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            <span className="text-xl">👨‍⚕️</span>
+            <span className="font-medium text-sm">Psychologist Management</span>
+          </button>
+        </nav>
+      </aside>
+
+      {/* Main Content Wrapper */}
+      <div className="lg:ml-72">
+        {/* Header */}
+        <header className="bg-white shadow-sm border-b border-gray-200">
+          <div className="max-w-full px-6 py-4">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="text-3xl font-bold text-black mb-0">Admin Dashboard</h1>
+                <p className="text-sm text-gray-500 mt-0.5">ThoughtPro Management Portal</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-right hidden sm:block">
+                  <p className="text-sm font-medium text-black">Administrator</p>
+                  <p className="text-xs text-gray-500">agrawalvidit56@gmail.com</p>
                 </div>
+                <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  A
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-md transition-all flex items-center gap-2 font-medium"
+                >
+                  <span>🚪</span>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
 
-                {userError && (
-                  <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
-                    {userError}
+        {/* Main Content */}
+        <div className="max-w-full mx-auto px-6 py-8">
+          <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+            <div className="p-6">
+              {/* User Management Tab */}
+              {activeTab === 'users' && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center flex-wrap gap-4">
+                    <h2 className="text-2xl font-bold text-black">User Management</h2>
+                    <div className="flex gap-3 items-center">
+                      <input
+                        type="text"
+                        placeholder="Search by phone number..."
+                        value={searchPhone}
+                        onChange={handleSearchChange}
+                        className="px-4 py-2.5 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-80"
+                        maxLength="15"
+                      />
+                      <button
+                        onClick={fetchActiveUsers}
+                        className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-md transition-all flex items-center gap-2 font-medium"
+                      >
+                        <span>🔄</span>
+                        <span>Refresh</span>
+                      </button>
+                    </div>
                   </div>
-                )}
 
-                {loadingUsers ? (
-                  <div className="text-center py-12">
-                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-500 border-t-transparent mx-auto"></div>
-                    <p className="text-dark-600 dark:text-dark-300 mt-4">Loading users...</p>
-                  </div>
+                  {userError && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-5 py-3.5 rounded-md">
+                      {userError}
+                    </div>
+                  )}
+
+                  {loadingUsers ? (
+                    <div className="text-center py-16">
+                      <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-500 border-t-transparent mx-auto"></div>
+                      <p className="text-gray-600 mt-4 font-medium">Loading users...</p>
+                    </div>
                 ) : (
-                  <>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto rounded-md border border-gray-200">
                       <table className="w-full">
-                        <thead className="bg-dark-100 dark:bg-dark-700">
+                        <thead className="bg-gray-50 border-b border-gray-200">
                           <tr>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">ID</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Name</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Email</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Phone</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Plan</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Status</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Join Date</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Actions</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">NAME</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">EMAIL</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PHONE</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PLAN</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">STATUS</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">JOIN DATE</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ACTIONS</th>
                           </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-dark-800 divide-y divide-dark-200 dark:divide-dark-700">
+                        <tbody className="bg-white divide-y divide-gray-200">
                           {users.map((user) => (
-                            <tr key={user.id} className="hover:bg-dark-50 dark:hover:bg-dark-700">
-                              <td className="px-4 py-4 text-sm text-dark-900 dark:text-white font-mono text-xs">{String(user.id).substring(0, 8)}...</td>
-                              <td className="px-4 py-4 text-sm font-medium text-dark-900 dark:text-white">{user.name}</td>
-                              <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.email}</td>
-                              <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.phone}</td>
-                              <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.plan}</td>
-                              <td className="px-4 py-4 text-sm">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-6 py-4 text-sm text-gray-900 font-mono">{String(user.id).substring(0, 8)}...</td>
+                              <td className="px-6 py-4 text-sm font-medium text-gray-900">{user.name}</td>
+                              <td className="px-6 py-4 text-sm text-gray-700">{user.email}</td>
+                              <td className="px-6 py-4 text-sm text-gray-700">{user.phone}</td>
+                              <td className="px-6 py-4 text-sm text-gray-700">{user.plan}</td>
+                              <td className="px-6 py-4 text-sm">
+                                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                                   user.status === 'active' 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                    : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                                    ? 'bg-green-100 text-green-800'
+                                    : 'bg-red-100 text-red-800'
                                 }`}>
                                   {user.status}
                                 </span>
                               </td>
-                              <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{user.joinDate}</td>
-                              <td className="px-4 py-4 text-sm">
+                              <td className="px-6 py-4 text-sm text-gray-700">{user.joinDate}</td>
+                              <td className="px-6 py-4 text-sm">
                                 <button
                                   onClick={() => handleDeleteUser(user.id)}
-                                  className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium"
+                                  className="text-red-600 hover:text-red-800 font-medium transition-colors"
                                 >
                                   Delete
                                 </button>
@@ -587,76 +646,77 @@ const AdminDashboard = () => {
                           ))}
                         </tbody>
                       </table>
+                      
+                      {users.length === 0 && !loadingUsers && (
+                        <div className="text-center py-12 bg-white border-t border-gray-200">
+                          <p className="text-gray-500 text-base">
+                            {searchPhone ? `No users found with phone number "${searchPhone}"` : 'No active billing users found'}
+                          </p>
+                        </div>
+                      )}
                     </div>
-
-                    {users.length === 0 && !loadingUsers && (
-                      <div className="text-center py-12">
-                        <p className="text-dark-500 dark:text-dark-400">
-                          {searchPhone ? `No users found with phone number "${searchPhone}"` : 'No active billing users found'}
-                        </p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-
-            {/* Coupon Management Tab */}
-            {activeTab === 'coupons' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-dark-900 dark:text-white">Coupon Management</h2>
-                  <button
-                    onClick={() => setShowCouponModal(true)}
-                    className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all flex items-center gap-2"
-                  >
-                    <span>➕</span>
-                    <span>Create Coupon</span>
-                  </button>
+                  )}
                 </div>
+              )}
 
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-dark-100 dark:bg-dark-700">
+              {/* Coupon Management Tab */}
+              {activeTab === 'coupons' && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-2xl font-bold text-black">Coupon Management</h2>
+                    <button
+                      onClick={() => setShowCouponModal(true)}
+                      className="px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all flex items-center gap-2 font-medium shadow-sm"
+                    >
+                      <span>➕</span>
+                      <span>Create Coupon</span>
+                    </button>
+                  </div>
+
+                  <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+                    <table className="w-full">
+                      <thead className="bg-gray-100">
                       <tr>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Code</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Type</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Value</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Usage</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Valid Until</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Status</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Actions</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Code</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Type</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Value</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Usage</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Valid Until</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-dark-800 divide-y divide-dark-200 dark:divide-dark-700">
+                    <tbody className="bg-white divide-y divide-gray-200">
                       {coupons.map((coupon) => (
-                        <tr key={coupon.id} className="hover:bg-dark-50 dark:hover:bg-dark-700">
-                          <td className="px-4 py-4 text-sm font-mono font-bold text-primary-600 dark:text-primary-400">{coupon.code}</td>
-                          <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{coupon.type}</td>
-                          <td className="px-4 py-4 text-sm font-semibold text-dark-900 dark:text-white">{coupon.value}</td>
-                          <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">
-                            {coupon.used}/{coupon.usageLimit}
-                            <div className="w-full bg-dark-200 dark:bg-dark-600 rounded-full h-1.5 mt-1">
+                        <tr key={coupon.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 text-sm font-mono font-bold text-teal-600">{coupon.code}</td>
+                          <td className="px-6 py-4 text-sm text-gray-600">{coupon.type}</td>
+                          <td className="px-6 py-4 text-sm font-semibold text-gray-900">{coupon.value}</td>
+                          <td className="px-6 py-4 text-sm">
+                            <div className="text-gray-600 mb-2">
+                              {coupon.used}/{coupon.usageLimit}
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
                               <div 
-                                className="bg-primary-500 h-1.5 rounded-full" 
+                                className="bg-teal-500 h-2 rounded-full transition-all" 
                                 style={{ width: `${(coupon.used / coupon.usageLimit) * 100}%` }}
                               ></div>
                             </div>
                           </td>
-                          <td className="px-4 py-4 text-sm text-dark-600 dark:text-dark-300">{coupon.validUntil}</td>
-                          <td className="px-4 py-4 text-sm">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          <td className="px-6 py-4 text-sm text-gray-600">{coupon.validUntil}</td>
+                          <td className="px-6 py-4 text-sm">
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                               coupon.status === 'active' 
-                                ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-gray-100 text-gray-800'
                             }`}>
                               {coupon.status}
                             </span>
                           </td>
-                          <td className="px-4 py-4 text-sm">
+                          <td className="px-6 py-4 text-sm">
                             <button
                               onClick={() => handleToggleCouponStatus(coupon.id)}
-                              className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
+                              className="text-teal-600 hover:text-teal-800 font-semibold transition-colors"
                             >
                               {coupon.status === 'active' ? 'Deactivate' : 'Activate'}
                             </button>
@@ -669,125 +729,126 @@ const AdminDashboard = () => {
               </div>
             )}
 
-            {/* Psychologist Management Tab */}
-            {activeTab === 'psychologists' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center flex-wrap gap-4">
-                  <h2 className="text-xl font-bold text-dark-900 dark:text-white">Psychologist Management</h2>
-                  <div className="flex gap-3 items-center flex-wrap">
-                    <select
-                      value={psychologistFilter.type}
-                      onChange={(e) => setPsychologistFilter({ type: e.target.value, language: '' })}
-                      className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="">Select Specialization</option>
-                      <option value="Clinical Psychology">Clinical Psychology</option>
-                      <option value="Cognitive Behavioral Therapy">Cognitive Behavioral Therapy</option>
-                      <option value="Child Psychology">Child Psychology</option>
-                      <option value="Anxiety & Depression">Anxiety & Depression</option>
-                      <option value="Marriage Counseling">Marriage Counseling</option>
-                    </select>
-                    <span className="text-dark-600 dark:text-dark-300">OR</span>
-                    <select
-                      value={psychologistFilter.language}
-                      onChange={(e) => setPsychologistFilter({ type: '', language: e.target.value })}
-                      className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="">Select Language</option>
-                      <option value="English">English</option>
-                      <option value="Hindi">Hindi</option>
-                      <option value="Marathi">Marathi</option>
-                      <option value="Spanish">Spanish</option>
-                    </select>
-                    <button
-                      onClick={handleFilterPsychologists}
-                      className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all"
-                    >
-                      🔍 Search
-                    </button>
-                    <button
-                      onClick={() => setShowPsychologistModal(true)}
-                      className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all flex items-center gap-2"
-                    >
-                      <span>➕</span>
-                      <span>Add</span>
-                    </button>
-                  </div>
-                </div>
-
-                {psychologistError && (
-                  <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
-                    {psychologistError}
-                  </div>
-                )}
-
-                {loadingPsychologists ? (
-                  <div className="text-center py-12">
-                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-500 border-t-transparent mx-auto"></div>
-                    <p className="text-dark-600 dark:text-dark-300 mt-4">Loading psychologists...</p>
-                  </div>
-                ) : (
-                  <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {psychologists.map((psychologist) => (
-                        <div key={psychologist.id} className="bg-dark-50 dark:bg-dark-700 rounded-lg p-6 border border-dark-200 dark:border-dark-600">
-                          <div className="flex justify-between items-start mb-4">
-                            <div>
-                              <h3 className="text-lg font-bold text-dark-900 dark:text-white">
-                                {psychologist.name || 'Psychologist'}
-                              </h3>
-                              <p className="text-sm text-primary-600 dark:text-primary-400">
-                                {psychologist.specialization}
-                              </p>
-                            </div>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              psychologist.is_active 
-                                ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
-                            }`}>
-                              {psychologist.is_active ? 'active' : 'inactive'}
-                            </span>
-                          </div>
-                          
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
-                              <span>🗣️</span>
-                              <span>{psychologist.languages?.join(', ') || 'N/A'}</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
-                              <span>💼</span>
-                              <span>{psychologist.experience_years} years experience</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-dark-600 dark:text-dark-300">
-                              <span>💰</span>
-                              <span>₹{psychologist.hourly_rate}/hour</span>
-                            </div>
-                            <div className="text-sm text-dark-600 dark:text-dark-300 mt-2">
-                              <p className="line-clamp-2">{psychologist.bio || 'No bio available'}</p>
-                            </div>
-                          </div>
-
-                          <button
-                            onClick={() => handleRemovePsychologist(psychologist.id)}
-                            className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      ))}
+              {/* Psychologist Management Tab */}
+              {activeTab === 'psychologists' && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-start flex-wrap gap-4">
+                    <h2 className="text-2xl font-bold text-black">Psychologist Management</h2>
+                    <div className="flex gap-3 items-center flex-wrap">
+                      <select
+                        value={psychologistFilter.type}
+                        onChange={(e) => setPsychologistFilter({ type: e.target.value, language: '' })}
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
+                      >
+                        <option value="">Select Specialization</option>
+                        <option value="Clinical Psychology">Clinical Psychology</option>
+                        <option value="Cognitive Behavioral Therapy">Cognitive Behavioral Therapy</option>
+                        <option value="Child Psychology">Child Psychology</option>
+                        <option value="Anxiety & Depression">Anxiety & Depression</option>
+                        <option value="Marriage Counseling">Marriage Counseling</option>
+                      </select>
+                      <span className="text-gray-600 font-medium">OR</span>
+                      <select
+                        value={psychologistFilter.language}
+                        onChange={(e) => setPsychologistFilter({ type: '', language: e.target.value })}
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
+                      >
+                        <option value="">Select Language</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Spanish">Spanish</option>
+                      </select>
+                      <button
+                        onClick={handleFilterPsychologists}
+                        className="px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all font-medium shadow-sm"
+                      >
+                        🔍 Search
+                      </button>
+                      <button
+                        onClick={() => setShowPsychologistModal(true)}
+                        className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all flex items-center gap-2 font-medium shadow-sm"
+                      >
+                        <span>➕</span>
+                        <span>Add</span>
+                      </button>
                     </div>
+                  </div>
 
-                    {psychologists.length === 0 && !loadingPsychologists && (
-                      <div className="text-center py-12">
-                        <p className="text-dark-500 dark:text-dark-400">
-                          No psychologists found. Try a different filter.
-                        </p>
+                  {psychologistError && (
+                    <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+                      {psychologistError}
+                    </div>
+                  )}
+
+                  {loadingPsychologists ? (
+                    <div className="text-center py-16">
+                      <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-500 border-t-transparent mx-auto"></div>
+                      <p className="text-gray-600 mt-4 font-medium">Loading psychologists...</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {psychologists.map((psychologist) => (
+                          <div key={psychologist.id} className="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start mb-4">
+                              <div>
+                                <h3 className="text-lg font-bold text-gray-900">
+                                  {psychologist.name || 'Psychologist'}
+                                </h3>
+                                <p className="text-sm text-teal-600 font-medium">
+                                  {psychologist.specialization}
+                                </p>
+                              </div>
+                              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                                psychologist.is_active 
+                                  ? 'bg-green-100 text-green-800'
+                                  : 'bg-gray-100 text-gray-800'
+                              }`}>
+                                {psychologist.is_active ? 'active' : 'inactive'}
+                              </span>
+                            </div>
+                            
+                            <div className="space-y-3 mb-5">
+                              <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <span>🗣️</span>
+                                <span className="font-medium">{psychologist.languages?.join(', ') || 'N/A'}</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <span>💼</span>
+                                <span className="font-medium">{psychologist.experience_years} years experience</span>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <span>💰</span>
+                                <span className="font-medium">₹{psychologist.hourly_rate}/hour</span>
+                              </div>
+                              <div className="text-sm text-gray-600 mt-3 pt-3 border-t border-gray-200">
+                                <p className="line-clamp-2">{psychologist.bio || 'No bio available'}</p>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => handleRemovePsychologist(psychologist.id)}
+                              className="w-full px-4 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all font-medium shadow-sm"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        ))}
                       </div>
-                    )}
-                  </>
-                )}
-              </div>
-            )}
+
+                      {psychologists.length === 0 && !loadingPsychologists && (
+                        <div className="text-center py-16 bg-gray-50 rounded-lg">
+                          <p className="text-gray-500 text-lg">
+                            No psychologists found. Try a different filter.
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -795,28 +856,28 @@ const AdminDashboard = () => {
       {/* Create Coupon Modal */}
       {showCouponModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Create New Coupon</h2>
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Create New Coupon</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Coupon Code</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Coupon Code</label>
                 <input
                   type="text"
                   value={newCoupon.code}
                   onChange={(e) => setNewCoupon({...newCoupon, code: e.target.value})}
                   placeholder="e.g., SUMMER2025"
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Discount Type</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Discount Type</label>
                   <select
                     value={newCoupon.type}
                     onChange={(e) => setNewCoupon({...newCoupon, type: e.target.value})}
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   >
                     <option value="Percentage">Percentage (%)</option>
                     <option value="Fixed Amount">Fixed Amount (₹)</option>
@@ -824,7 +885,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Value {newCoupon.type === 'Percentage' ? '(%)' : '(₹)'}
                   </label>
                   <input
@@ -832,41 +893,41 @@ const AdminDashboard = () => {
                     value={newCoupon.value}
                     onChange={(e) => setNewCoupon({...newCoupon, value: e.target.value})}
                     placeholder={newCoupon.type === 'Percentage' ? '10' : '500'}
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Usage Limit</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Usage Limit</label>
                   <input
                     type="number"
                     value={newCoupon.usageLimit}
                     onChange={(e) => setNewCoupon({...newCoupon, usageLimit: e.target.value})}
                     placeholder="100"
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
-                  <p className="text-xs text-dark-500 dark:text-dark-400 mt-1">Each user can redeem only once</p>
+                  <p className="text-xs text-gray-500 mt-1">Each user can redeem only once</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Valid Until</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Valid Until</label>
                   <input
                     type="date"
                     value={newCoupon.validUntil}
                     onChange={(e) => setNewCoupon({...newCoupon, validUntil: e.target.value})}
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Applicable To</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Applicable To</label>
                 <select
                   value={newCoupon.applicableTo}
                   onChange={(e) => setNewCoupon({...newCoupon, applicableTo: e.target.value})}
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="all">All Users</option>
                   <option value="new">New Users Only</option>
@@ -876,11 +937,11 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Plan Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Plan Type</label>
                 <select
                   value={newCoupon.planType}
                   onChange={(e) => setNewCoupon({...newCoupon, planType: e.target.value})}
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="all">All Plans</option>
                   <option value="premium">Premium Only</option>
@@ -891,13 +952,13 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                 <textarea
                   value={newCoupon.description}
                   onChange={(e) => setNewCoupon({...newCoupon, description: e.target.value})}
                   placeholder="Brief description of this coupon..."
                   rows="3"
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
             </div>
@@ -905,13 +966,13 @@ const AdminDashboard = () => {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={handleCreateCoupon}
-                className="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all font-medium"
               >
                 Create Coupon
               </button>
               <button
                 onClick={() => setShowCouponModal(false)}
-                className="flex-1 px-4 py-2 bg-dark-200 dark:bg-dark-600 hover:bg-dark-300 dark:hover:bg-dark-500 text-dark-900 dark:text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded-lg transition-all font-medium"
               >
                 Cancel
               </button>
@@ -923,28 +984,28 @@ const AdminDashboard = () => {
       {/* Add Psychologist Modal */}
       {showPsychologistModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Add New Psychologist</h2>
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Add New Psychologist</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">User ID *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">User ID *</label>
                 <input
                   type="text"
                   value={newPsychologist.user_id}
                   onChange={(e) => setNewPsychologist({...newPsychologist, user_id: e.target.value})}
                   placeholder="550e8400-e29b-41d4-a716-446655440000"
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
-                <p className="text-xs text-dark-500 dark:text-dark-400 mt-1">Existing user account ID to link with psychologist profile</p>
+                <p className="text-xs text-gray-500 mt-1">Existing user account ID to link with psychologist profile</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Specialization *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Specialization *</label>
                 <select
                   value={newPsychologist.specialization}
                   onChange={(e) => setNewPsychologist({...newPsychologist, specialization: e.target.value})}
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="Clinical Psychology">Clinical Psychology</option>
                   <option value="Cognitive Behavioral Therapy">Cognitive Behavioral Therapy</option>
@@ -956,10 +1017,10 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Languages *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Languages *</label>
                 <div className="grid grid-cols-2 gap-2">
                   {['English', 'Hindi', 'Marathi', 'Spanish', 'Bengali', 'Tamil'].map(lang => (
-                    <label key={lang} className="flex items-center gap-2 p-2 border border-dark-300 dark:border-dark-600 rounded-lg cursor-pointer hover:bg-dark-50 dark:hover:bg-dark-700">
+                    <label key={lang} className="flex items-center gap-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input
                         type="checkbox"
                         checked={selectedLanguages.includes(lang)}
@@ -970,30 +1031,30 @@ const AdminDashboard = () => {
                             setSelectedLanguages(selectedLanguages.filter(l => l !== lang));
                           }
                         }}
-                        className="w-4 h-4"
+                        className="w-4 h-4 text-teal-500"
                       />
-                      <span className="text-sm text-dark-900 dark:text-white">{lang}</span>
+                      <span className="text-sm text-gray-900">{lang}</span>
                     </label>
                   ))}
                 </div>
-                <p className="text-xs text-dark-500 dark:text-dark-400 mt-1">Selected: {selectedLanguages.join(', ') || 'None'}</p>
+                <p className="text-xs text-gray-500 mt-1">Selected: {selectedLanguages.join(', ') || 'None'}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Experience (years) *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Experience (years) *</label>
                   <input
                     type="number"
                     value={newPsychologist.experience_years}
                     onChange={(e) => setNewPsychologist({...newPsychologist, experience_years: e.target.value})}
                     placeholder="5"
                     min="0"
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Hourly Rate (₹) *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Hourly Rate (₹) *</label>
                   <input
                     type="number"
                     value={newPsychologist.hourly_rate}
@@ -1001,19 +1062,19 @@ const AdminDashboard = () => {
                     placeholder="120"
                     min="0"
                     step="10"
-                    className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Bio</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
                 <textarea
                   value={newPsychologist.bio}
                   onChange={(e) => setNewPsychologist({...newPsychologist, bio: e.target.value})}
                   placeholder="Licensed clinical psychologist specializing in anxiety, depression, and cognitive behavioral therapy..."
                   rows="4"
-                  className="w-full px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
             </div>
@@ -1021,7 +1082,7 @@ const AdminDashboard = () => {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={handleAddPsychologist}
-                className="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all font-medium"
               >
                 Create Profile
               </button>
@@ -1038,7 +1099,7 @@ const AdminDashboard = () => {
                   });
                   setSelectedLanguages([]);
                 }}
-                className="flex-1 px-4 py-2 bg-dark-200 dark:bg-dark-600 hover:bg-dark-300 dark:hover:bg-dark-500 text-dark-900 dark:text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded-lg transition-all font-medium"
               >
                 Cancel
               </button>

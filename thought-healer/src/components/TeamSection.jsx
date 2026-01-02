@@ -69,11 +69,15 @@ const TeamSection = () => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500/30 to-secondary-500/30 dark:from-primary-400/30 dark:to-secondary-400/30 rounded-xl blur opacity-70"></div>
 
               <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-dark-200/50 dark:border-white/10 shadow-xl">
-                <div className={`h-56 sm:h-64 flex items-center justify-center overflow-hidden ${member.imagePosition || ''}`}>
+                <div className={`h-56 sm:h-64 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-700 dark:to-dark-800 flex items-center justify-center overflow-hidden ${member.imagePosition || ''}`}>
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className={`w-full h-full object-cover object-center ${member.imageClass || ''}`}
+                    className={`w-full h-full object-contain ${member.imageClass || ''}`}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = '<div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white text-2xl font-bold">' + member.name.charAt(0) + '</div>';
+                    }}
                   />
                 </div>
 

@@ -158,15 +158,15 @@ const PsychologistManagement = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-6">
-      <div className="space-y-6">
-        <div className="flex justify-between items-center flex-wrap gap-4">
-          <h2 className="text-xl font-bold text-dark-900 dark:text-white">Psychologist Management</h2>
-          <div className="flex gap-3 items-center flex-wrap">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-4 sm:p-6">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+          <h2 className="text-lg sm:text-xl font-bold text-dark-900 dark:text-white">Psychologist Management</h2>
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
             <select
               value={psychologistFilter.type}
               onChange={(e) => setPsychologistFilter({ type: e.target.value, language: '' })}
-              className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full sm:w-auto px-3 sm:px-4 py-2 text-sm border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="">Select Specialization</option>
               <option value="Clinical Psychology">Clinical Psychology</option>
@@ -175,11 +175,11 @@ const PsychologistManagement = () => {
               <option value="Anxiety & Depression">Anxiety & Depression</option>
               <option value="Marriage Counseling">Marriage Counseling</option>
             </select>
-            <span className="text-dark-600 dark:text-dark-300">OR</span>
+            <span className="text-center text-dark-600 dark:text-dark-300 text-sm hidden sm:inline">OR</span>
             <select
               value={psychologistFilter.language}
               onChange={(e) => setPsychologistFilter({ type: '', language: e.target.value })}
-              className="px-4 py-2 border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full sm:w-auto px-3 sm:px-4 py-2 text-sm border border-dark-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="">Select Language</option>
               <option value="English">English</option>
@@ -189,13 +189,13 @@ const PsychologistManagement = () => {
             </select>
             <button
               onClick={handleFilterPsychologists}
-              className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all"
+              className="w-full sm:w-auto px-3 sm:px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all text-sm font-medium"
             >
-              🔍 Search
+              🔍 <span className="hidden sm:inline">Search</span>
             </button>
             <button
               onClick={() => setShowPsychologistModal(true)}
-              className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all flex items-center gap-2"
+              className="w-full sm:w-auto px-3 sm:px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all flex items-center justify-center gap-2 text-sm font-medium"
             >
               <span>➕</span>
               <span>Add</span>
@@ -216,7 +216,7 @@ const PsychologistManagement = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {psychologists.map((psychologist) => (
                 <div key={psychologist.id} className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-4">
@@ -308,9 +308,9 @@ const PsychologistManagement = () => {
 
       {/* Add Psychologist Modal */}
       {showPsychologistModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">Add New Psychologist</h2>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 sm:p-4">
+          <div className="bg-white dark:bg-dark-800 rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl sm:text-2xl font-bold text-dark-900 dark:text-white mb-4 sm:mb-6">Add New Psychologist</h2>
             
             <div className="space-y-4">
               <div>
@@ -365,9 +365,9 @@ const PsychologistManagement = () => {
                 <p className="text-xs text-dark-500 dark:text-dark-400 mt-1">Selected: {selectedLanguages.join(', ') || 'None'}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Experience (years) *</label>
+                  <label className="block text-xs sm:text-sm font-medium text-dark-700 dark:text-dark-300 mb-2">Experience (years) *</label>
                   <input
                     type="number"
                     value={newPsychologist.experience_years}
@@ -404,10 +404,10 @@ const PsychologistManagement = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-6">
               <button
                 onClick={handleAddPsychologist}
-                className="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all text-sm sm:text-base font-medium"
               >
                 Create Profile
               </button>
@@ -424,7 +424,7 @@ const PsychologistManagement = () => {
                   });
                   setSelectedLanguages([]);
                 }}
-                className="flex-1 px-4 py-2 bg-dark-200 dark:bg-dark-600 hover:bg-dark-300 dark:hover:bg-dark-500 text-dark-900 dark:text-white rounded-lg transition-all"
+                className="flex-1 px-4 py-2.5 bg-dark-200 dark:bg-dark-600 hover:bg-dark-300 dark:hover:bg-dark-500 text-dark-900 dark:text-white rounded-lg transition-all text-sm sm:text-base font-medium"
               >
                 Cancel
               </button>

@@ -73,12 +73,12 @@ const ThoughtProSuccess = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-500 via-secondary-500 to-purple-600 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-white dark:bg-dark-800 rounded-2xl shadow-2xl p-8 md:p-12 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-primary-500 via-secondary-500 to-purple-600 flex items-center justify-center p-3 sm:p-4">
+      <div className="w-full max-w-2xl bg-white dark:bg-dark-800 rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12 text-center">
         {/* Success Icon */}
-        <div className="mb-8 flex justify-center">
-          <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center animate-bounce">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-500">
+        <div className="mb-6 sm:mb-8 flex justify-center">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center animate-bounce">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-500 sm:w-12 sm:h-12">
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M9 12l2 2 4-4"></path>
             </svg>
@@ -86,16 +86,16 @@ const ThoughtProSuccess = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-2">
           Subscription Activated! 🎉
         </h1>
-        <p className="text-xl text-dark-600 dark:text-dark-300 mb-8">
+        <p className="text-lg sm:text-xl text-dark-600 dark:text-dark-300 mb-6 sm:mb-8">
           Welcome to ThoughtPro {plan.planOption.includes('ultra') ? 'Ultra' : 'Premium'}
         </p>
 
         {/* Subscription Details */}
-        <div className="bg-dark-50 dark:bg-dark-900/50 rounded-xl p-6 mb-8 space-y-4">
-          <div className="flex justify-between items-center">
+        <div className="bg-dark-50 dark:bg-dark-900/50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
+          <div className="flex justify-between items-center text-sm sm:text-base">
             <span className="text-dark-600 dark:text-dark-400">Plan:</span>
             <span className="font-semibold text-dark-900 dark:text-white">
               {subscriptionStatus?.plan_name || planNames[plan.planOption] || 'Premium'}
@@ -134,9 +134,9 @@ const ThoughtProSuccess = () => {
         </div>
 
         {/* Next Steps */}
-        <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 rounded-xl p-6 mb-8">
-          <h3 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">What's Next?</h3>
-          <ul className="space-y-3 text-left text-dark-700 dark:text-dark-300">
+        <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+          <h3 className="text-lg sm:text-xl font-semibold text-dark-900 dark:text-white mb-3 sm:mb-4">What's Next?</h3>
+          <ul className="space-y-2 sm:space-y-3 text-left text-sm sm:text-base text-dark-700 dark:text-dark-300">
             <li className="flex items-start gap-2">
               <span className="text-green-500 mt-1">✓</span>
               <span>All premium features are now unlocked</span>
@@ -153,10 +153,10 @@ const ThoughtProSuccess = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid sm:grid-cols-2 gap-4 mb-6">
+        <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
           <Link
             to="/subscription-management"
-            className="py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all text-center"
+            className="py-2.5 sm:py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:scale-105 transition-all text-center"
           >
             Manage Subscription
           </Link>
@@ -164,7 +164,7 @@ const ThoughtProSuccess = () => {
             href="https://play.google.com/store/apps/details?id=com.thoughtpro"
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3 border-2 border-primary-500 text-primary-500 rounded-lg font-semibold hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all text-center"
+            className="py-2.5 sm:py-3 border-2 border-primary-500 text-primary-500 rounded-lg font-semibold text-sm sm:text-base hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all text-center"
           >
             Download App
           </a>

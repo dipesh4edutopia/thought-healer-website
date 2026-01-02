@@ -230,14 +230,6 @@ const ThoughtProB2B = () => {
                 >
                   Get Started
                 </a>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.thoughtpro.b2b"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-2 border-primary-500 dark:border-primary-400 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 inline-flex items-center justify-center hover:scale-105 text-primary-500 dark:text-primary-400"
-                >
-                  Download App
-                </a>
               </div>
             </div>
             <div className="relative">

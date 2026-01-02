@@ -87,8 +87,10 @@ const ThoughtProPlans = () => {
         description: isPremium ? 'Perfect for personal wellness' : 'Complete wellness experience',
         tier: planGroup.tier,
         icon: isPremium ? '⭐' : '💎',
-        monthlyPrice: monthly ? monthly.price_inr : null,
-        yearlyPrice: yearly ? yearly.price_inr : null,
+        monthlyPrice: monthly ? Math.round(monthly.price_inr * 2 * 0.4) : null,
+        yearlyPrice: yearly ? Math.round(yearly.price_inr * 2 * 0.4) : null,
+        monthlyOriginalPrice: monthly ? Math.round(monthly.price_inr * 2) : null,
+        yearlyOriginalPrice: yearly ? Math.round(yearly.price_inr * 2) : null,
         monthlyPlanId: monthly ? monthly.plan_id : null,
         yearlyPlanId: yearly ? yearly.plan_id : null,
         yearlySavings: yearlySavings,
@@ -145,56 +147,59 @@ const ThoughtProPlans = () => {
 
       {/* Navigation */}
       <nav className="relative z-10 bg-white/80 dark:bg-dark-900/80 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <Link to="/thoughtpro" className="flex items-center space-x-2">
-            <span className="text-3xl">🧠</span>
-            <span className="text-xl font-bold text-dark-900 dark:text-white">ThoughtPro</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            {localStorage.getItem('isAuthenticated') === 'true' ? (
-              <>
-                <span className="text-dark-700 dark:text-dark-300">
-                  Hi, {localStorage.getItem('userName')}
-                </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex flex-wrap justify-between items-center gap-2 sm:gap-4">
+            <Link to="/thoughtpro" className="flex items-center space-x-2">
+              <span className="text-2xl sm:text-3xl">🧠</span>
+              <span className="text-lg sm:text-xl font-bold text-dark-900 dark:text-white">ThoughtPro</span>
+            </Link>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              {localStorage.getItem('isAuthenticated') === 'true' ? (
+                <>
+                  <span className="hidden md:inline text-dark-700 dark:text-dark-300 text-sm sm:text-base">
+                    Hi, {localStorage.getItem('userName')}
+                  </span>
+                  <Link
+                    to="/subscription-management"
+                    className="px-2 sm:px-4 py-1.5 sm:py-2 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all text-xs sm:text-sm whitespace-nowrap"
+                  >
+                    Subscriptions
+                  </Link>
+                </>
+              ) : (
                 <Link
-                  to="/subscription-management"
-                  className="px-4 py-2 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all"
+                  to="/thoughtpro-signin"
+                  className="px-2 sm:px-4 py-1.5 sm:py-2 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all text-xs sm:text-sm"
                 >
-                  My Subscriptions
+                  Sign In
                 </Link>
-              </>
-            ) : (
-              <Link
-                to="/thoughtpro-signin"
-                className="px-4 py-2 border-2 border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all"
+              )}
+              <a
+                href="https://play.google.com/store/apps/details?id=com.thoughtpro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg hover:shadow-lg transition-all text-xs sm:text-sm whitespace-nowrap"
               >
-                Sign In
-              </Link>
-            )}
-            <a
-              href="https://play.google.com/store/apps/details?id=com.thoughtpro"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg hover:shadow-lg transition-all"
-            >
-              Download App
-            </a>
+                <span className="hidden sm:inline">Download App</span>
+                <span className="sm:hidden">App</span>
+              </a>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-dark-800/50 rounded-full mb-6 backdrop-blur-sm">
-            <span className="text-2xl">🎯</span>
-            <span className="text-dark-700 dark:text-dark-300">Choose Your Path to Wellness</span>
+        <div className="text-center mb-10 sm:mb-14 lg:mb-16">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-white/80 dark:bg-dark-800/50 rounded-full mb-4 sm:mb-6 backdrop-blur-sm">
+            <span className="text-xl sm:text-2xl">🎯</span>
+            <span className="text-dark-700 dark:text-dark-300 text-xs sm:text-sm lg:text-base text-center">Choose Your Path to Wellness</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-dark-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-3 sm:mb-4 text-dark-900 dark:text-white px-2">
             Choose Your <span className="gradient-text">ThoughtPro</span> Plan
           </h1>
-          <p className="text-xl text-dark-600 dark:text-dark-300">
+          <p className="text-base sm:text-lg lg:text-xl text-dark-600 dark:text-dark-300 px-4">
             Unlock premium features and take your mental wellness to the next level
           </p>
         </div>
@@ -218,7 +223,7 @@ const ThoughtProPlans = () => {
 
         {/* Plans Container */}
         {!loading && !error && plans.length > 0 && (
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {plans.map((plan, index) => {
             const isPremium = plan.tier?.toLowerCase() === 'premium' || plan.name?.toLowerCase().includes('premium');
             const isPopular = plan.isPopular || plan.popular || index === 1;
@@ -226,52 +231,62 @@ const ThoughtProPlans = () => {
             const borderClass = isPopular ? 'border-2 border-secondary-500 dark:border-secondary-400' : 'border border-dark-200/50 dark:border-white/10';
             
             return (
-              <div key={plan.id || plan._id || index} className={`bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 ${borderClass} shadow-2xl relative`}>
+              <div key={plan.id || plan._id || index} className={`bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 ${borderClass} shadow-2xl relative`}>
                 {/* Popular Badge */}
                 {isPopular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap">
                     ⭐ MOST POPULAR
                   </div>
                 )}
 
                 {/* Plan Header */}
-                <div className={`flex items-center gap-4 mb-6 ${isPopular ? 'mt-4' : ''}`}>
-                  <div className={`w-16 h-16 bg-gradient-to-br ${isPremium ? 'from-primary-500 to-secondary-500' : 'from-secondary-500 to-purple-600'} rounded-xl flex items-center justify-center`}>
-                    <span className="text-3xl">{plan.icon || planIcon}</span>
+                <div className={`flex items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 ${isPopular ? 'mt-4' : ''}`}>
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br ${isPremium ? 'from-primary-500 to-secondary-500' : 'from-secondary-500 to-purple-600'} rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-2xl sm:text-3xl">{plan.icon || planIcon}</span>
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-dark-900 dark:text-white">{plan.name || plan.title}</h2>
-                    <p className="text-dark-600 dark:text-dark-300">{plan.description || plan.subtitle}</p>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white truncate">{plan.name || plan.title}</h2>
+                    <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300">{plan.description || plan.subtitle}</p>
                   </div>
                 </div>
 
                 {/* Plan Highlights */}
                 {plan.highlights && plan.highlights.length > 0 && (
-                  <div className="space-y-3 mb-6">
+                  <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                     {plan.highlights.slice(0, 3).map((highlight, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <span className="text-green-500">✓</span>
-                        <span className="text-dark-700 dark:text-dark-300">{highlight}</span>
+                      <div key={idx} className="flex items-start gap-2">
+                        <span className="text-green-500 text-sm sm:text-base flex-shrink-0 mt-0.5">✓</span>
+                        <span className="text-dark-700 dark:text-dark-300 text-xs sm:text-sm lg:text-base">{highlight}</span>
                       </div>
                     ))}
                   </div>
                 )}
 
                 {/* Pricing Options */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
                   {/* Monthly Option */}
                   {plan.monthlyPrice && (
                     <button
                       onClick={() => handlePlanSelect(`${plan.tier || plan.name}-monthly`, plan.monthlyPrice, plan.tier || plan.name, plan.monthlyPlanId)}
-                      className={`p-4 rounded-xl border-2 transition-all ${
+                      className={`p-2 sm:p-3 lg:p-4 rounded-lg sm:rounded-xl border-2 transition-all ${
                         selectedPlan?.planOption === `${plan.tier || plan.name}-monthly`
                           ? isPremium ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-secondary-500 bg-secondary-50 dark:bg-secondary-900/20'
                           : 'border-dark-200 dark:border-dark-700 hover:border-primary-300'
                       }`}
                     >
-                      <div className="text-sm text-dark-600 dark:text-dark-400">Monthly</div>
-                      <div className="text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
-                      <div className="text-xs text-dark-500 dark:text-dark-500">/month</div>
+                      <div className="text-xs sm:text-sm text-dark-600 dark:text-dark-400">Monthly</div>
+                      <div className="flex flex-col items-center">
+                        {plan.monthlyOriginalPrice ? (
+                          <>
+                            <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.monthlyOriginalPrice}</div>
+                            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
+                            <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
+                          </>
+                        ) : (
+                          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
+                        )}
+                      </div>
+                      <div className="text-[10px] sm:text-xs text-dark-500 dark:text-dark-500">/month</div>
                     </button>
                   )}
 
@@ -279,20 +294,30 @@ const ThoughtProPlans = () => {
                   {plan.yearlyPrice && (
                     <button
                       onClick={() => handlePlanSelect(`${plan.tier || plan.name}-yearly`, plan.yearlyPrice, plan.tier || plan.name, plan.yearlyPlanId)}
-                      className={`p-4 rounded-xl border-2 transition-all relative ${
+                      className={`p-2 sm:p-3 lg:p-4 rounded-lg sm:rounded-xl border-2 transition-all relative ${
                         selectedPlan?.planOption === `${plan.tier || plan.name}-yearly`
                           ? isPremium ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-secondary-500 bg-secondary-50 dark:bg-secondary-900/20'
                           : 'border-dark-200 dark:border-dark-700 hover:border-primary-300'
                       }`}
                     >
                       {plan.yearlySavings && (
-                        <div className="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">🎉 Best Value</div>
+                        <div className="absolute -top-2 -right-2 bg-yellow-500 text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full whitespace-nowrap">🎉 Best</div>
                       )}
-                      <div className="text-sm text-dark-600 dark:text-dark-400">Yearly</div>
-                      <div className="text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
-                      <div className="text-xs text-dark-500 dark:text-dark-500">/year</div>
+                      <div className="text-xs sm:text-sm text-dark-600 dark:text-dark-400">Yearly</div>
+                      <div className="flex flex-col items-center">
+                        {plan.yearlyOriginalPrice ? (
+                          <>
+                            <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.yearlyOriginalPrice}</div>
+                            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
+                            <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
+                          </>
+                        ) : (
+                          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
+                        )}
+                      </div>
+                      <div className="text-[10px] sm:text-xs text-dark-500 dark:text-dark-500">/year</div>
                       {plan.yearlySavings && (
-                        <div className="mt-2 text-xs text-green-600 dark:text-green-400 font-semibold">
+                        <div className="mt-1 sm:mt-2 text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">
                           Save {plan.yearlySavings}
                         </div>
                       )}
@@ -302,12 +327,13 @@ const ThoughtProPlans = () => {
 
                 {/* Plan Features */}
                 {plan.features && plan.features.length > 0 && (
-                  <div className="bg-dark-50 dark:bg-dark-900/50 rounded-lg p-4">
-                    <h4 className="font-semibold text-dark-900 dark:text-white mb-3">What you'll get:</h4>
-                    <ul className="space-y-2 text-sm text-dark-600 dark:text-dark-300">
+                  <div className="bg-dark-50 dark:bg-dark-900/50 rounded-lg p-3 sm:p-4">
+                    <h4 className="font-semibold text-dark-900 dark:text-white mb-2 sm:mb-3 text-sm sm:text-base">What you'll get:</h4>
+                    <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-600 dark:text-dark-300">
                       {plan.features.map((feature, idx) => (
-                        <li key={idx}>
-                          <span className="text-green-500">✓</span> {feature}
+                        <li key={idx} className="flex items-start gap-1.5 sm:gap-2">
+                          <span className="text-green-500 flex-shrink-0 mt-0.5">✓</span>
+                          <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -321,10 +347,10 @@ const ThoughtProPlans = () => {
 
         {/* Subscribe Button */}
         {selectedPlan && (
-          <div id="main-subscribe-btn" className="text-center mb-12">
+          <div id="main-subscribe-btn" className="text-center mb-8 sm:mb-12">
             <button
               onClick={handleSubscribe}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
             >
               <span>🚀</span>
               <span>Subscribe Now</span>
@@ -333,21 +359,21 @@ const ThoughtProPlans = () => {
         )}
 
         {/* Redemption Section */}
-        <div className="max-w-2xl mx-auto bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-2xl p-8 border border-dark-200/50 dark:border-white/10 shadow-xl text-center">
-          <div className="text-5xl mb-4">🎁</div>
-          <h3 className="text-2xl font-bold text-dark-900 dark:text-white mb-2">Have a Redeem Code?</h3>
-          <p className="text-dark-600 dark:text-dark-300 mb-6">Enter your code below to unlock your plan</p>
-          <div className="flex gap-2">
+        <div className="max-w-2xl mx-auto bg-white/80 dark:bg-dark-800/50 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-dark-200/50 dark:border-white/10 shadow-xl text-center">
+          <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">🎁</div>
+          <h3 className="text-xl sm:text-2xl font-bold text-dark-900 dark:text-white mb-1 sm:mb-2">Have a Redeem Code?</h3>
+          <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300 mb-4 sm:mb-6">Enter your code below to unlock your plan</p>
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
               value={redeemCode}
               onChange={(e) => setRedeemCode(e.target.value)}
               placeholder="Enter your redemption code"
-              className="flex-1 px-4 py-3 bg-white dark:bg-dark-700 border border-dark-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-dark-900 dark:text-white"
+              className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-dark-700 border border-dark-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-dark-900 dark:text-white text-sm sm:text-base"
             />
             <button
               onClick={handleRedeem}
-              className="px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg hover:shadow-lg transition-all flex items-center gap-2"
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap text-sm sm:text-base"
             >
               <span>Redeem</span>
               <span>→</span>

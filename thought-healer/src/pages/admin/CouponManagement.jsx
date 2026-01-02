@@ -409,13 +409,13 @@ const CouponManagement = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-6">
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold text-dark-900 dark:text-white">Coupon Management</h2>
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-4 sm:p-6">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <h2 className="text-lg sm:text-xl font-bold text-dark-900 dark:text-white">Coupon Management</h2>
           <button
             onClick={() => setShowCouponModal(true)}
-            className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all flex items-center gap-2"
+            className="w-full sm:w-auto px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all flex items-center justify-center gap-2 text-sm sm:text-base font-medium"
           >
             <span>➕</span>
             <span>Create Coupon</span>
@@ -433,8 +433,10 @@ const CouponManagement = () => {
             <div className="text-dark-600 dark:text-dark-300">Loading coupons...</div>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-          <table className="w-full">
+          <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="inline-block min-w-full align-middle">
+          <div className="overflow-hidden">
+          <table className="min-w-full">
             <thead className="bg-dark-100 dark:bg-dark-700">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-medium text-dark-700 dark:text-dark-300 uppercase tracking-wider">Code</th>
@@ -508,6 +510,8 @@ const CouponManagement = () => {
               ))}
             </tbody>
           </table>
+          </div>
+          </div>
           </div>
         )}
       </div>
