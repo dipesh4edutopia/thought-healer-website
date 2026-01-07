@@ -4,7 +4,7 @@ import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
   const [userInfo, setUserInfo] = useState({
     email: 'admin@thoughthealer.com',
     role: 'Administrator'
@@ -21,6 +21,18 @@ const AdminLayout = () => {
         role: userRole === 'admin' ? 'Administrator' : 'User'
       });
     }
+
+    // Handle window resize for responsive sidebar
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(true);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleLogout = () => {
@@ -49,20 +61,20 @@ const AdminLayout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-50 to-primary-50 dark:from-dark-900 dark:to-dark-800">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <header className="bg-white dark:bg-dark-800 shadow-lg border-b border-dark-200 dark:border-dark-700 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+      <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
+        <div className="w-full px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
               {/* Sidebar Toggle Button */}
               <button
                 onClick={toggleSidebar}
-                className="p-2 rounded-lg bg-dark-100 dark:bg-dark-700 hover:bg-dark-200 dark:hover:bg-dark-600 transition-all"
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all flex-shrink-0"
                 aria-label="Toggle Sidebar"
               >
                 <svg
-                  className="w-6 h-6 text-dark-900 dark:text-white"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900 dark:text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -75,25 +87,25 @@ const AdminLayout = () => {
                 </svg>
               </button>
               
-              <div>
-                <h1 className="text-2xl font-bold text-dark-900 dark:text-white">Admin Dashboard</h1>
-                <p className="text-sm text-dark-600 dark:text-dark-300">ThoughtPro Management Portal</p>
+              <div className="min-w-0">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white truncate">Admin Dashboard</h1>
+                <p className="hidden sm:block text-xs sm:text-sm text-gray-600 dark:text-gray-300">ThoughtPro Management Portal</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0">
+              <div className="relative hidden sm:block">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg">
                   {userInfo.email.charAt(0).toUpperCase()}
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full border-2 border-white"></div>
               </div>
-              <div className="text-right hidden sm:block">
-                <p className="text-sm font-medium text-dark-900 dark:text-white">{userInfo.role}</p>
-                <p className="text-xs text-dark-600 dark:text-dark-300">{userInfo.email}</p>
+              <div className="text-right hidden lg:block">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">{userInfo.role}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 truncate max-w-[150px]">{userInfo.email}</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-3 py-2 sm:px-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all flex items-center gap-1 sm:gap-2 shadow-lg hover:shadow-xl text-sm sm:text-base"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -118,7 +130,7 @@ const AdminLayout = () => {
         <aside
           className={`${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } fixed lg:sticky top-[88px] left-0 z-20 w-64 h-[calc(100vh-88px)] bg-white dark:bg-dark-800 shadow-lg border-r border-dark-200 dark:border-dark-700 transition-transform duration-300 ease-in-out overflow-y-auto`}
+          } fixed lg:sticky top-[57px] sm:top-[73px] left-0 z-20 w-64 h-[calc(100vh-57px)] sm:h-[calc(100vh-73px)] bg-white dark:bg-gray-800 shadow-lg border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out overflow-y-auto`}
         >
           <nav className="p-4 space-y-2">
             <Link
@@ -126,8 +138,8 @@ const AdminLayout = () => {
               onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
                 isActive('/admin/users')
-                  ? 'bg-primary-500 text-white shadow-lg'
-                  : 'text-dark-700 dark:text-dark-300 hover:bg-dark-100 dark:hover:bg-dark-700'
+                  ? 'bg-teal-500 text-white shadow-lg'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               <span className="text-xl">👥</span>
@@ -139,8 +151,8 @@ const AdminLayout = () => {
               onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
                 isActive('/admin/coupons')
-                  ? 'bg-primary-500 text-white shadow-lg'
-                  : 'text-dark-700 dark:text-dark-300 hover:bg-dark-100 dark:hover:bg-dark-700'
+                  ? 'bg-teal-500 text-white shadow-lg'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               <span className="text-xl">🎟️</span>
@@ -152,8 +164,8 @@ const AdminLayout = () => {
               onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
                 isActive('/admin/psychologists')
-                  ? 'bg-primary-500 text-white shadow-lg'
-                  : 'text-dark-700 dark:text-dark-300 hover:bg-dark-100 dark:hover:bg-dark-700'
+                  ? 'bg-teal-500 text-white shadow-lg'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               <span className="text-xl">👨‍⚕️</span>
@@ -163,23 +175,19 @@ const AdminLayout = () => {
         </aside>
 
         {/* Main Content */}
-        <main
-          className={`flex-1 transition-all duration-300 ${
-            sidebarOpen ? 'lg:ml-64' : 'lg:ml-0'
-          }`}
-        >
+        <main className="flex-1 w-full min-w-0">
           {/* Stats Overview */}
           {location.pathname === '/admin' && (
-            <div className="p-6 bg-white dark:bg-dark-800 border-b border-dark-200 dark:border-dark-700">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {adminStats.map((stat, index) => (
-                  <div key={index} className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 p-4 rounded-lg border border-primary-200 dark:border-primary-800">
+                  <div key={index} className="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 p-4 rounded-lg border border-teal-200 dark:border-teal-800">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-primary-600 dark:text-primary-400">{stat.label}</p>
-                        <p className="text-2xl font-bold text-primary-900 dark:text-primary-100">{stat.value}</p>
+                        <p className="text-xs sm:text-sm font-medium text-teal-600 dark:text-teal-400">{stat.label}</p>
+                        <p className="text-xl sm:text-2xl font-bold text-teal-900 dark:text-teal-100">{stat.value}</p>
                       </div>
-                      <div className="text-3xl opacity-80">{stat.icon}</div>
+                      <div className="text-2xl sm:text-3xl opacity-80">{stat.icon}</div>
                     </div>
                   </div>
                 ))}
@@ -187,7 +195,7 @@ const AdminLayout = () => {
             </div>
           )}
           
-          <div className="p-6">
+          <div className="p-3 sm:p-4 lg:p-6">
             <Outlet />
           </div>
         </main>

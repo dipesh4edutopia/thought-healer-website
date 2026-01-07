@@ -219,26 +219,26 @@ const Otp = () => {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${currentProduct.bgColor} flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-all duration-300`}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
         <div className="flex justify-center">
           <div className="flex items-center space-x-2">
-            <div className={`w-10 h-10 bg-gradient-to-r ${currentProduct.color} rounded-lg flex items-center justify-center`}>
-              <span className="text-white font-bold text-lg">{currentProduct.icon}</span>
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r ${currentProduct.color} rounded-lg flex items-center justify-center`}>
+              <span className="text-white font-bold text-base sm:text-lg">{currentProduct.icon}</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">{currentProduct.name}</span>
+            <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{currentProduct.name}</span>
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+        <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">
           Verify your email
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">
           We've sent a 6-digit code to{' '}
-          <span className="font-medium text-blue-600 dark:text-blue-400">{email}</span>
+          <span className="font-medium text-blue-600 dark:text-blue-400 break-all">{email}</span>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200 dark:border-gray-700">
+      <div className="mt-6 sm:mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        <div className="bg-white dark:bg-gray-800 py-6 sm:py-8 px-4 sm:px-10 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="rounded-md bg-red-50 dark:bg-red-900/50 p-4">
@@ -247,10 +247,10 @@ const Otp = () => {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-center mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 text-center mb-3 sm:mb-4">
                 Enter verification code
               </label>
-              <div className="flex justify-center space-x-2">
+              <div className="flex justify-center space-x-1.5 sm:space-x-2">
                 {otp.map((digit, index) => (
                   <input
                     key={index}
@@ -260,7 +260,7 @@ const Otp = () => {
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-12 h-12 text-center text-lg font-semibold border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-10 h-10 sm:w-12 sm:h-12 text-center text-base sm:text-lg font-semibold border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
                     placeholder="0"
                   />
                 ))}
@@ -288,7 +288,7 @@ const Otp = () => {
               <button
                 type="submit"
                 disabled={loading || otp.join('').length !== 6}
-                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r ${currentProduct.color} hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200`}
+                className={`group relative w-full flex justify-center py-2.5 sm:py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r ${currentProduct.color} hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200`}
               >
                 {loading ? (
                   <div className="flex items-center">
@@ -305,8 +305,8 @@ const Otp = () => {
             </div>
           </form>
 
-          <div className="mt-6 text-center space-y-4">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="mt-4 sm:mt-6 text-center space-y-3 sm:space-y-4">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
               Didn't receive the code? Check your spam folder or{' '}
               <button
                 onClick={handleResend}
@@ -317,7 +317,7 @@ const Otp = () => {
               </button>
             </p>
             
-            <div className="text-sm">
+            <div className="text-xs sm:text-sm">
               <Link to="/signup" className="text-blue-600 hover:text-blue-500 dark:text-blue-400">
                 ← Back to signup
               </Link>

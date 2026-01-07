@@ -16,6 +16,20 @@ const ThoughtPro = () => {
     }
   });
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [pricingPlans, setPricingPlans] = useState([
+    {
+      name: "Free",
+      price: { monthly: 0, annual: 0 },
+      features: [
+        "Self-monitor stress, productivity & 10 other vital parameters",
+        "Basic tracking and insights",
+        "Limited interventions"
+      ],
+      cta: "Get Started Free",
+      popular: false
+    }
+  ]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -28,6 +42,86 @@ const ThoughtPro = () => {
       localStorage.setItem('th-theme', isDark ? 'dark' : 'light');
     } catch {}
   }, [isDark]);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/plans');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
+        if (result.success && result.data && result.data.data) {
+          const apiPlans = result.data.data;
+          const transformedPlans = transformApiPlans(apiPlans);
+          setPricingPlans(prev => [prev[0], ...transformedPlans]); // Keep Free plan, add API plans
+        }
+      } catch (err) {
+        console.error('Error fetching plans:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  const transformApiPlans = (apiPlans) => {
+    const planTypes = {};
+    
+    apiPlans.forEach(plan => {
+      const type = plan.plan_type.toLowerCase();
+      if (!planTypes[type]) {
+        planTypes[type] = { monthly: null, yearly: null };
+      }
+      
+      const isYearly = plan.validity_days >= 365;
+      if (isYearly) {
+        planTypes[type].yearly = plan;
+      } else {
+        planTypes[type].monthly = plan;
+      }
+    });
+    
+    return Object.keys(planTypes).map(type => {
+      const isPremium = type === 'premium';
+      const monthly = planTypes[type].monthly;
+      const yearly = planTypes[type].yearly;
+      
+      return {
+        name: type.charAt(0).toUpperCase() + type.slice(1),
+        price: {
+          monthly: monthly ? Math.round(monthly.price_inr * 2 * 0.4) : 0,
+          annual: yearly ? Math.round(yearly.price_inr * 2 * 0.4) : 0
+        },
+        originalPrice: {
+          monthly: monthly ? Math.round(monthly.price_inr * 2) : 0,
+          annual: yearly ? Math.round(yearly.price_inr * 2) : 0
+        },
+        features: isPremium
+          ? [
+              "All Free features",
+              "10+ Advanced Scans",
+              "Primary & Secondary Interventions",
+              "Video Tertiary Content",
+              "Detailed analytics"
+            ]
+          : [
+              "All Premium features",
+              "100+ Advanced Scans",
+              "Priority support",
+              "1-on-1 sessions with professionals",
+              "₹500-800 per session"
+            ],
+        cta: isPremium ? "Start Premium" : "Go Ultra",
+        popular: isPremium
+      };
+    });
+  };
 
   useEffect(() => {
     function onKeyDown(e) {
@@ -90,46 +184,6 @@ const ThoughtPro = () => {
       role: "Student",
       image: "https://placehold.co/60x60",
       text: "The productivity tracking helped me optimize my study schedule. My grades improved significantly!"
-    }
-  ];
-
-  const pricingPlans = [
-    {
-      name: "Free",
-      price: { monthly: 0, annual: 0 },
-      features: [
-        "Self-monitor stress, productivity & 10 other vital parameters",
-        "Basic tracking and insights",
-        "Limited interventions"
-      ],
-      cta: "Get Started Free",
-      popular: false
-    },
-    {
-      name: "Premium",
-      price: { monthly: 299, annual: 999 },
-      features: [
-        "All Free features",
-        "10+ Advanced Scans",
-        "Primary & Secondary Interventions",
-        "Video Tertiary Content",
-        "Detailed analytics"
-      ],
-      cta: "Start Premium",
-      popular: true
-    },
-    {
-      name: "Ultra",
-      price: { monthly: 599, annual: 2599 },
-      features: [
-        "All Premium features",
-        "100+ Advanced Scans",
-        "Priority support",
-        "1-on-1 sessions with professionals",
-        "₹500-800 per session"
-      ],
-      cta: "Go Ultra",
-      popular: false
     }
   ];
 
@@ -504,8 +558,8 @@ const ThoughtPro = () => {
             <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4 text-dark-900 dark:text-white">
               Choose Your Mental Health Journey
             </h2>
-            <p className="text-xl mb-8 text-dark-600 dark:text-dark-300">
-              Start free, upgrade when you're ready for more advanced features
+            <p className="text-xl md:text-xl mb-8 text-dark-600 dark:text-dark-300 max-w-2xl mx-auto">
+              Start free and upgrade when ready for more comprehensive mental health support
             </p>
             <div className="flex items-center justify-center space-x-4">
               <span className={`${!isAnnual ? 'font-semibold text-dark-900 dark:text-white' : 'text-dark-600 dark:text-dark-400'}`}>Monthly</span>
@@ -516,7 +570,7 @@ const ThoughtPro = () => {
                 <div className={`absolute w-5 h-5 bg-white rounded-full top-0.5 transition-transform ${isAnnual ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
               </button>
               <span className={`${isAnnual ? 'font-semibold text-dark-900 dark:text-white' : 'text-dark-600 dark:text-dark-400'}`}>Annual</span>
-              <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Save 67%</span>
+              <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Save 60%</span>
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -539,14 +593,32 @@ const ThoughtPro = () => {
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">{plan.name}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-dark-900 dark:text-white">
-                      ₹{isAnnual ? plan.price.annual : plan.price.monthly}
-                    </span>
-                    <span className="text-dark-600 dark:text-dark-300">
-                      {plan.price.monthly === 0 ? '' : isAnnual ? '/year' : '/month'}
-                    </span>
+                    {plan.originalPrice && plan.originalPrice.monthly > 0 ? (
+                      <div className="flex flex-col items-center">
+                        <span className="text-lg text-gray-500 dark:text-gray-400 line-through mb-1">
+                          ₹{isAnnual ? plan.originalPrice.annual : plan.originalPrice.monthly}
+                        </span>
+                        <div>
+                          <span className="text-4xl font-bold text-dark-900 dark:text-white">
+                            ₹{isAnnual ? plan.price.annual : plan.price.monthly}
+                          </span>
+                          <span className="text-dark-600 dark:text-dark-300">
+                            {isAnnual ? '/year' : '/month'}
+                          </span>
+                        </div>
+                        <span className="text-sm text-green-600 dark:text-green-400 font-semibold mt-2">
+                          60% OFF
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-4xl font-bold text-dark-900 dark:text-white">
+                          ₹{isAnnual ? plan.price.annual : plan.price.monthly}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                  {isAnnual && plan.price.monthly > 0 && (
+                  {isAnnual && plan.price.annual > 0 && (
                     <p className="text-sm text-dark-600 dark:text-dark-300">
                       ₹{Math.round(plan.price.annual / 12)}/month billed annually
                     </p>

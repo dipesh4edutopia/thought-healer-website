@@ -90,14 +90,27 @@ const Header = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close product dropdown
       if (productDropdownOpen && !event.target.closest('.relative')) {
-        setProductDropdownOpen(false);
+        const productButton = event.target.closest('button');
+        if (!productButton || !productButton.textContent.includes('Our Products')) {
+          setProductDropdownOpen(false);
+        }
+      }
+      
+      // Close user dropdown
+      if (userDropdownOpen) {
+        const userDropdownElement = event.target.closest('.relative');
+        const isUserButton = event.target.closest('button')?.querySelector('.w-8.h-8.bg-gradient-to-r');
+        if (!userDropdownElement && !isUserButton) {
+          setUserDropdownOpen(false);
+        }
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [productDropdownOpen]);
+  }, [productDropdownOpen, userDropdownOpen]);
 
   return (
     <header 
@@ -190,7 +203,6 @@ const Header = () => {
               <div className="relative">
                 <button 
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  onBlur={() => setTimeout(() => setUserDropdownOpen(false), 200)}
                   className="flex items-center space-x-2 text-dark-600 dark:text-dark-300 font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                 >
                   <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">

@@ -131,25 +131,25 @@ const Signup = () => {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${currentProduct.bgColor} flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-all duration-300`}>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
         <div className="flex justify-center">
           <div className="flex items-center space-x-2">
-            <div className={`w-10 h-10 bg-gradient-to-r ${currentProduct.color} rounded-lg flex items-center justify-center`}>
-              <span className="text-white font-bold text-lg">{currentProduct.icon}</span>
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r ${currentProduct.color} rounded-lg flex items-center justify-center`}>
+              <span className="text-white font-bold text-base sm:text-lg">{currentProduct.icon}</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">SyneptLabs</span>
+            <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">SyneptLabs</span>
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+        <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">
           Create your account
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">
           Choose your product and create an account to get started
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200 dark:border-gray-700">
+      <div className="mt-6 sm:mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        <div className="bg-white dark:bg-gray-800 py-6 sm:py-8 px-4 sm:px-10 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700">
           {/* Product Selection */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
@@ -161,29 +161,29 @@ const Signup = () => {
                   key={key}
                   type="button"
                   onClick={() => setSelectedProduct(key)}
-                  className={`p-6 rounded-xl border-2 transition-all duration-300 text-left ${
+                  className={`p-4 sm:p-6 rounded-xl border-2 transition-all duration-300 text-left ${
                     selectedProduct === key
                       ? `border-transparent bg-gradient-to-r ${product.color} text-white shadow-lg transform scale-105`
                       : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500 hover:shadow-md'
                   }`}
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="text-3xl">{product.icon}</div>
-                    <div className="flex-1">
-                      <div className="font-bold text-lg mb-1">{product.name}</div>
-                      <div className={`text-sm mb-3 ${selectedProduct === key ? 'opacity-90' : 'opacity-70'}`}>
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <div className="text-2xl sm:text-3xl flex-shrink-0">{product.icon}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-base sm:text-lg mb-1">{product.name}</div>
+                      <div className={`text-xs sm:text-sm mb-2 sm:mb-3 ${selectedProduct === key ? 'opacity-90' : 'opacity-70'}`}>
                         {product.description}
                       </div>
                       <div className="space-y-1">
                         {product.features.map((feature, idx) => (
-                          <div key={idx} className={`text-xs flex items-center ${selectedProduct === key ? 'opacity-90' : 'opacity-60'}`}>
+                          <div key={idx} className={`text-[10px] sm:text-xs flex items-center ${selectedProduct === key ? 'opacity-90' : 'opacity-60'}`}>
                             <span className="mr-2">•</span>
                             {feature}
                           </div>
                         ))}
                       </div>
                       {product.requiresApproval && (
-                        <div className={`text-xs mt-2 font-medium ${selectedProduct === key ? 'text-yellow-200' : 'text-yellow-600'}`}>
+                        <div className={`text-[10px] sm:text-xs mt-2 font-medium ${selectedProduct === key ? 'text-yellow-200' : 'text-yellow-600'}`}>
                           ⚠️ Requires admin approval
                         </div>
                       )}
@@ -281,7 +281,7 @@ const Signup = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r ${currentProduct.color} hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200`}
+                className={`group relative w-full flex justify-center py-2.5 sm:py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r ${currentProduct.color} hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200`}
               >
                 {loading ? (
                   <div className="flex items-center">
@@ -310,17 +310,17 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <Link
                 to="/login"
-                className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
+                className="w-full flex justify-center py-2.5 sm:py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
               >
                 Sign in to existing account
               </Link>
             </div>
 
             <div className="mt-4 text-center">
-              <Link to="/" className="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400">
+              <Link to="/" className="text-xs sm:text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400">
                 ← Back to home
               </Link>
             </div>
