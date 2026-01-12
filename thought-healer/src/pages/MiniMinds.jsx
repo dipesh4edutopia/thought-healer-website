@@ -531,9 +531,17 @@ const MiniMinds = () => {
               </div>
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">Premium</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 999 : 299}</span>
-                  <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
+                <div className="mb-4 flex flex-col items-center">
+                  <span className="text-lg text-gray-500 dark:text-gray-400 line-through mb-1">
+                    ₹{isAnnual ? 2498 : 748}
+                  </span>
+                  <div>
+                    <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 999 : 299}</span>
+                    <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
+                  </div>
+                  <span className="text-sm text-green-600 dark:text-green-400 font-semibold mt-2">
+                    60% OFF
+                  </span>
                 </div>
                 {isAnnual && (
                   <p className="text-sm text-dark-500 dark:text-dark-400">
@@ -575,9 +583,17 @@ const MiniMinds = () => {
             <div className="bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-dark-200/50 dark:border-white/10 hover:shadow-2xl transition-all">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">Ultra</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 2599 : 599}</span>
-                  <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
+                <div className="mb-4 flex flex-col items-center">
+                  <span className="text-lg text-gray-500 dark:text-gray-400 line-through mb-1">
+                    ₹{isAnnual ? 6498 : 1498}
+                  </span>
+                  <div>
+                    <span className="text-4xl font-bold text-dark-900 dark:text-white">₹{isAnnual ? 2599 : 599}</span>
+                    <span className="text-dark-600 dark:text-dark-300">{isAnnual ? '/year' : '/month'}</span>
+                  </div>
+                  <span className="text-sm text-green-600 dark:text-green-400 font-semibold mt-2">
+                    60% OFF
+                  </span>
                 </div>
                 {isAnnual && (
                   <p className="text-sm text-dark-500 dark:text-dark-400">

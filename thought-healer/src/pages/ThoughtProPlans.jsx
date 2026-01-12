@@ -87,10 +87,10 @@ const ThoughtProPlans = () => {
         description: isPremium ? 'Perfect for personal wellness' : 'Complete wellness experience',
         tier: planGroup.tier,
         icon: isPremium ? '⭐' : '💎',
-        monthlyPrice: monthly ? Math.round(monthly.price_inr * 2 * 0.4) : null,
-        yearlyPrice: yearly ? Math.round(yearly.price_inr * 2 * 0.4) : null,
-        monthlyOriginalPrice: monthly ? Math.round(monthly.price_inr * 2) : null,
-        yearlyOriginalPrice: yearly ? Math.round(yearly.price_inr * 2) : null,
+        monthlyPrice: monthly ? Math.round(monthly.price_inr) : null,
+        yearlyPrice: yearly ? Math.round(yearly.price_inr) : null,
+        monthlyOriginalPrice: monthly ? Math.round(monthly.price_inr * 2.5) : null,
+        yearlyOriginalPrice: yearly ? Math.round(yearly.price_inr * 2.5) : null,
         monthlyPlanId: monthly ? monthly.plan_id : null,
         yearlyPlanId: yearly ? yearly.plan_id : null,
         yearlySavings: yearlySavings,
@@ -276,14 +276,12 @@ const ThoughtProPlans = () => {
                     >
                       <div className="text-xs sm:text-sm text-dark-600 dark:text-dark-400">Monthly</div>
                       <div className="flex flex-col items-center">
-                        {plan.monthlyOriginalPrice ? (
-                          <>
-                            <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.monthlyOriginalPrice}</div>
-                            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
-                            <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
-                          </>
-                        ) : (
-                          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
+                        {plan.monthlyOriginalPrice && (
+                          <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.monthlyOriginalPrice}</div>
+                        )}
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.monthlyPrice}</div>
+                        {plan.monthlyOriginalPrice && (
+                          <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
                         )}
                       </div>
                       <div className="text-[10px] sm:text-xs text-dark-500 dark:text-dark-500">/month</div>
@@ -305,14 +303,12 @@ const ThoughtProPlans = () => {
                       )}
                       <div className="text-xs sm:text-sm text-dark-600 dark:text-dark-400">Yearly</div>
                       <div className="flex flex-col items-center">
-                        {plan.yearlyOriginalPrice ? (
-                          <>
-                            <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.yearlyOriginalPrice}</div>
-                            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
-                            <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
-                          </>
-                        ) : (
-                          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
+                        {plan.yearlyOriginalPrice && (
+                          <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-through">₹{plan.yearlyOriginalPrice}</div>
+                        )}
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-dark-900 dark:text-white">₹{plan.yearlyPrice}</div>
+                        {plan.yearlyOriginalPrice && (
+                          <div className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">60% OFF</div>
                         )}
                       </div>
                       <div className="text-[10px] sm:text-xs text-dark-500 dark:text-dark-500">/year</div>

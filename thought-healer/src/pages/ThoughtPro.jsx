@@ -95,12 +95,12 @@ const ThoughtPro = () => {
       return {
         name: type.charAt(0).toUpperCase() + type.slice(1),
         price: {
-          monthly: monthly ? Math.round(monthly.price_inr * 2 * 0.4) : 0,
-          annual: yearly ? Math.round(yearly.price_inr * 2 * 0.4) : 0
+          monthly: monthly ? Math.round(monthly.price_inr) : 0,
+          annual: yearly ? Math.round(yearly.price_inr) : 0
         },
         originalPrice: {
-          monthly: monthly ? Math.round(monthly.price_inr * 2) : 0,
-          annual: yearly ? Math.round(yearly.price_inr * 2) : 0
+          monthly: monthly ? Math.round(monthly.price_inr * 2.5) : 0,
+          annual: yearly ? Math.round(yearly.price_inr * 2.5) : 0
         },
         features: isPremium
           ? [
@@ -593,30 +593,26 @@ const ThoughtPro = () => {
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold mb-4 text-dark-900 dark:text-white">{plan.name}</h3>
                   <div className="mb-4">
-                    {plan.originalPrice && plan.originalPrice.monthly > 0 ? (
-                      <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center">
+                      {plan.originalPrice && (plan.originalPrice.monthly > 0 || plan.originalPrice.annual > 0) && (
                         <span className="text-lg text-gray-500 dark:text-gray-400 line-through mb-1">
                           ₹{isAnnual ? plan.originalPrice.annual : plan.originalPrice.monthly}
                         </span>
-                        <div>
-                          <span className="text-4xl font-bold text-dark-900 dark:text-white">
-                            ₹{isAnnual ? plan.price.annual : plan.price.monthly}
-                          </span>
-                          <span className="text-dark-600 dark:text-dark-300">
-                            {isAnnual ? '/year' : '/month'}
-                          </span>
-                        </div>
-                        <span className="text-sm text-green-600 dark:text-green-400 font-semibold mt-2">
-                          60% OFF
-                        </span>
-                      </div>
-                    ) : (
+                      )}
                       <div>
                         <span className="text-4xl font-bold text-dark-900 dark:text-white">
                           ₹{isAnnual ? plan.price.annual : plan.price.monthly}
                         </span>
+                        <span className="text-dark-600 dark:text-dark-300">
+                          {isAnnual ? '/year' : '/month'}
+                        </span>
                       </div>
-                    )}
+                      {plan.originalPrice && (plan.originalPrice.monthly > 0 || plan.originalPrice.annual > 0) && (
+                        <span className="text-sm text-green-600 dark:text-green-400 font-semibold mt-2">
+                          60% OFF
+                        </span>
+                      )}
+                    </div>
                   </div>
                   {isAnnual && plan.price.annual > 0 && (
                     <p className="text-sm text-dark-600 dark:text-dark-300">
