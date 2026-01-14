@@ -21,7 +21,6 @@ import MiniMindsSuccess from './pages/MiniMindsSuccess';
 
 import ThoughtProSignup from './pages/ThoughtProSignup';
 import ThoughtProOtp from './pages/ThoughtProOtp';
-
 import ThoughtProPayment from './pages/ThoughtProPayment';
 import ThoughtProSuccess from './pages/ThoughtProSuccess';
 import SubscriptionManagement from './pages/SubscriptionManagement';
