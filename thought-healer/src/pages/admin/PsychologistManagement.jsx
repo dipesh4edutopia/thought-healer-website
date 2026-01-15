@@ -48,30 +48,38 @@ const PsychologistManagement = () => {
     setLoadingPsychologists(true);
     setPsychologistError('');
     try {
-      let url = `${API_BASE_URL}/api/psychologists?`;
-      
-      if (filterType && !filterLang) {
-        url += `type=${encodeURIComponent(filterType)}`;
-      } else if (filterLang && !filterType) {
-        url += `language=${encodeURIComponent(filterLang)}`;
-      } else {
-        url += `type=Clinical Psychology`;
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) {
+        setPsychologistError('Authentication required. Please login again.');
+        setLoadingPsychologists(false);
+        return;
       }
+
+      let url = `${API_BASE_URL}/api/admin/psychologists`;
+      
+      // if (filterType && !filterLang) {
+      //   url += `type=${encodeURIComponent(filterType)}`;
+      // } else if (filterLang && !filterType) {
+      //   url += `language=${encodeURIComponent(filterLang)}`;
+      // } else {
+      //   url += `type=Clinical Psychology`;
+      // }
 
       console.log('Fetching psychologists from:', url);
 
       const response = await fetch(url, {
         method: 'GET',
         headers: {
+          'Authorization': `Bearer ${authToken}`,
           'Content-Type': 'application/json'
         }
       });
 
       const data = await response.json();
-      console.log('Psychologists response:', data);
+      console.log('Psychologists response:', data.data.data);
 
       if (response.ok && data.success) {
-        const psychologistsList = data.data?.psychologists || [];
+        const psychologistsList = data?.data.data?.psychologists || [];
         setPsychologists(psychologistsList);
         console.log('Loaded psychologists:', psychologistsList.length);
       } else {
@@ -92,8 +100,33 @@ const PsychologistManagement = () => {
 
   // Step 1: Create User with Psychologist Role
   const handleCreateUser = async () => {
+    // Validate required fields
     if (!userData.email || !userData.username || !userData.password) {
       alert('Please fill all required fields (Email, Username, Password)');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(userData.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Username validation (3-50 characters, no spaces)
+    if (userData.username.length < 3 || userData.username.length > 50) {
+      alert('Username must be between 3 and 50 characters');
+      return;
+    }
+
+    if (userData.username.includes(' ')) {
+      alert('Username cannot contain spaces');
+      return;
+    }
+
+    // Password validation (minimum 8 characters)
+    if (userData.password.length < 8) {
+      alert('Password must be at least 8 characters long');
       return;
     }
 
@@ -137,9 +170,49 @@ const PsychologistManagement = () => {
 
   // Step 2: Update Complete Profile
   const handleUpdateProfile = async () => {
-    if (!profileData.name || profileData.languages.length === 0) {
-      alert('Please fill at least Name and Languages');
+    // Validate required fields
+    if (!profileData.name || !profileData.name.trim()) {
+      alert('Please enter the psychologist\'s full name');
       return;
+    }
+
+    if (profileData.languages.length === 0) {
+      alert('Please select at least one language');
+      return;
+    }
+
+    // Validate mobile number if provided
+    if (profileData.mobile_number) {
+      const mobileRegex = /^[0-9]{10}$/;
+      if (!mobileRegex.test(profileData.mobile_number.replace(/\s/g, ''))) {
+        alert('Please enter a valid 10-digit mobile number');
+        return;
+      }
+    }
+
+    // Validate rates if provided
+    if (profileData.emergency_call_rate && parseFloat(profileData.emergency_call_rate) < 0) {
+      alert('Emergency call rate cannot be negative');
+      return;
+    }
+
+    if (profileData.session_45_minute_rate && parseFloat(profileData.session_45_minute_rate) < 0) {
+      alert('45-minute session rate cannot be negative');
+      return;
+    }
+
+    if (profileData.session_20_minute_rate && parseFloat(profileData.session_20_minute_rate) < 0) {
+      alert('20-minute session rate cannot be negative');
+      return;
+    }
+
+    // Validate IFSC code if provided
+    if (profileData.ifsc_code && profileData.ifsc_code.trim()) {
+      const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+      if (!ifscRegex.test(profileData.ifsc_code.trim())) {
+        alert('Please enter a valid IFSC code (e.g., HDFC0000185)');
+        return;
+      }
     }
 
     try {
@@ -158,7 +231,7 @@ const PsychologistManagement = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: profileData.name,
+          name: profileData.name.trim(),
           degree: profileData.degree || null,
           additional_qualification: profileData.additional_qualification || null,
           mobile_number: profileData.mobile_number || null,
