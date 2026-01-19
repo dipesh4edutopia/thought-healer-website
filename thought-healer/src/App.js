@@ -28,6 +28,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import UserManagement from './pages/admin/UserManagement';
 import CouponManagement from './pages/admin/CouponManagement';
 import PsychologistManagement from './pages/admin/PsychologistManagement';
+import MarketingCoupons from './pages/admin/MarketingCoupons';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -138,6 +139,14 @@ function App() {
               element={
                 <ProtectedRoute requiredRole="admin">
                   <PsychologistManagement />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="marketing-coupons" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <MarketingCoupons />
                 </ProtectedRoute>
               } 
             />

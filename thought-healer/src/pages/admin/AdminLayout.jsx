@@ -171,6 +171,19 @@ const AdminLayout = () => {
               <span className="text-xl">👨‍⚕️</span>
               <span className="font-medium">Psychologists</span>
             </Link>
+
+            <Link
+              to="/admin/marketing-coupons"
+              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
+                isActive('/admin/marketing-coupons')
+                  ? 'bg-teal-500 text-white shadow-lg'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <span className="text-xl">📢</span>
+              <span className="font-medium">Marketing Coupons</span>
+            </Link>
           </nav>
         </aside>
 
