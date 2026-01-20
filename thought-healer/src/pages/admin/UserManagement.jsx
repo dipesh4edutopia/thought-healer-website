@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 const UserManagement = () => {
   const [searchPhone, setSearchPhone] = useState('');
+  const [searchEmail, setSearchEmail] = useState('');
+  const [roleFilter, setRoleFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [userError, setUserError] = useState('');
@@ -10,7 +16,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     fetchActiveUsers();
-  }, []);
+  }, [currentPage, perPage, roleFilter, searchEmail]);
 
   const fetchActiveUsers = async () => {
     setLoadingUsers(true);
@@ -25,7 +31,18 @@ const UserManagement = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/api/v1/users/billing/active`, {
+      // Build query parameters
+      const params = new URLSearchParams();
+      params.append('page', currentPage);
+      params.append('per_page', perPage);
+      if (roleFilter) {
+        params.append('role', roleFilter);
+      }
+      if (searchEmail) {
+        params.append('search', searchEmail);
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/users?${params.toString()}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${authToken}`,
@@ -39,8 +56,17 @@ const UserManagement = () => {
 
       if (response.ok) {
         let usersArray = [];
+        let pagination = null;
         
-        if (data.data && Array.isArray(data.data.data)) {
+        if (data.data && data.data.data && Array.isArray(data.data.data.users)) {
+          usersArray = data.data.data.users;
+          pagination = data.data.data.pagination;
+          console.log('Using data.data.data.users array');
+        } else if (data.data && Array.isArray(data.data.users)) {
+          usersArray = data.data.users;
+          pagination = data.data.pagination;
+          console.log('Using data.data.users array');
+        } else if (data.data && Array.isArray(data.data.data)) {
           usersArray = data.data.data;
           console.log('Using data.data.data array');
         } else if (Array.isArray(data.data)) {
@@ -55,6 +81,12 @@ const UserManagement = () => {
         }
 
         console.log('Users array length:', usersArray.length);
+
+        // Update pagination info
+        if (pagination) {
+          setTotalPages(pagination.total_pages || 1);
+          setTotalUsers(pagination.total || 0);
+        }
         
         const mappedUsers = usersArray.map(user => ({
           id: user.id || user.user_id,
@@ -63,6 +95,7 @@ const UserManagement = () => {
           phone: user.phone || user.phone_number || 'N/A',
           plan: user.plan_name || user.plan_type || 'N/A',
           status: user.status || 'active',
+          role: user.role || 'user',
           joinDate: user.created_at || user.expiry_date ? new Date(user.created_at || user.expiry_date).toLocaleDateString() : 'N/A'
         }));
         setUsers(mappedUsers);
@@ -167,28 +200,94 @@ const UserManagement = () => {
     }
   };
 
+  const handleEmailSearch = (e) => {
+    const email = e.target.value;
+    setSearchEmail(email);
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  const handleRoleFilter = (e) => {
+    setRoleFilter(e.target.value);
+    setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  const handlePerPageChange = (e) => {
+    setPerPage(parseInt(e.target.value));
+    setCurrentPage(1); // Reset to first page when changing per page
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
       <div className="space-y-4 sm:space-y-6">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">User Management</h2>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <input
-              type="text"
-              placeholder="Search by phone..."
-              value={searchPhone}
-              onChange={handleSearchChange}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 w-full sm:w-64 text-sm"
-              maxLength="15"
-            />
-            <button
-              onClick={fetchActiveUsers}
-              className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap text-sm"
-            >
-              <span>🔄</span>
-              <span>Refresh</span>
-            </button>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Total Users: <span className="font-bold text-gray-900 dark:text-white">{totalUsers}</span>
           </div>
+        </div>
+
+        {/* Filters Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <input
+            type="text"
+            placeholder="Search by email..."
+            value={searchEmail}
+            onChange={handleEmailSearch}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+          />
+          
+          <input
+            type="text"
+            placeholder="Search by phone..."
+            value={searchPhone}
+            onChange={handleSearchChange}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+            maxLength="15"
+          />
+
+          <select
+            value={roleFilter}
+            onChange={handleRoleFilter}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+          >
+            <option value="">All Roles</option>
+            <option value="user">User</option>
+            <option value="psychologist">Psychologist</option>
+            <option value="miniminds">MiniMinds</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <select
+            value={perPage}
+            onChange={handlePerPageChange}
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+          >
+            <option value="10">10 per page</option>
+            <option value="25">25 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+          </select>
+        </div>
+
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              setSearchEmail('');
+              setSearchPhone('');
+              setRoleFilter('');
+              setCurrentPage(1);
+            }}
+            className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-all flex items-center gap-2 text-sm"
+          >
+            <span>🔄</span>
+            <span>Reset Filters</span>
+          </button>
         </div>
 
         {userError && (
@@ -213,6 +312,7 @@ const UserManagement = () => {
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Name</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Email</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Phone</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Role</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Plan</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Status</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wider">Join Date</th>
@@ -226,6 +326,16 @@ const UserManagement = () => {
                       <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">{user.name}</td>
                       <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{user.email}</td>
                       <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">{user.phone}</td>
+                      <td className="px-4 py-3 text-sm">
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap capitalize ${
+                          user.role === 'admin' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' :
+                          user.role === 'psychologist' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
+                          user.role === 'miniminds' ? 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300' :
+                          'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300'
+                        }`}>
+                          {user.role}
+                        </span>
+                      </td>
                       <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 capitalize">{user.plan}</td>
                       <td className="px-4 py-3 text-sm">
                         <span className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
@@ -301,8 +411,56 @@ const UserManagement = () => {
             {users.length === 0 && !loadingUsers && (
               <div className="text-center py-12 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <p className="text-gray-500 dark:text-gray-400 text-lg">
-                  {searchPhone ? `No users found with phone number "${searchPhone}"` : 'No active billing users found'}
+                  {searchPhone || searchEmail ? `No users found` : 'No active billing users found'}
                 </p>
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {!loadingUsers && users.length > 0 && (
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  Showing page <span className="font-bold text-gray-900 dark:text-white">{currentPage}</span> of <span className="font-bold text-gray-900 dark:text-white">{totalPages}</span>
+                  {' '}({users.length} users on this page)
+                </div>
+                
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handlePageChange(1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-600 transition-all text-sm"
+                  >
+                    ⏮️ First
+                  </button>
+                  
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-600 transition-all text-sm"
+                  >
+                    ◀️ Prev
+                  </button>
+                  
+                  <div className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm font-medium">
+                    {currentPage}
+                  </div>
+                  
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-600 transition-all text-sm"
+                  >
+                    Next ▶️
+                  </button>
+                  
+                  <button
+                    onClick={() => handlePageChange(totalPages)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-600 transition-all text-sm"
+                  >
+                    Last ⏭️
+                  </button>
+                </div>
               </div>
             )}
           </>
