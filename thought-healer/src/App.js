@@ -29,6 +29,8 @@ import UserManagement from './pages/admin/UserManagement';
 import CouponManagement from './pages/admin/CouponManagement';
 import PsychologistManagement from './pages/admin/PsychologistManagement';
 import MarketingCoupons from './pages/admin/MarketingCoupons';
+import UserCreation from './pages/admin/UserCreation';
+import SubscriptionGrant from './pages/admin/SubscriptionGrant';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -147,6 +149,22 @@ function App() {
               element={
                 <ProtectedRoute requiredRole="admin">
                   <MarketingCoupons />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="create-user" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <UserCreation />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="grant-subscription" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <SubscriptionGrant />
                 </ProtectedRoute>
               } 
             />
