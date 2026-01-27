@@ -5,20 +5,20 @@ const TeamSection = () => {
     {
       name: 'Dr. Sandeep Jagtap',
       role: 'Founder',
-      image: '/Dr._Sandeep_Jagtap1-removebg-preview.png',
+      image: '/Dr._Sandeep_Jagtap.png',
       delay: '0'
     },
     {
       name: 'Dr. Swati Jagtap',
       role: 'Founder',
-      image: '/Dr._Swati_Jagtap-removebg-preview (1).png',
+      image: '/Dr._Swati_Jagtap.png',
       imageClass: 'max-h-[115%]',
       delay: '100'
     },
     {
       name: 'Dr. Dipesh Walte',
       role: 'Founder',
-      image: '/Dr_Dipesh_Walte_CanvaReady_300x256.png',
+      image: '/Dr_Dipesh_Walte.png',
       delay: '200'
     },
     {

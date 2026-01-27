@@ -612,7 +612,7 @@ const AdminDashboard = () => {
                             <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PHONE</th>
                             <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PLAN</th>
                             <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">STATUS</th>
-                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">JOIN DATE</th>
+                            <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">EXPIRY DATE</th>
                             <th className="px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ACTIONS</th>
                           </tr>
                         </thead>
