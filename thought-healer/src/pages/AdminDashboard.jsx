@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -44,8 +45,6 @@ const AdminDashboard = () => {
     bio: ''
   });
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-
-  const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
   // Fetch all active billing users on component mount
   useEffect(() => {

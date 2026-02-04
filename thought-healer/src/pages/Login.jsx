@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import TwoFactorVerification from '../components/TwoFactorVerification';
+import { API_BASE_URL } from '../config/api';
 
-const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [show2FA, setShow2FA] = useState(false);
 
   // Handle URL query parameters for product preselection
   useEffect(() => {
@@ -99,7 +101,7 @@ const Login = () => {
           email: formData.email,
           password: formData.password,
           product: selectedProduct,
-          role: selectedProduct === 'admin' ? 'admin' : 'user'
+          role: selectedProduct === 'thoughtpro' ? 'user' : selectedProduct === 'miniminds' ? 'parent' : 'admin'
         }),
       });
       
@@ -108,6 +110,14 @@ const Login = () => {
       console.log('📥 Response structure:', JSON.stringify(result, null, 2));
       
       if (response.ok && result.success) {
+        // Check if 2FA is required for admin login
+        if (result.data?.requires2FA && selectedProduct === 'admin') {
+          console.log('🔐 2FA required for admin login');
+          setShow2FA(false);
+          setLoading(false);
+          return;
+        }
+
         // Check token availability - prioritize 'token' field as per API response
         const token = result.data?.token || result.data?.accessToken || result.token || result.data?.access_token;
         const refreshToken = result.data?.refreshToken || result.data?.refresh_token || result.refreshToken;
@@ -169,6 +179,33 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handle2FASuccess = (result) => {
+    console.log('✅ 2FA verification successful');
+    
+    // Store auth data
+    const token = result.data?.token;
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('userEmail', formData.email);
+    localStorage.setItem('userName', result.data?.user?.username || formData.email.split('@')[0]);
+    localStorage.setItem('userId', result.data?.user?.id || 'admin-user');
+    localStorage.setItem('userRole', 'admin');
+    localStorage.setItem('product', 'admin');
+    localStorage.setItem('isAuthenticated', 'true');
+    
+    if (rememberMe) {
+      localStorage.setItem('rememberEmail', formData.email);
+      localStorage.setItem('rememberProduct', 'admin');
+    }
+    
+    setShow2FA(false);
+    navigate('/admin');
+  };
+
+  const handle2FACancel = () => {
+    setShow2FA(false);
+    setLoading(false);
   };
 
   const currentProduct = products[selectedProduct];
@@ -366,6 +403,15 @@ const Login = () => {
           </div>
         </div>
       </div>
+      
+      {show2FA && (
+        <TwoFactorVerification
+          email={formData.email}
+          password={formData.password}
+          onSuccess={handle2FASuccess}
+          onCancel={handle2FACancel}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const MiniMindsPayment = () => {
   const location = useLocation();
@@ -9,6 +10,11 @@ const MiniMindsPayment = () => {
   const [paymentMethod, setPaymentMethod] = useState('razorpay');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [couponCode, setCouponCode] = useState('');
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [couponValidating, setCouponValidating] = useState(false);
+  const [couponError, setCouponError] = useState(null);
+  const [discountInfo, setDiscountInfo] = useState(null);
   const [userInfo, setUserInfo] = useState({
     name: localStorage.getItem('userName') || '',
     email: localStorage.getItem('userEmail') || '',
@@ -33,6 +39,68 @@ const MiniMindsPayment = () => {
       ...userInfo,
       [name]: type === 'checkbox' ? checked : value
     });
+  };
+
+  const validateCoupon = async () => {
+    if (!couponCode.trim()) {
+      setCouponError('Please enter a coupon code');
+      return;
+    }
+
+    setCouponValidating(true);
+    setCouponError(null);
+
+    try {
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) {
+        throw new Error('Please login to apply coupon');
+      }
+
+      // Validate coupon
+      const response = await fetch(`${API_BASE_URL}/api/coupons/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ code: couponCode.trim().toUpperCase() })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Invalid coupon code');
+      }
+
+      // Calculate discount preview
+      const discount = Math.round((plan.price * result.data.discountPercentage) / 100);
+      const finalPrice = plan.price - discount;
+
+      setDiscountInfo({
+        code: couponCode.trim().toUpperCase(),
+        discountPercentage: result.data.discountPercentage,
+        discountAmount: discount,
+        finalPrice: finalPrice,
+        originalPrice: plan.price
+      });
+
+      setCouponApplied(true);
+      setCouponError(null);
+    } catch (error) {
+      console.error('Coupon validation error:', error);
+      setCouponError(error.message);
+      setCouponApplied(false);
+      setDiscountInfo(null);
+    } finally {
+      setCouponValidating(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setCouponCode('');
+    setCouponApplied(false);
+    setDiscountInfo(null);
+    setCouponError(null);
   };
 
   const createRazorpayOrder = async () => {
@@ -69,20 +137,27 @@ const MiniMindsPayment = () => {
       console.log('Creating order with plan_id:', plan.planId);
       console.log('User info:', { name: userInfo.name, email: userInfo.email, phone: userInfo.phone });
       
-      const response = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/create-order', {
+      const requestBody = {
+        plan_id: plan.planId,
+        user_name: userInfo.name,
+        user_email: userInfo.email,
+        user_phone: userInfo.phone,
+        user_token: authToken,
+        currency: 'INR'
+      };
+
+      // Add coupon code if applied
+      if (couponApplied && discountInfo) {
+        requestBody.coupon_code = discountInfo.code;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/subscriptions/create-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
         },
-        body: JSON.stringify({
-          plan_id: plan.planId,
-          user_name: userInfo.name,
-          user_email: userInfo.email,
-          user_phone: userInfo.phone,
-          user_token: authToken,
-          currency: 'INR'
-        })
+        body: JSON.stringify(requestBody)
       });
 
       console.log('Create order response status:', response.status);
@@ -153,8 +228,13 @@ const MiniMindsPayment = () => {
         throw new Error('Missing required payment data');
       }
 
+      // Add coupon code if applied
+      if (couponApplied && discountInfo) {
+        paymentData.coupon_code = discountInfo.code;
+      }
+
       console.log('Sending payment verification request...');
-      const response = await fetch('https://thoughtprob2c.thoughthealer.org/api/subscriptions/verify-payment', {
+      const response = await fetch(`${API_BASE_URL}/api/subscriptions/verify-payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -363,14 +443,27 @@ const MiniMindsPayment = () => {
                 <span>Subtotal</span>
                 <span>₹{plan.price}.00</span>
               </div>
+              {couponApplied && discountInfo && (
+                <div className="flex justify-between text-sm sm:text-base text-green-600 dark:text-green-400">
+                  <span>Coupon Discount ({discountInfo.discountPercentage}%)</span>
+                  <span>-₹{discountInfo.discountAmount}.00</span>
+                </div>
+              )}
               <div className="flex justify-between text-dark-700 dark:text-dark-300">
                 <span>Tax</span>
                 <span>₹0.00</span>
               </div>
               <div className="border-t border-dark-200 dark:border-dark-700 pt-3 sm:pt-4 flex justify-between text-base sm:text-lg font-bold text-dark-900 dark:text-white">
                 <span>Total</span>
-                <span>₹{plan.price}.00</span>
+                <span>₹{couponApplied && discountInfo ? discountInfo.finalPrice : plan.price}.00</span>
               </div>
+              {couponApplied && discountInfo && (
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
+                  <p className="text-sm text-green-700 dark:text-green-300">
+                    🎉 You save ₹{discountInfo.discountAmount} with coupon <strong>{discountInfo.code}</strong>
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="bg-dark-50 dark:bg-dark-900/50 rounded-lg p-4">
@@ -404,6 +497,56 @@ const MiniMindsPayment = () => {
                 <p className="text-xs sm:text-sm text-dark-600 dark:text-dark-300">
                   Pay securely with Credit/Debit Card, UPI, Net Banking, or Wallet
                 </p>
+              </div>
+
+              {/* Coupon Code Section */}
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-dark-700 dark:text-dark-300">
+                  Have a Coupon Code?
+                </label>
+                {!couponApplied ? (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                      placeholder="Enter coupon code"
+                      className="flex-1 px-4 py-3 bg-white dark:bg-dark-700 border border-dark-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-dark-900 dark:text-white uppercase"
+                      disabled={couponValidating}
+                    />
+                    <button
+                      type="button"
+                      onClick={validateCoupon}
+                      disabled={couponValidating || !couponCode.trim()}
+                      className="px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {couponValidating ? 'Validating...' : 'Apply'}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-green-700 dark:text-green-300">
+                        ✓ Coupon Applied: {discountInfo.code}
+                      </p>
+                      <p className="text-xs text-green-600 dark:text-green-400">
+                        {discountInfo.discountPercentage}% discount • Save ₹{discountInfo.discountAmount}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={removeCoupon}
+                      className="text-red-500 hover:text-red-600 font-semibold text-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+                {couponError && (
+                  <p className="text-sm text-red-600 dark:text-red-400">
+                    {couponError}
+                  </p>
+                )}
               </div>
 
               {/* User Details */}
@@ -473,13 +616,13 @@ const MiniMindsPayment = () => {
                   />
                   <span className="text-sm text-dark-600 dark:text-dark-300">
                     I agree to the{' '}
-                    <a href="/terms&condition.html" target="_blank" className="text-primary-500 hover:underline">
+                    <Link to="/terms-and-conditions" target="_blank" className="text-primary-500 hover:underline">
                       Terms & Conditions
-                    </a>{' '}
+                    </Link>{' '}
                     and{' '}
-                    <a href="/Privacy_policy.html" target="_blank" className="text-primary-500 hover:underline">
+                    <Link to="/privacy-policy" target="_blank" className="text-primary-500 hover:underline">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </span>
                 </label>
               </div>
@@ -498,7 +641,7 @@ const MiniMindsPayment = () => {
                 ) : (
                   <>
                     <span>🔒</span>
-                    <span>Pay ₹{plan.price} with Razorpay</span>
+                    <span>Pay ₹{couponApplied && discountInfo ? discountInfo.finalPrice : plan.price} with Razorpay</span>
                   </>
                 )}
               </button>

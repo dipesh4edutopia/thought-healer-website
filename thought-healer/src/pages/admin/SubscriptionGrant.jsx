@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
 const SubscriptionGrant = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +13,6 @@ const SubscriptionGrant = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(null);
-
-  const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
   const handleChange = (e) => {
     const { name, value } = e.target;

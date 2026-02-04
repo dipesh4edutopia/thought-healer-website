@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
 const PsychologistManagement = () => {
   const [psychologists, setPsychologists] = useState([]);
@@ -37,8 +38,6 @@ const PsychologistManagement = () => {
     account_number: '',
     ifsc_code: ''
   });
-
-  const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
   useEffect(() => {
     fetchPsychologists();

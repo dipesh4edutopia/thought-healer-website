@@ -31,7 +31,10 @@ import PsychologistManagement from './pages/admin/PsychologistManagement';
 import MarketingCoupons from './pages/admin/MarketingCoupons';
 import UserCreation from './pages/admin/UserCreation';
 import SubscriptionGrant from './pages/admin/SubscriptionGrant';
+import TwoFactorSettings from './pages/admin/TwoFactorSettings';
 import ProtectedRoute from './components/ProtectedRoute';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   useEffect(() => {
@@ -63,6 +66,10 @@ function App() {
           <Route path="/miniminds-signin" element={<MiniMindsSignin />} />
           <Route path="/miniminds-signup" element={<MiniMindsSignup />} />
           <Route path="/miniminds-otp" element={<MiniMindsOtp />} />
+          
+          {/* Legal Pages */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           
           {/* Public - Can view plans without login */}
           <Route path="/thoughtpro-plans" element={<ThoughtProPlans />} />
@@ -149,6 +156,14 @@ function App() {
               element={
                 <ProtectedRoute requiredRole="admin">
                   <MarketingCoupons />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="2fa-setup" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <TwoFactorSettings />
                 </ProtectedRoute>
               } 
             />

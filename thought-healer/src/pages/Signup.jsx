@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
+import { API_BASE_URL } from '../config/api';
 
 const Signup = () => {
   const navigate = useNavigate();

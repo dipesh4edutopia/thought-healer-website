@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
 const UserManagement = () => {
   const [searchPhone, setSearchPhone] = useState('');
@@ -11,8 +12,6 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [userError, setUserError] = useState('');
-
-  const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
   useEffect(() => {
     fetchActiveUsers();

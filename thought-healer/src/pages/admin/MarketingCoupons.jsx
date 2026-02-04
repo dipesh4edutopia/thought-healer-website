@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
 const MarketingCoupons = () => {
   const [coupons, setCoupons] = useState([]);
@@ -30,8 +31,6 @@ const MarketingCoupons = () => {
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [couponAnalytics, setCouponAnalytics] = useState(null);
   const [showCouponAnalytics, setShowCouponAnalytics] = useState(false);
-
-  const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
   useEffect(() => {
     if (activeTab === 'list') {

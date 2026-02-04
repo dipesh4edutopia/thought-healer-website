@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
-const API_BASE_URL = 'https://thoughtprob2c.thoughthealer.org';
 
 const CouponManagement = () => {
   const [coupons, setCoupons] = useState([]);
@@ -119,27 +119,22 @@ const CouponManagement = () => {
       const result = await response.json();
       console.log('📦 Redemptions API Response:', result);
       
-      // Handle nested data structure
-      let redemptionData = result.data;
-      if (redemptionData && typeof redemptionData === 'object' && !Array.isArray(redemptionData)) {
-        // If data is an object with a data property (pagination wrapper), extract it
-        if (redemptionData.data) {
-          redemptionData = redemptionData.data;
-        } else if (redemptionData.pagination) {
-          // If only pagination exists, redemptions might be empty
-          redemptionData = [];
+      // Handle nested data structure: result.data.data.redemptions
+      let redemptionData = [];
+      if (result.success && result.data) {
+        // Check for nested data.data structure
+        if (result.data.data && result.data.data.redemptions) {
+          redemptionData = result.data.data.redemptions;
+        } else if (result.data.redemptions) {
+          redemptionData = result.data.redemptions;
+        } else if (Array.isArray(result.data)) {
+          redemptionData = result.data;
         }
       }
       
-      if (result.success && Array.isArray(redemptionData)) {
-        console.log('✅ Setting redemptions:', redemptionData);
-        setCouponRedemptions(redemptionData);
-        setRedemptionPage(page);
-      } else {
-        console.warn('⚠️ API returned success but data is not an array:', typeof redemptionData, redemptionData);
-        setCouponRedemptions([]);
-        setRedemptionPage(page);
-      }
+      console.log('✅ Setting redemptions:', redemptionData);
+      setCouponRedemptions(redemptionData);
+      setRedemptionPage(page);
     } catch (err) {
       setError(err.message);
       console.error('❌ Error fetching redemptions:', err);
