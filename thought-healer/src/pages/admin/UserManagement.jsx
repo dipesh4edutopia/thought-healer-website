@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../../config/api';
+import SubAdminAPI from '../../services/subAdminApi';
 
 const UserManagement = () => {
   const [searchPhone, setSearchPhone] = useState('');
@@ -12,10 +13,39 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [userError, setUserError] = useState('');
+  const [permissions, setPermissions] = useState([]);
+  const [isSubAdmin, setIsSubAdmin] = useState(false);
 
   useEffect(() => {
     fetchActiveUsers();
+    checkUserPermissions();
   }, [currentPage, perPage, roleFilter, searchEmail]);
+
+  const checkUserPermissions = async () => {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole === 'sub_admin') {
+      setIsSubAdmin(true);
+      try {
+        const response = await SubAdminAPI.getProfile();
+        if (response.success && response.data.permissions) {
+          const permissionKeys = response.data.permissions
+            .filter(p => p.is_enabled)
+            .map(p => p.permission_key);
+          setPermissions(permissionKeys);
+        }
+      } catch (error) {
+        console.error('Error fetching permissions:', error);
+      }
+    } else {
+      setIsSubAdmin(false);
+      setPermissions([]); // Admin has all permissions
+    }
+  };
+
+  const hasPermission = (permission) => {
+    if (!isSubAdmin) return true; // Admin has all permissions
+    return permissions.includes(permission);
+  };
 
   const fetchActiveUsers = async () => {
     setLoadingUsers(true);
@@ -347,12 +377,18 @@ const UserManagement = () => {
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">{user.joinDate}</td>
                       <td className="px-4 py-3 text-sm">
-                        <button
-                          onClick={() => handleDeleteUser(user.id)}
-                          className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium whitespace-nowrap"
-                        >
-                          Delete
-                        </button>
+                        {hasPermission('users_delete') ? (
+                          <button
+                            onClick={() => handleDeleteUser(user.id)}
+                            className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium whitespace-nowrap"
+                          >
+                            Delete
+                          </button>
+                        ) : (
+                          <span className="text-gray-400 dark:text-gray-600 font-medium whitespace-nowrap cursor-not-allowed" title="No permission">
+                            Delete 🔒
+                          </span>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -397,12 +433,22 @@ const UserManagement = () => {
                     </div>
                   </div>
                   
-                  <button
-                    onClick={() => handleDeleteUser(user.id)}
-                    className="w-full mt-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all font-medium text-sm"
-                  >
-                    Delete User
-                  </button>
+                  {hasPermission('users_delete') ? (
+                    <button
+                      onClick={() => handleDeleteUser(user.id)}
+                      className="w-full mt-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all font-medium text-sm"
+                    >
+                      Delete User
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full mt-2 px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-600 rounded-lg cursor-not-allowed font-medium text-sm"
+                      title="No permission to delete users"
+                    >
+                      Delete User 🔒
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

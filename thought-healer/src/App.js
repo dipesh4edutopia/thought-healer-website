@@ -32,6 +32,8 @@ import MarketingCoupons from './pages/admin/MarketingCoupons';
 import UserCreation from './pages/admin/UserCreation';
 import SubscriptionGrant from './pages/admin/SubscriptionGrant';
 import TwoFactorSettings from './pages/admin/TwoFactorSettings';
+import SubAdminManagement from './pages/admin/SubAdminManagement';
+import SubAdminLogin from './pages/SubAdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
@@ -66,6 +68,9 @@ function App() {
           <Route path="/miniminds-signin" element={<MiniMindsSignin />} />
           <Route path="/miniminds-signup" element={<MiniMindsSignup />} />
           <Route path="/miniminds-otp" element={<MiniMindsOtp />} />
+          
+          {/* Sub-Admin Login */}
+          <Route path="/sub-admin-login" element={<SubAdminLogin />} />
           
           {/* Legal Pages */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -180,6 +185,14 @@ function App() {
               element={
                 <ProtectedRoute requiredRole="admin">
                   <SubscriptionGrant />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="sub-admins" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <SubAdminManagement />
                 </ProtectedRoute>
               } 
             />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import SubAdminAPI from '../../services/subAdminApi';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ const AdminLayout = () => {
     email: 'admin@thoughthealer.com',
     role: 'Administrator'
   });
+  const [permissions, setPermissions] = useState([]);
+  const [isSubAdmin, setIsSubAdmin] = useState(false);
 
   useEffect(() => {
     // Get user information from localStorage
@@ -18,8 +21,17 @@ const AdminLayout = () => {
     if (userEmail) {
       setUserInfo({
         email: userEmail,
-        role: userRole === 'admin' ? 'Administrator' : 'User'
+        role: userRole === 'admin' ? 'Administrator' : userRole === 'sub_admin' ? 'Sub-Admin' : 'User'
       });
+    }
+
+    // Check if user is sub-admin and fetch permissions
+    if (userRole === 'sub_admin') {
+      setIsSubAdmin(true);
+      fetchSubAdminPermissions();
+    } else {
+      setIsSubAdmin(false);
+      setPermissions([]); // Admin has all permissions
     }
 
     // Handle window resize for responsive sidebar
@@ -34,6 +46,30 @@ const AdminLayout = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const fetchSubAdminPermissions = async () => {
+    try {
+      const response = await SubAdminAPI.getProfile();
+      if (response.success && response.data.permissions) {
+        // Extract just the permission keys from the permission objects
+        const permissionKeys = response.data.permissions
+          .filter(p => p.is_enabled)
+          .map(p => p.permission_key);
+        setPermissions(permissionKeys);
+        console.log('Sub-admin permissions loaded:', permissionKeys);
+      }
+    } catch (error) {
+      console.error('Error fetching sub-admin permissions:', error);
+    }
+  };
+
+  // Check if user has permission (admin always has all permissions)
+  const hasPermission = (permission) => {
+    if (!isSubAdmin) return true; // Admin has all permissions
+    const hasAccess = permissions.includes(permission);
+    console.log(`Permission check for ${permission}:`, hasAccess);
+    return hasAccess;
+  };
 
   const handleLogout = () => {
     // Clear all local storage to remove credentials
@@ -59,6 +95,73 @@ const AdminLayout = () => {
     { label: 'Active Coupons', value: '45', icon: '🎟️' },
     { label: 'Psychologists', value: '78', icon: '👨‍⚕️' },
   ];
+
+  // Menu items with their required permissions
+  const allMenuItems = [
+    {
+      path: '/admin/users',
+      icon: '👥',
+      label: 'User Management',
+      permission: 'users_view'
+    },
+    {
+      path: '/admin/create-user',
+      icon: '➕',
+      label: 'Create User',
+      permission: 'users_create'
+    },
+    {
+      path: '/admin/coupons',
+      icon: '🎟️',
+      label: 'Coupon Management',
+      permission: 'coupons_view'
+    },
+    {
+      path: '/admin/marketing-coupons',
+      icon: '📢',
+      label: 'Marketing Coupons',
+      permission: 'coupons_create'
+    },
+    {
+      path: '/admin/psychologists',
+      icon: '👨‍⚕️',
+      label: 'Psychologists',
+      permission: 'psychologists_view'
+    },
+    {
+      path: '/admin/bookings',
+      icon: '📅',
+      label: 'Bookings',
+      permission: 'bookings_view'
+    },
+    {
+      path: '/admin/grant-subscription',
+      icon: '💎',
+      label: 'Grant Subscription',
+      permission: 'subscriptions_grant'
+    },
+    {
+      path: '/admin/2fa-setup',
+      icon: '🔐',
+      label: '2FA Security',
+      permission: 'settings_manage_2fa'
+    },
+    {
+      path: '/admin/sub-admins',
+      icon: '👤',
+      label: 'Sub-Admin Management',
+      permission: 'subadmin_manage',
+      adminOnly: true // Only main admin can access
+    }
+  ];
+
+  // Filter menu items based on permissions
+  const visibleMenuItems = allMenuItems.filter(item => {
+    // Hide admin-only items for sub-admins
+    if (item.adminOnly && isSubAdmin) return false;
+    // Show all other items (will be disabled if no permission)
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -133,98 +236,42 @@ const AdminLayout = () => {
           } fixed lg:sticky top-[57px] sm:top-[73px] left-0 z-20 w-64 h-[calc(100vh-57px)] sm:h-[calc(100vh-73px)] bg-white dark:bg-gray-800 shadow-lg border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out overflow-y-auto`}
         >
           <nav className="p-4 space-y-2">
-            <Link
-              to="/admin/users"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/users')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">👥</span>
-              <span className="font-medium">User Management</span>
-            </Link>
-
-            <Link
-              to="/admin/coupons"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/coupons')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">🎟️</span>
-              <span className="font-medium">Coupon Management</span>
-            </Link>
-
-            <Link
-              to="/admin/psychologists"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/psychologists')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">👨‍⚕️</span>
-              <span className="font-medium">Psychologists</span>
-            </Link>
-
-            <Link
-              to="/admin/marketing-coupons"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/marketing-coupons')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">📢</span>
-              <span className="font-medium">Marketing Coupons</span>
-            </Link>
-
-            <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
-
-            <Link
-              to="/admin/2fa-setup"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/2fa-setup')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">🔐</span>
-              <span className="font-medium">2FA Security</span>
-            </Link>
-
-            <Link
-              to="/admin/create-user"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/create-user')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">➕</span>
-              <span className="font-medium">Create User</span>
-            </Link>
-
-            <Link
-              to="/admin/grant-subscription"
-              onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
-                isActive('/admin/grant-subscription')
-                  ? 'bg-teal-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <span className="text-xl">💎</span>
-              <span className="font-medium">Grant Subscription</span>
-            </Link>
+            {visibleMenuItems.map((item, index) => {
+              const isEnabled = hasPermission(item.permission);
+              
+              return (
+                <React.Fragment key={item.path}>
+                  {/* Add divider before settings section */}
+                  {index > 0 && item.path === '/admin/grant-subscription' && (
+                    <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
+                  )}
+                  
+                  {isEnabled ? (
+                    <Link
+                      to={item.path}
+                      onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
+                        isActive(item.path)
+                          ? 'bg-teal-500 text-white shadow-lg'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      <span className="text-xl">{item.icon}</span>
+                      <span className="font-medium">{item.label}</span>
+                    </Link>
+                  ) : (
+                    <div
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-not-allowed opacity-40 bg-gray-50 dark:bg-gray-800/50"
+                      title="You don't have permission to access this"
+                    >
+                      <span className="text-xl grayscale">{item.icon}</span>
+                      <span className="font-medium text-gray-500 dark:text-gray-600">{item.label}</span>
+                      <span className="ml-auto text-xs">🔒</span>
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </nav>
         </aside>
 
