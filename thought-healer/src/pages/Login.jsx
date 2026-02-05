@@ -113,7 +113,7 @@ const Login = () => {
         // Check if 2FA is required for admin login
         if (result.data?.requires2FA && selectedProduct === 'admin') {
           console.log('🔐 2FA required for admin login');
-          setShow2FA(false);
+          setShow2FA(true);
           setLoading(false);
           return;
         }

@@ -187,7 +187,7 @@ const AdminLayout = () => {
 
             <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
 
-            {/* <Link
+            <Link
               to="/admin/2fa-setup"
               onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer ${
@@ -198,7 +198,7 @@ const AdminLayout = () => {
             >
               <span className="text-xl">🔐</span>
               <span className="font-medium">2FA Security</span>
-            </Link> */}
+            </Link>
 
             <Link
               to="/admin/create-user"
