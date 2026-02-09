@@ -24,7 +24,7 @@ I've successfully converted the first part of your website (home page) to React!
    - All color schemes and animations
    - Global styles
    - Package.json with all dependencies
-
+cd
 ## 🚀 How to Run
 
 ### Step 1: Open Terminal
