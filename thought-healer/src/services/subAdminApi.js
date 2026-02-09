@@ -3,7 +3,7 @@
  * Handles all API calls for sub-admin management
  */
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://thoughtprob2c.thoughthealer.org';
 
 class SubAdminAPI {
   /**
