@@ -20,7 +20,6 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </h1>
           <p className="text-center text-gray-400 mb-8">
-            Effective Date: 11-06-2025<br />
             Company Name: Synept Labs Pvt Ltd<br />
             Email: <a href="mailto:connect@thoughthealer.org" className="text-primary-400 hover:underline">connect@thoughthealer.org</a>
           </p>
