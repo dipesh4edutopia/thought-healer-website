@@ -131,16 +131,16 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/cookies" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   Cookie Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/disclaimer" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   Disclaimer
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -37,6 +37,8 @@ import SubAdminLogin from './pages/SubAdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
+import Cookies from './pages/Cookies';
+import Disclaimer from './pages/Disclaimer';
 
 function App() {
   useEffect(() => {
@@ -75,6 +77,8 @@ function App() {
           {/* Legal Pages */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           
           {/* Public - Can view plans without login */}
           <Route path="/thoughtpro-plans" element={<ThoughtProPlans />} />

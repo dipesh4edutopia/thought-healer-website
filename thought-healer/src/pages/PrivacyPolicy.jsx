@@ -12,233 +12,127 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-gradient-to-b from-dark-800 via-dark-900 to-black">
       <Header />
       
-      <div className="pt-24 pb-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Privacy Policy
-            </h1>
-            <p className="text-dark-300 text-lg">
-              Last Updated: February 4, 2026
-            </p>
-          </div>
+      <main className="py-24 bg-dark-900 dark:bg-dark-950">
+        <div className="max-w-3xl mx-auto bg-dark-800 dark:bg-dark-700 p-10 rounded-2xl shadow-xl">
+          
+          {/* Page heading */}
+          <h1 className="text-5xl font-extrabold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-400">
+            Privacy Policy
+          </h1>
+          <p className="text-center text-gray-400 mb-8">
+            Effective Date: 11-06-2025<br />
+            Company Name: Synept Labs Pvt Ltd<br />
+            Email: <a href="mailto:connect@thoughthealer.org" className="text-primary-400 hover:underline">connect@thoughthealer.org</a>
+          </p>
+          {/* Divider */}
+          <div className="h-px bg-gray-700 mb-10"></div>
+          
+          {/* Policy content */}
+          <div className="space-y-8">
+            <section className="space-y-8 text-gray-300 leading-relaxed">
 
-          {/* Content */}
-          <div className="bg-dark-700/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 space-y-8">
-            
-            {/* Introduction */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
-              <p className="text-dark-300 leading-relaxed">
-                Welcome to Thought Healer. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mental health services, including ThoughtPro, MiniMinds, and HerMind platforms.
-              </p>
-            </section>
-
-            {/* Information We Collect */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">2. Information We Collect</h2>
-              
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">2.1 Personal Information</h3>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We collect information that you provide directly to us, including:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>Full name, email address, and phone number</li>
-                <li>Age, gender, and demographic information</li>
-                <li>Payment and billing information</li>
-                <li>Emergency contact details</li>
-                <li>Health information and mental health history (when provided)</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">2.2 Session Information</h3>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                When you participate in therapy sessions or use our services:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>Session notes and recordings (with your consent)</li>
-                <li>Communication between you and your therapist</li>
-                <li>Assessment results and progress tracking data</li>
-                <li>Appointment scheduling and attendance records</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">2.3 Technical Information</h3>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We automatically collect certain information when you use our platform:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>Device information (IP address, browser type, operating system)</li>
-                <li>Usage data (pages visited, time spent, features used)</li>
-                <li>Cookies and similar tracking technologies</li>
-                <li>Location data (if you grant permission)</li>
-              </ul>
-            </section>
-
-            {/* How We Use Your Information */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">3. How We Use Your Information</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We use the collected information for the following purposes:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>Providing and improving mental health services and therapy sessions</li>
-                <li>Matching you with appropriate therapists and psychologists</li>
-                <li>Processing payments and managing subscriptions</li>
-                <li>Communicating with you about appointments, updates, and support</li>
-                <li>Ensuring platform security and preventing fraud</li>
-                <li>Conducting research and analysis to improve our services (anonymized data)</li>
-                <li>Complying with legal obligations and regulatory requirements</li>
-                <li>Sending promotional materials (only with your consent)</li>
-              </ul>
-            </section>
-
-            {/* Data Security */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">4. Data Security</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We implement industry-standard security measures to protect your information:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>End-to-end encryption for all therapy sessions and communications</li>
-                <li>Secure SSL/TLS connections for data transmission</li>
-                <li>Regular security audits and vulnerability assessments</li>
-                <li>Restricted access to personal information (only authorized personnel)</li>
-                <li>Secure data storage with encrypted databases</li>
-                <li>Multi-factor authentication for sensitive operations</li>
-                <li>Regular backup and disaster recovery procedures</li>
-              </ul>
-              <p className="text-dark-300 leading-relaxed mt-3">
-                However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee absolute security.
-              </p>
-            </section>
-
-            {/* Information Sharing */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">5. Information Sharing and Disclosure</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We do not sell your personal information. We may share your information only in the following circumstances:
-              </p>
-              
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">5.1 With Your Consent</h3>
-              <p className="text-dark-300 leading-relaxed">
-                We may share information when you explicitly authorize us to do so.
+              <p>
+                At <strong>Thought Healer Pvt. Ltd.</strong>, your privacy is not merely a legal obligation — it is a responsibility grounded in trust. When you choose to share your thoughts, emotions, and personal experiences with us through ThoughtPro, MiniMinds, HerMind, or ThoughtPro B2B, you are placing meaningful trust in our platform. This Privacy Policy explains how we collect, use, safeguard, and manage your information when you access our services.
               </p>
 
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">5.2 With Healthcare Providers</h3>
-              <p className="text-dark-300 leading-relaxed">
-                Your information is shared with the therapists and psychologists providing your care, bound by professional confidentiality obligations.
-              </p>
-
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">5.3 Service Providers</h3>
-              <p className="text-dark-300 leading-relaxed">
-                We work with third-party service providers for payment processing, hosting, and analytics. These providers are contractually obligated to protect your information.
-              </p>
-
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">5.4 Legal Requirements</h3>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We may disclose information when required by law or in the following situations:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li>To comply with legal processes (subpoenas, court orders)</li>
-                <li>To protect against harm or illegal activity</li>
-                <li>In cases of imminent danger to self or others</li>
-                <li>To protect our rights, property, or safety</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-primary-400 mb-3 mt-4">5.5 Business Transfers</h3>
-              <p className="text-dark-300 leading-relaxed">
-                In the event of a merger, acquisition, or sale of assets, your information may be transferred. We will notify you before your information becomes subject to a different privacy policy.
-              </p>
-            </section>
-
-            {/* Your Rights */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">6. Your Rights and Choices</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                You have the following rights regarding your personal information:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li><strong className="text-white">Access:</strong> Request a copy of your personal information</li>
-                <li><strong className="text-white">Correction:</strong> Update or correct inaccurate information</li>
-                <li><strong className="text-white">Deletion:</strong> Request deletion of your personal information (subject to legal requirements)</li>
-                <li><strong className="text-white">Portability:</strong> Receive your data in a structured, machine-readable format</li>
-                <li><strong className="text-white">Opt-out:</strong> Unsubscribe from marketing communications</li>
-                <li><strong className="text-white">Restrict Processing:</strong> Limit how we use your information</li>
-                <li><strong className="text-white">Object:</strong> Object to processing based on legitimate interests</li>
-              </ul>
-              <p className="text-dark-300 leading-relaxed mt-3">
-                To exercise these rights, please contact us at <a href="mailto:privacy@thoughthealer.com" className="text-primary-400 hover:underline">privacy@thoughthealer.com</a>.
-              </p>
-            </section>
-
-            {/* Cookies */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">7. Cookies and Tracking Technologies</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                We use cookies and similar technologies to enhance your experience:
-              </p>
-              <ul className="list-disc list-inside text-dark-300 space-y-2 ml-4">
-                <li><strong className="text-white">Essential Cookies:</strong> Required for platform functionality</li>
-                <li><strong className="text-white">Analytics Cookies:</strong> Help us understand how you use our services</li>
-                <li><strong className="text-white">Preference Cookies:</strong> Remember your settings and preferences</li>
-                <li><strong className="text-white">Marketing Cookies:</strong> Deliver relevant advertisements (with consent)</li>
-              </ul>
-              <p className="text-dark-300 leading-relaxed mt-3">
-                You can control cookies through your browser settings. However, disabling certain cookies may affect platform functionality.
-              </p>
-            </section>
-
-            {/* Children's Privacy */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">8. Children's Privacy</h2>
-              <p className="text-dark-300 leading-relaxed">
-                Our MiniMinds service is designed for children and adolescents. We take extra precautions to protect children's privacy and require parental consent for users under 18. Parents/guardians have the right to access, modify, or delete their child's information at any time.
-              </p>
-            </section>
-
-            {/* Data Retention */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">9. Data Retention</h2>
-              <p className="text-dark-300 leading-relaxed">
-                We retain your personal information for as long as necessary to provide our services and comply with legal obligations. Therapy session records are maintained according to professional and legal requirements, typically 7-10 years after your last session. When data is no longer needed, we securely delete or anonymize it.
-              </p>
-            </section>
-
-            {/* International Data Transfers */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">10. International Data Transfers</h2>
-              <p className="text-dark-300 leading-relaxed">
-                Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place to protect your information in accordance with this Privacy Policy and applicable data protection laws.
-              </p>
-            </section>
-
-            {/* Changes to Privacy Policy */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">11. Changes to This Privacy Policy</h2>
-              <p className="text-dark-300 leading-relaxed">
-                We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. Your continued use of our services after changes constitutes acceptance of the updated policy.
-              </p>
-            </section>
-
-            {/* Contact Information */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">12. Contact Us</h2>
-              <p className="text-dark-300 leading-relaxed mb-3">
-                If you have any questions or concerns about this Privacy Policy or our data practices, please contact us:
-              </p>
-              <div className="bg-dark-800/50 rounded-lg p-6 space-y-2">
-                <p className="text-white"><strong>Email:</strong> <a href="mailto:privacy@thoughthealer.com" className="text-primary-400 hover:underline">privacy@thoughthealer.com</a></p>
-                <p className="text-white"><strong>Phone:</strong> +91 1234567890</p>
-                <p className="text-white"><strong>Address:</strong> Thought Healer Pvt. Ltd., [Your Address]</p>
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Information We Collect</h2>
+                <p>
+                  When you use our services, we may collect personal information such as your name, email address, phone number, date of birth, and payment details. For users registering under MiniMinds, we may also collect parent or guardian information where legally required.
+                </p>
+                <p>
+                  As a mental health service provider, you may choose to share sensitive personal information including emotional concerns, therapy session details, medical background, or mental health history. Such information is collected solely to provide safe, effective, and personalized support — and, where required, only with your explicit consent.
+                </p>
+                <p>
+                  We may also automatically collect certain technical information such as IP address, device type, browser details, session timestamps, and basic usage data. This helps us improve the functionality, performance, and security of our platform.
+                </p>
               </div>
-            </section>
 
-            {/* HIPAA Compliance */}
-            <section className="border-t border-dark-600 pt-8">
-              <h2 className="text-2xl font-bold text-white mb-4">13. HIPAA Compliance Notice</h2>
-              <p className="text-dark-300 leading-relaxed">
-                For users in applicable jurisdictions, we comply with HIPAA (Health Insurance Portability and Accountability Act) requirements. Protected Health Information (PHI) is handled with the utmost care and security. You may request a copy of our Notice of Privacy Practices for additional details on how we protect your health information.
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">How We Use Your Information</h2>
+                <p>
+                  Your information is used to deliver therapy and mental wellness services, match you with appropriate professionals, manage appointments, process payments, enhance user experience, and comply with applicable legal requirements. We do not sell your personal information to third parties. Your data is used only for legitimate service-related and operational purposes.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Confidentiality and Ethical Standards</h2>
+                <p>
+                  Confidentiality is central to our practice. All therapy sessions and communications are treated with strict confidentiality in accordance with professional ethical standards. However, confidentiality may be legally limited in certain circumstances, including situations involving imminent risk of harm to you or others, suspected abuse or neglect of a minor or vulnerable individual, or where disclosure is required by law or court order. Outside of such limited situations, your information remains private and protected.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Data Protection and Security</h2>
+                <p>
+                  We implement appropriate technical and organizational measures to safeguard your information. These include encrypted communications where applicable, secure cloud storage, controlled internal access, and secure payment processing through trusted third-party providers. While we use industry-standard security practices, no digital system can guarantee absolute security.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Data Retention</h2>
+                <p>
+                  We retain your information only for as long as necessary to provide services and comply with legal and professional record-keeping obligations applicable to mental health services. After the required retention period, your data is securely deleted or anonymized.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Corporate Wellness Programs</h2>
+                <p>
+                  If you access our services through a corporate wellness or B2B program, we may provide anonymized and aggregated usage reports to the organization. These reports never include personal therapy details or any identifiable information about individual users.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Children and Minors</h2>
+                <p>
+                  For users under the age of 18 accessing MiniMinds, parental or guardian consent is required. We take special care to ensure children's information is handled in accordance with applicable child data protection laws.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Your Rights</h2>
+                <p>
+                  Depending on applicable law, you may have the right to access your information, request corrections, withdraw consent, request deletion, or restrict certain processing activities. To exercise your rights, please contact us at 
+                  <a href="mailto:legal@thoughthealer.com" className="text-primary-400 hover:underline"> legal@thoughthealer.com</a>.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">International Access</h2>
+                <p>
+                  If you access our services from outside India, your information may be processed in India or other jurisdictions where our service providers operate. We ensure that appropriate safeguards are implemented to protect your data during such transfers.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Emergency Situations</h2>
+                <p>
+                  Our services are not designed for emergency situations. If you are experiencing a mental health crisis or medical emergency, please contact local emergency services or a crisis helpline immediately rather than relying solely on our platform.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Policy Updates</h2>
+                <p>
+                  We may update this Privacy Policy from time to time to reflect legal, operational, or service-related changes. When significant changes are made, we will notify you via email or platform notifications. Continued use of our services after updates constitutes acceptance of the revised policy.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold text-white">Contact Us</h2>
+                <p>
+                  If you have any questions regarding this Privacy Policy or how your data is handled, you may contact Thought Healer Pvt. Ltd. at 
+                  <a href="mailto:legal@thoughthealer.com" className="text-primary-400 hover:underline"> legal@thoughthealer.com</a> 
+                  or 
+                  <a href="mailto:support@thoughthealer.com" className="text-primary-400 hover:underline"> support@thoughthealer.com</a>.
+                </p>
+              </div>
+
+              <p>
+                By using our services, you acknowledge that you have read, understood, and agreed to this Privacy Policy and consent to the collection and use of your information as described above.
               </p>
+
             </section>
 
             {/* Back to Home */}
@@ -252,7 +146,7 @@ const PrivacyPolicy = () => {
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>
