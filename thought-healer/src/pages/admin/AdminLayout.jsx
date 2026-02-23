@@ -141,6 +141,12 @@ const AdminLayout = () => {
       permission: 'subscriptions_grant'
     },
     {
+      path: '/admin/pre-authorizations',
+      icon: '🔑',
+      label: 'Pre-Authorization',
+      permission: 'subscriptions_grant'
+    },
+    {
       path: '/admin/2fa-setup',
       icon: '🔐',
       label: '2FA Security',

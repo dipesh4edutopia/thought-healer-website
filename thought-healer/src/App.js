@@ -33,6 +33,7 @@ import UserCreation from './pages/admin/UserCreation';
 import SubscriptionGrant from './pages/admin/SubscriptionGrant';
 import TwoFactorSettings from './pages/admin/TwoFactorSettings';
 import SubAdminManagement from './pages/admin/SubAdminManagement';
+import PreAuthorization from './pages/admin/PreAuthorization';
 import SubAdminLogin from './pages/SubAdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -192,13 +193,21 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="sub-admins" 
+            <Route
+              path="sub-admins"
               element={
                 <ProtectedRoute requiredRole="admin">
                   <SubAdminManagement />
                 </ProtectedRoute>
-              } 
+              }
+            />
+            <Route
+              path="pre-authorizations"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <PreAuthorization />
+                </ProtectedRoute>
+              }
             />
           </Route>
           
