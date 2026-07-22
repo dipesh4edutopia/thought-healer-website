@@ -65,6 +65,7 @@ const Header = () => {
     const productNames = {
       thoughtpro: 'ThoughtPro',
       miniminds: 'MiniMinds',
+      les: 'LES',
       admin: 'Admin'
     };
     return productNames[product] || product;
@@ -74,6 +75,7 @@ const Header = () => {
     const dashboardPaths = {
       thoughtpro: '/thoughtpro-plans',
       miniminds: '/miniminds-plans',
+      les: '/les-plans',
       admin: '/admin'
     };
     return dashboardPaths[userProduct] || '/';
@@ -82,9 +84,12 @@ const Header = () => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      try { localStorage.setItem('th-theme', 'dark'); } catch {}
     } else {
       document.documentElement.classList.remove('dark');
+      try { localStorage.setItem('th-theme', 'light'); } catch {}
     }
+    window.dispatchEvent(new Event('themeChange'));
   }, [darkMode]);
 
   // Close dropdown when clicking outside
@@ -192,6 +197,16 @@ const Header = () => {
                   >
                     HerMind
                   </Link>
+                  <Link 
+                    to="/les" 
+                    className="block px-4 py-2 text-dark-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-teal-500 dark:hover:text-teal-400 transition-colors font-semibold"
+                    onClick={() => {
+                      setProductDropdownOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    🎓 LES (Learning)
+                  </Link>
                 </div>
               )}
             </div>
@@ -259,10 +274,11 @@ const Header = () => {
             {/* Theme Toggle */}
             <button 
               onClick={() => setDarkMode(!darkMode)}
-              className="theme-toggle" 
+              className="p-2 rounded-full bg-gray-100 dark:bg-dark-800 text-dark-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-dark-700 transition-all border border-gray-200 dark:border-dark-700 flex items-center justify-center w-9 h-9 text-base" 
               aria-label="Toggle dark mode"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <span className="sr-only">Toggle dark mode</span>
+              {darkMode ? '☀️' : '🌙'}
             </button>
           </nav>
 
@@ -271,10 +287,11 @@ const Header = () => {
             {/* Theme Toggle */}
             <button 
               onClick={() => setDarkMode(!darkMode)}
-              className="theme-toggle" 
+              className="p-2 rounded-full bg-gray-100 dark:bg-dark-800 text-dark-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-dark-700 transition-all border border-gray-200 dark:border-dark-700 flex items-center justify-center w-9 h-9 text-base" 
               aria-label="Toggle dark mode"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <span className="sr-only">Toggle dark mode</span>
+              {darkMode ? '☀️' : '🌙'}
             </button>
 
             {/* Mobile Menu Button */}
@@ -360,6 +377,13 @@ const Header = () => {
                       className="text-dark-500 dark:text-dark-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors py-1"
                     >
                       HerMind
+                    </Link>
+                    <Link 
+                      to="/les" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-teal-500 dark:text-teal-400 hover:text-teal-400 font-semibold transition-colors py-1"
+                    >
+                      🎓 LES (Learning)
                     </Link>
                   </div>
                 )}

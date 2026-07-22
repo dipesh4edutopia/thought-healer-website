@@ -6,6 +6,7 @@ const SubscriptionGrant = () => {
     searchType: 'email',
     email: '',
     user_id: '',
+    product: 'thoughtpro',
     plan_type: 'premium',
     validity_days: 365
   });
@@ -292,6 +293,24 @@ const SubscriptionGrant = () => {
               )}
             </div>
           )}
+
+          {/* Target Product */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Target Product <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="product"
+              value={formData.product}
+              onChange={handleChange}
+              disabled={loading}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+            >
+              <option value="thoughtpro">ThoughtPro</option>
+              <option value="miniminds">MiniMinds</option>
+              <option value="les">LES (Learning Support)</option>
+            </select>
+          </div>
 
           {/* Plan Type */}
           <div>

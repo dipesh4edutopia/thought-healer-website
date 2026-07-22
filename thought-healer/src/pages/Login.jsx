@@ -101,7 +101,7 @@ const Login = () => {
           email: formData.email,
           password: formData.password,
           product: selectedProduct,
-          role: selectedProduct === 'thoughtpro' ? 'user' : selectedProduct === 'miniminds' ? 'parent' : 'admin'
+          role: selectedProduct === 'thoughtpro' ? 'user' : selectedProduct === 'miniminds' ? 'parent' : selectedProduct === 'les' ? 'parent' : 'admin'
         }),
       });
       

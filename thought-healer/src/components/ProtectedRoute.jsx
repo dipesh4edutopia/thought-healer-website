@@ -86,6 +86,7 @@ const ProtectedRoute = ({ children, requiredRole = null, requiredProduct = null 
                 const dashboardPaths = {
                   thoughtpro: '/thoughtpro-plans',
                   miniminds: '/miniminds-plans',
+                  les: '/les-plans',
                   admin: '/admin'
                 };
                 window.location.href = dashboardPaths[userProduct] || '/';

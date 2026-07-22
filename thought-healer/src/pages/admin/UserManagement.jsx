@@ -289,6 +289,7 @@ const UserManagement = () => {
             <option value="user">User</option>
             <option value="psychologist">Psychologist</option>
             <option value="miniminds">MiniMinds</option>
+            <option value="les">LES (Learning Support)</option>
             <option value="admin">Admin</option>
           </select>
 

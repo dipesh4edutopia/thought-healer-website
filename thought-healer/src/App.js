@@ -18,6 +18,7 @@ import MiniMindsOtp from './pages/MiniMindsOtp';
 import MiniMindsPlans from './pages/MiniMindsPlans';
 import MiniMindsPayment from './pages/MiniMindsPayment';
 import MiniMindsSuccess from './pages/MiniMindsSuccess';
+import LES from './pages/LES';
 
 import ThoughtProSignup from './pages/ThoughtProSignup';
 import ThoughtProOtp from './pages/ThoughtProOtp';
@@ -63,8 +64,9 @@ function App() {
           <Route path="/otp" element={<Otp />} />
           <Route path="/thoughtpro" element={<ThoughtPro />} />
           <Route path="/thoughtpro-b2b" element={<ThoughtProB2B />} />
-           <Route path="/miniminds" element={<MiniMinds />} />
+          <Route path="/miniminds" element={<MiniMinds />} />
           <Route path="/hermind" element={<HerMind />} />
+          <Route path="/les" element={<LES />} />
           <Route path="/thoughtpro-signin" element={<ThoughtProSignin />} />
           <Route path="/thoughtpro-signup" element={<ThoughtProSignup />} />
           <Route path="/thoughtpro-otp" element={<ThoughtProOtp />} />
@@ -83,7 +85,7 @@ function App() {
           
           {/* Public - Can view plans without login */}
           <Route path="/thoughtpro-plans" element={<ThoughtProPlans />} />
-           <Route path="/miniminds-plans" element={<MiniMindsPlans />} />
+          <Route path="/miniminds-plans" element={<MiniMindsPlans />} />
           
           {/* Protected Routes - Require Authentication */}
           <Route 

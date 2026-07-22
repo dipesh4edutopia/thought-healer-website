@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ServicesSection = () => {
   const services = [
@@ -34,6 +35,18 @@ const ServicesSection = () => {
       hoverColor: 'group-hover:text-primary-500',
       hoverBorder: 'group-hover:border-primary-500/0',
       delay: '200'
+    },
+    {
+      icon: 'fa-graduation-cap',
+      title: 'LES (Learning Support)',
+      description: 'Empowering neurodivergent learners with specialized interventions for Dyslexia, Dyscalculia, ADHD, and motor skills.',
+      gradient: 'from-teal-500 to-emerald-500',
+      iconBg: 'from-teal-500/20 to-emerald-500/5',
+      iconColor: 'text-teal-500',
+      hoverColor: 'group-hover:text-teal-500',
+      hoverBorder: 'group-hover:border-teal-500/0',
+      link: '/les',
+      delay: '300'
     }
   ];
 
@@ -54,12 +67,12 @@ const ServicesSection = () => {
           </h2>
           <p className="text-dark-600 dark:text-dark-300 text-base sm:text-lg px-4">
             The founders of Synept Labs serendipitously found out that tech mainly software and AI could help solve the raging issue of Mental healthcare faster.
-            Through Multiple discussions and iterations they came up with Thought Healer, Thought Pro and Miniminds blueprint that suits the respective target audience.
+            Through Multiple discussions and iterations they came up with Thought Healer, Thought Pro, MiniMinds, and LES (Learning Enhancement Solution) blueprints that suit their respective target audiences.
             Their mission is to provide affordable mental healthcare for all and free mental healthcare for the most weaker sections of the society.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div 
               key={index}
@@ -88,9 +101,9 @@ const ServicesSection = () => {
                   {/* Animated line */}
                   <div className={`w-12 h-0.5 bg-primary-500/30 dark:bg-primary-400/30 group-hover:w-full transition-all duration-300 mb-4`}></div>
 
-                  <a href="#" className={`inline-flex items-center ${service.iconColor} dark:${service.iconColor} font-medium group-hover:translate-x-2 transition-transform duration-300`}>
+                  <Link to={service.link || '#'} className={`inline-flex items-center ${service.iconColor} dark:${service.iconColor} font-medium group-hover:translate-x-2 transition-transform duration-300`}>
                     Learn more <i className="fas fa-arrow-right ml-2 text-sm"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

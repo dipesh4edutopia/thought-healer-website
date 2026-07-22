@@ -111,6 +111,12 @@ const Footer = () => {
                   HerMind
                 </a>
               </li>
+              <li>
+                <a href="/les" className="text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-300 flex items-center group">
+                  <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
+                  LES (Learning Enhancement)
+                </a>
+              </li>
             </ul>
           </div>
 
