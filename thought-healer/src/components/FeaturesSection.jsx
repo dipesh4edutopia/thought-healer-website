@@ -62,6 +62,20 @@ const FeaturesSection = () => {
       delay: '200'
     },
     {
+      name: 'LES',
+      features: [
+        'Empowering neurodivergent learners with structured, evidence-based tools',
+        'Specialized support for Dyslexia, Dyscalculia, Dysgraphia, and ADHD',
+        'Multi-sensory learning activities and custom study checklists',
+        'Integrated accessibility suite with Dyslexic font and high contrast modes',
+        '100% Free educational resources for parents, educators, and schools'
+      ],
+      downloadLink: 'https://play.google.com/store/apps/details?id=com.syneptlabs.lesapp',
+      pageLink: '/les',
+      color: 'primary',
+      delay: '250'
+    },
+    {
       name: 'HerMind',
       features: [
         'Monitor pressing female issues like PCOS/PCOD/post-partum depression',
@@ -88,7 +102,7 @@ const FeaturesSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 sm:gap-8">
           {products.map((product, index) => (
             <div
               key={index}

@@ -277,6 +277,16 @@ const LES = () => {
               </button>
 
               <a
+                href="https://play.google.com/store/apps/details?id=com.syneptlabs.lesapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden lg:inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl border-2 border-teal-500 text-teal-600 dark:text-teal-400 font-semibold text-sm hover:bg-teal-50 dark:hover:bg-teal-900/30 transition transform hover:scale-105"
+              >
+                <span>📲</span>
+                <span>Download App</span>
+              </a>
+
+              <a
                 href="#solutions"
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-400 hover:to-emerald-500 text-white text-sm font-semibold shadow-lg shadow-teal-500/25 transition transform hover:-translate-y-0.5"
               >
@@ -315,7 +325,16 @@ const LES = () => {
             <a href="#solutions" onClick={() => setIsMobileOpen(false)} className="block py-2 text-slate-700 dark:text-slate-300 hover:text-teal-600">Learning Solutions</a>
             <a href="#accessibility" onClick={() => setIsMobileOpen(false)} className="block py-2 text-slate-700 dark:text-slate-300 hover:text-teal-600">Accessibility</a>
             <a href="#testimonials" onClick={() => setIsMobileOpen(false)} className="block py-2 text-slate-700 dark:text-slate-300 hover:text-teal-600">Expert Endorsements</a>
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.syneptlabs.lesapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileOpen(false)}
+                className="w-full block py-2.5 text-center text-teal-600 dark:text-teal-400 border-2 border-teal-500 rounded-xl font-semibold hover:bg-teal-50 dark:hover:bg-teal-900/30 transition"
+              >
+                📲 Download App
+              </a>
               <a href="#solutions" onClick={() => setIsMobileOpen(false)} className="w-full block py-2.5 text-center text-white bg-gradient-to-r from-teal-500 to-emerald-600 rounded-xl font-semibold">
                 Explore Free App →
               </a>
@@ -355,6 +374,15 @@ const LES = () => {
                   className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-400 hover:to-emerald-500 text-white font-bold text-base shadow-xl shadow-teal-500/25 transition transform hover:-translate-y-0.5 text-center"
                 >
                   Browse Free Learning Modules →
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.syneptlabs.lesapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-teal-500 text-teal-600 dark:text-teal-400 font-bold text-base hover:bg-teal-50 dark:hover:bg-teal-900/20 transition transform hover:-translate-y-0.5 text-center flex items-center justify-center space-x-2"
+                >
+                  <span>📲</span>
+                  <span>Download App</span>
                 </a>
                 <button
                   onClick={handleAudioDemo}
@@ -665,12 +693,21 @@ const LES = () => {
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             Join thousands of parents and educators turning learning differences into superpowers with LES. 100% Free forever.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#solutions"
-              className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-bold text-sm shadow-xl shadow-teal-500/25"
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-bold text-sm shadow-xl shadow-teal-500/25"
             >
               Explore Free Modules Today
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.syneptlabs.lesapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-xl border-2 border-teal-500 text-teal-600 dark:text-teal-400 font-bold text-sm hover:bg-teal-50 dark:hover:bg-teal-900/20 transition flex items-center space-x-2"
+            >
+              <span>📲</span>
+              <span>Download App on Google Play</span>
             </a>
           </div>
         </div>
