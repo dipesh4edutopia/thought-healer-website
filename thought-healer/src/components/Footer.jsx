@@ -25,17 +25,17 @@ const Footer = () => {
 
             {/* Social Media Links */}
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-facebook-f"></i>
+              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Facebook Page" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
+                <i className="fab fa-facebook-f" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-twitter"></i>
+              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Twitter Profile" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
+                <i className="fab fa-twitter" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-linkedin-in"></i>
+              <a href="https://thoughthealer.org" aria-label="ThoughtHealer LinkedIn Page" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
+                <i className="fab fa-linkedin-in" aria-hidden="true"></i>
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-instagram"></i>
+              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Instagram Profile" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
+                <i className="fab fa-instagram" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -45,10 +45,10 @@ const Footer = () => {
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#home" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   Home
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#about" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
@@ -82,40 +82,34 @@ const Footer = () => {
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Our Products</h4>
             <ul className="space-y-3">
               <li>
-                <a href="/thoughtpro" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/thoughtpro" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   ThoughtPro
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/thoughtpro-b2b" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/thoughtpro-b2b" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   ThoughtPro B2B
-                </a>
+                </Link>
               </li>
-              {/* <li>
-                <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
-                  <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
-                  Thought Healer
-                </a>
-              </li> */}
               <li>
-                <a href="/miniminds" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/miniminds" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   MiniMinds
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/hermind" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
+                <Link to="/hermind" className="text-dark-400 hover:text-primary-400 transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   HerMind
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/les" className="text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-300 flex items-center group">
+                <Link to="/les" className="text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-300 flex items-center group">
                   <i className="fas fa-chevron-right text-xs mr-2 group-hover:translate-x-1 transition-transform"></i>
                   LES (Learning Enhancement)
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -162,10 +156,10 @@ const Footer = () => {
 
             {/* Additional Links */}
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300">
+              <a href="#contact" className="text-dark-400 hover:text-primary-400 transition-colors duration-300">
                 Support
               </a>
-              <a href="#" className="text-dark-400 hover:text-primary-400 transition-colors duration-300">
+              <a href="#contact" className="text-dark-400 hover:text-primary-400 transition-colors duration-300">
                 Help Center
               </a>
               <a href="#contact" className="text-dark-400 hover:text-primary-400 transition-colors duration-300">

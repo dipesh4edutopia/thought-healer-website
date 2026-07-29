@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block private/admin routes from Googlebot
+Disallow: /admin/
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+# Sitemap location
+Sitemap: https://thoughthealer.org/sitemap.xml

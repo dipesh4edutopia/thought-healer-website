@@ -1,5 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const b2bSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'ThoughtPro B2B',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Android',
+      url: 'https://thoughthealer.org/thoughtpro-b2b',
+      downloadUrl: 'https://play.google.com/store/apps/details?id=com.thoughtpro.b2b',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+      description: 'Enterprise mental wellness platform. Comprehensive mental health assessments, team analytics, and professional interventions for organizations.',
+      author: { '@type': 'Organization', name: 'ThoughtHealer' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+        { '@type': 'ListItem', position: 2, name: 'ThoughtPro B2B', item: 'https://thoughthealer.org/thoughtpro-b2b' },
+      ],
+    },
+  ],
+};
 
 const ThoughtProB2B = () => {
   const navigate = useNavigate();
@@ -62,6 +87,12 @@ const ThoughtProB2B = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-dark-950">
+      <SEOHead
+        title="ThoughtPro B2B — Corporate Mental Wellness Platform | ThoughtHealer"
+        description="Enterprise mental health platform for organizations. Comprehensive team assessments, real-time analytics, and professional interventions by licensed psychologists."
+        canonical="https://thoughthealer.org/thoughtpro-b2b"
+        schema={b2bSchema}
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-dark-900/90 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -395,7 +426,7 @@ const ThoughtProB2B = () => {
                 <span className="text-xl font-bold">ThoughtPro B2B</span>
               </div>
               <p className="text-dark-300 text-sm">
-                Enterprise mental wellness platform powered by SyneptLabs cutting-edge technology.
+                Enterprise mental wellness platform powered by ThoughtHealer cutting-edge technology.
               </p>
             </div>
             <div>
@@ -410,20 +441,20 @@ const ThoughtProB2B = () => {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-dark-300 text-sm">
                 <li><Link to="/" className="hover:text-primary-500 transition-colors">About</Link></li>
-                <li><a href="#" className="hover:text-primary-500 transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-primary-500 transition-colors">Terms</a></li>
+                <li><Link to="/privacy-policy" className="hover:text-primary-500 transition-colors">Privacy</Link></li>
+                <li><Link to="/terms-and-conditions" className="hover:text-primary-500 transition-colors">Terms</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-dark-300 text-sm">
-                <li><a href="mailto:info@thoughhealer.org" className="hover:text-primary-500 transition-colors">Email Us</a></li>
-                <li><a href="#" className="hover:text-primary-500 transition-colors">Support</a></li>
+                <li><a href="mailto:connect@thoughthealer.org" className="hover:text-primary-500 transition-colors">Email Us</a></li>
+                <li><a href="#contact" className="hover:text-primary-500 transition-colors">Support</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-dark-700 pt-8 text-center text-dark-400 text-sm">
-            <p>&copy; 2025 ThoughtPro B2B by SyneptLabs. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} ThoughtPro B2B by ThoughtHealer. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -73,6 +73,10 @@ const TeamSection = () => {
                   <img 
                     src={member.image} 
                     alt={member.name} 
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="400"
                     className={`w-full h-full object-contain ${member.imageClass || ''}`}
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -88,14 +92,14 @@ const TeamSection = () => {
                   </p>
 
                   <div className="flex space-x-3">
-                    <a href="#" className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-                      <i className="fab fa-linkedin-in"></i>
+                    <a href="https://thoughthealer.org" aria-label={`${member.name} LinkedIn Profile`} className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                      <i className="fab fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    <a href="#" className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-                      <i className={`fab ${index === 1 ? 'fa-github' : index === 2 ? 'fa-instagram' : 'fa-twitter'}`}></i>
+                    <a href="https://thoughthealer.org" aria-label={`${member.name} Social Profile`} className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                      <i className={`fab ${index === 1 ? 'fa-github' : index === 2 ? 'fa-instagram' : 'fa-twitter'}`} aria-hidden="true"></i>
                     </a>
-                    <a href="#" className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-                      <i className="fas fa-envelope"></i>
+                    <a href="mailto:connect@thoughthealer.org" aria-label={`Email ${member.name}`} className="text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                      <i className="fas fa-envelope" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>

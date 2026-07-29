@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SEOHead from '../components/SEOHead';
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-800 via-dark-900 to-black">
+      <SEOHead
+        title="Privacy Policy | ThoughtHealer"
+        description="Read ThoughtHealer's Privacy Policy. Understand how Synept Lab Private Limited collects, uses, and protects your personal data across all ThoughtHealer apps."
+        canonical="https://thoughthealer.org/privacy-policy"
+      />
       <Header />
       
       <main className="py-24 bg-dark-900 dark:bg-dark-950">

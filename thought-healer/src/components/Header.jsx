@@ -126,16 +126,16 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <span className="text-xl sm:text-2xl font-display font-bold">
-              <span className="text-primary-500 dark:text-primary-400">Synept</span>
-              <span className="text-dark-900 dark:text-white">Labs</span>
+              <span className="text-primary-500 dark:text-primary-400">Thought</span>
+              <span className="text-dark-900 dark:text-white">Healer</span>
             </span>
-          </a>
+          </Link>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
-            <a href="#" className="text-dark-900 dark:text-white font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</a>
+            <Link to="/" className="text-dark-900 dark:text-white font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</Link>
             <a href="#about" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About Us</a>
             <a href="#team" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Doctors</a>
             
@@ -297,6 +297,7 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
               className="text-dark-900 dark:text-white focus:outline-none"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

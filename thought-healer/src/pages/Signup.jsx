@@ -136,7 +136,7 @@ const Signup = () => {
             <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r ${currentProduct.color} rounded-lg flex items-center justify-center`}>
               <span className="text-white font-bold text-base sm:text-lg">{currentProduct.icon}</span>
             </div>
-            <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">SyneptLabs</span>
+            <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">ThoughtHealer</span>
           </div>
         </div>
         <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">

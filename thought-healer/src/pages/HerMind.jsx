@@ -1,5 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const herMindSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'HerMind',
+      applicationCategory: 'HealthApplication',
+      operatingSystem: 'Android',
+      url: 'https://thoughthealer.org/hermind',
+      description: 'HerMind is a mental health app tailored for women, addressing PCOS, PCOD, postpartum depression, body image, and holistic wellness.',
+      author: { '@type': 'Organization', name: 'ThoughtHealer' },
+      audience: { '@type': 'Audience', audienceType: 'Women' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+        { '@type': 'ListItem', position: 2, name: 'HerMind', item: 'https://thoughthealer.org/hermind' },
+      ],
+    },
+  ],
+};
 
 const HerMind = () => {
   const navigate = useNavigate();
@@ -62,6 +86,12 @@ const HerMind = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-dark-950">
+      <SEOHead
+        title="HerMind — Women's Mental Health & Wellness App | ThoughtHealer"
+        description="HerMind supports women's mental health including PCOS, PCOD, postpartum depression and body image concerns. Personalized interventions tailored for women by licensed professionals."
+        canonical="https://thoughthealer.org/hermind"
+        schema={herMindSchema}
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-dark-900/90 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -488,14 +518,14 @@ const HerMind = () => {
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-dark-300 text-sm">
-                <li><a href="mailto:support@syneptlabs.com" className="hover:text-purple-400 transition-colors">Email Support</a></li>
-                <li><a href="#" className="hover:text-purple-400 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-purple-400 transition-colors">Terms of Service</a></li>
+                <li><a href="mailto:connect@thoughthealer.org" className="hover:text-purple-400 transition-colors">Email Support</a></li>
+                <li><Link to="/privacy-policy" className="hover:text-purple-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms-and-conditions" className="hover:text-purple-400 transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-dark-700 pt-8 text-center text-dark-400 text-sm">
-            <p>&copy; 2025 HerMind by SyneptLabs. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} HerMind by ThoughtHealer. All rights reserved.</p>
           </div>
         </div>
       </footer>

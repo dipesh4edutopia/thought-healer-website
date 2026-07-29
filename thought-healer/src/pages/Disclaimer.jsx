@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SEOHead from '../components/SEOHead';
 
 const Disclaimer = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const Disclaimer = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-800 via-dark-900 to-black">
+      <SEOHead
+        title="Disclaimer | ThoughtHealer"
+        description="ThoughtHealer Disclaimer. Our apps are mental wellness support tools and are not a substitute for professional psychiatric care or emergency medical services."
+        canonical="https://thoughthealer.org/disclaimer"
+      />
       <Header />
       
       <main className="py-24 bg-dark-900 dark:bg-dark-950">

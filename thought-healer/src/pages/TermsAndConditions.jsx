@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SEOHead from '../components/SEOHead';
 
 const TermsAndConditions = () => {
   
@@ -11,6 +12,11 @@ const TermsAndConditions = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-800 via-dark-900 to-black">
+      <SEOHead
+        title="Terms and Conditions | ThoughtHealer"
+        description="ThoughtHealer Terms and Conditions. Read the terms governing your use of ThoughtPro, MiniMinds, HerMind, and LES apps by Synept Lab Private Limited."
+        canonical="https://thoughthealer.org/terms-and-conditions"
+      />
       <Header />
       
       <main className="py-24 bg-dark-900 dark:bg-dark-950">

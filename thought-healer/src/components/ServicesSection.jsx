@@ -17,7 +17,7 @@ const ServicesSection = () => {
     {
       icon: 'fa-mobile-alt',
       title: 'Digital Wellness',
-      description: 'Access our suite of digital mental health tools, including mood tracking, guided meditations, and AI-powered personalized exercises.',
+      description: 'Access our suite of digital mental health tools, including mood tracking, guided meditations, and expert-curated personalized exercises.',
       gradient: 'from-secondary-500 to-primary-500',
       iconBg: 'from-secondary-500/20 to-secondary-500/5',
       iconColor: 'text-secondary-500',
@@ -63,11 +63,11 @@ const ServicesSection = () => {
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16" data-aos="fade-up">
           <span className="text-primary-500 dark:text-primary-400 font-medium"></span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mt-2 mb-3 sm:mb-4 text-dark-900 dark:text-white px-4">
-            Welcome to Our Synept Labs
+            Welcome to ThoughtHealer
           </h2>
           <p className="text-dark-600 dark:text-dark-300 text-base sm:text-lg px-4">
-            The founders of Synept Labs serendipitously found out that tech mainly software and AI could help solve the raging issue of Mental healthcare faster.
-            Through Multiple discussions and iterations they came up with Thought Healer, Thought Pro, MiniMinds, and LES (Learning Enhancement Solution) blueprints that suit their respective target audiences.
+            The founders of ThoughtHealer serendipitously found out that tech mainly software and AI could help solve the raging issue of Mental healthcare faster.
+            Through Multiple discussions and iterations they came up with ThoughtHealer, ThoughtPro, MiniMinds, and LES (Learning Enhancement Solution) blueprints that suit their respective target audiences.
             Their mission is to provide affordable mental healthcare for all and free mental healthcare for the most weaker sections of the society.
           </p>
         </div>

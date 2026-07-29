@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SEOHead from '../components/SEOHead';
 
 const Cookies = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const Cookies = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-800 via-dark-900 to-black">
+      <SEOHead
+        title="Cookie Policy | ThoughtHealer"
+        description="ThoughtHealer Cookie Policy. Learn about how ThoughtHealer uses cookies and similar tracking technologies across its mental wellness apps and website."
+        canonical="https://thoughthealer.org/cookies"
+      />
       <Header />
       
       <main className="py-24 bg-dark-900 dark:bg-dark-950">

@@ -1,5 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const thoughtProSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'ThoughtPro',
+      applicationCategory: 'HealthApplication',
+      operatingSystem: 'Android',
+      url: 'https://thoughthealer.org/thoughtpro',
+      downloadUrl: 'https://play.google.com/store/apps/details?id=com.thoughtpro',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR', availability: 'https://schema.org/InStock' },
+      description: 'ThoughtPro monitors 12 vital mental health parameters including stress and productivity. Get expert interventions from licensed psychologists.',
+      author: { '@type': 'Organization', name: 'ThoughtHealer' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is ThoughtPro?',
+          acceptedAnswer: { '@type': 'Answer', text: 'ThoughtPro is a mental health monitoring app that tracks 12 vital parameters including stress and productivity, offering primary, secondary, and tertiary interventions by licensed professionals.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is ThoughtPro free to use?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Yes, ThoughtPro has a free plan available on Google Play Store. Premium plans with advanced features and one-on-one counseling are also available.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'How does ThoughtPro help with stress monitoring?',
+          acceptedAnswer: { '@type': 'Answer', text: 'ThoughtPro monitors stress, productivity, and 10 other mental wellness parameters, providing personalized interventions curated by licensed mental health professionals.' },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+        { '@type': 'ListItem', position: 2, name: 'ThoughtPro', item: 'https://thoughthealer.org/thoughtpro' },
+      ],
+    },
+  ],
+};
 
 const ThoughtPro = () => {
   const navigate = useNavigate();
@@ -189,6 +234,12 @@ const ThoughtPro = () => {
 
   return (
     <div className="min-h-screen bg-dark-100 dark:bg-dark-900">
+      <SEOHead
+        title="ThoughtPro — Monitor Stress & Mental Health App | ThoughtHealer"
+        description="ThoughtPro monitors 12 vital mental health parameters including stress and productivity. Get expert interventions from licensed psychologists. Download free on Android."
+        canonical="https://thoughthealer.org/thoughtpro"
+        schema={thoughtProSchema}
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-dark-900/90 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -732,7 +783,7 @@ const ThoughtPro = () => {
             </div>
           </div>
           <div className="border-t border-dark-200 dark:border-dark-800 mt-8 pt-8 text-center text-dark-600 dark:text-dark-400">
-            <p>&copy; 2025 ThoughtPro by Synept Labs. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} ThoughtPro by ThoughtHealer. All rights reserved.</p>
           </div>
         </div>
       </footer>

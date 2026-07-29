@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 
 const HeroSection = () => {
   useEffect(() => {
+    // Skip particles on mobile to improve LCP
+    if (window.innerWidth < 768) return;
     // Initialize Particles.js
     if (window.particlesJS && document.getElementById('particles-js')) {
       window.particlesJS('particles-js', {
         "particles": {
           "number": {
-            "value": 80,
+            "value": 30,
             "density": {
               "enable": true,
               "value_area": 800
@@ -113,7 +115,8 @@ const HeroSection = () => {
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold mb-4 sm:mb-5 md:mb-6 leading-tight tracking-tight">
-                <span className="gradient-text text-transparent bg-clip-text">Healthy Living</span>
+                <span className="gradient-text text-transparent bg-clip-text">Digital Mental Health</span>{' '}
+                <span className="text-dark-900 dark:text-white">Monitoring &amp; Wellness</span>
               </h1>
  
               <p className="text-dark-600 dark:text-dark-300 text-sm sm:text-base md:text-lg lg:text-xl mb-5 sm:mb-6 md:mb-8 max-w-xl mx-auto lg:mx-0">

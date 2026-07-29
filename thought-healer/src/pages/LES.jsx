@@ -1,5 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const lesSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'LES — Learning Enhancement Suite',
+      applicationCategory: 'EducationalApplication',
+      url: 'https://thoughthealer.org/les',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR', availability: 'https://schema.org/InStock' },
+      description: 'Free multi-sensory learning tools for students with Dyslexia, ADHD, Dyscalculia, and Dysgraphia. Evidence-based support for parents and schools.',
+      author: { '@type': 'Organization', name: 'ThoughtHealer' },
+      audience: { '@type': 'Audience', audienceType: 'Students, Parents, Educators' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is LES?',
+          acceptedAnswer: { '@type': 'Answer', text: 'LES (Learning Enhancement Suite) is a free tool from ThoughtHealer providing multi-sensory, evidence-based learning support for children with Dyslexia, ADHD, Dyscalculia, and Dysgraphia.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is LES free to use?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Yes, LES is completely free. ThoughtHealer provides this tool at no cost to ensure every neurodivergent student has access to quality learning support.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Who is LES designed for?',
+          acceptedAnswer: { '@type': 'Answer', text: 'LES is designed for students with learning differences including Dyslexia, ADHD, Dyscalculia, and Dysgraphia. It is also useful for parents, teachers, and schools looking for inclusive educational tools.' },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+        { '@type': 'ListItem', position: 2, name: 'LES', item: 'https://thoughthealer.org/les' },
+      ],
+    },
+  ],
+};
 
 const LES = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -208,6 +252,12 @@ const LES = () => {
         ? 'bg-black text-yellow-300 font-mono'
         : 'bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans'
     } ${accessibilityMode === 'dyslexic' ? 'font-serif tracking-wide leading-relaxed' : ''}`}>
+      <SEOHead
+        title="LES — Free Learning Tools for Dyslexia, ADHD & Neurodivergent Students"
+        description="Free multi-sensory learning tools for students with Dyslexia, ADHD, Dyscalculia and Dysgraphia. Evidence-based support for parents, teachers and schools. 100% free by ThoughtHealer."
+        canonical="https://thoughthealer.org/les"
+        schema={lesSchema}
+      />
       
       {/* Accessibility Quick Ribbon */}
       <div className="bg-teal-900 dark:bg-teal-950 border-b border-teal-700/50 py-2 px-4 text-xs text-teal-100 dark:text-teal-200">

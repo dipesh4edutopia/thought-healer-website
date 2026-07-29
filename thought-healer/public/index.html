@@ -5,25 +5,109 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#14b8a6" />
-  <meta name="description" content="SyneptLabs - Healing the world, one thought at a time" />
+
+  <!-- Primary Meta -->
+  <meta name="description" content="Comprehensive mental health monitoring and wellness platform. ThoughtPro, MiniMinds, HerMind and LES apps by ThoughtHealer, Pune, India." />
+  <meta name="author" content="ThoughtHealer - Synept Lab Private Limited" />
+  <meta name="keywords" content="mental health app India, ThoughtPro, MiniMinds, HerMind, LES, stress monitoring, children mental health, women wellness, neurodivergent learning" />
+
+  <!-- PWA -->
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Open Graph (global fallback — per-page values override via react-helmet-async) -->
+  <meta property="og:site_name" content="ThoughtHealer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ThoughtHealer — Mental Health & Wellness Platform" />
+  <meta property="og:description" content="Comprehensive mental health monitoring and wellness platform. ThoughtPro, MiniMinds, HerMind and LES apps by ThoughtHealer." />
+  <meta property="og:image" content="https://thoughthealer.org/og-image.png" />
+  <meta property="og:url" content="https://thoughthealer.org/" />
+  <meta property="og:locale" content="en_IN" />
 
-  <title>SyneptLabs - Mental Wellness Solutions</title>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@thoughthealer" />
+  <meta name="twitter:title" content="ThoughtHealer — Mental Health & Wellness Platform" />
+  <meta name="twitter:description" content="Comprehensive mental health monitoring. ThoughtPro, MiniMinds, HerMind and LES apps by ThoughtHealer." />
+  <meta name="twitter:image" content="https://thoughthealer.org/og-image.png" />
+
+  <!-- Google Fonts — preconnect for speed, then async load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- Font Awesome — async load (was render-blocking, saving ~1,200ms) -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  </noscript>
+
+  <!-- AOS Animation Library — async load (was render-blocking) -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </noscript>
+
+  <title>ThoughtHealer — Mental Health & Wellness Platform</title>
+
+  <!-- Organization JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ThoughtHealer",
+    "alternateName": "ThoughtHealer",
+    "legalName": "Synept Lab Private Limited",
+    "url": "https://thoughthealer.org",
+    "logo": "https://thoughthealer.org/favicon.png",
+    "email": "connect@thoughthealer.org",
+    "foundingLocation": {
+      "@type": "Place",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
+    "description": "Comprehensive mental health monitoring and wellness platform offering ThoughtPro, MiniMinds, HerMind, and LES applications for individuals, children, women, and enterprises.",
+    "knowsAbout": ["Mental Health", "Stress Monitoring", "Children Wellness", "Women Health", "Neurodivergent Learning", "Corporate Wellness"]
+  }
+  </script>
+
+  <!-- WebSite Schema (enables Google Sitelinks Searchbox) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ThoughtHealer",
+    "url": "https://thoughthealer.org",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://thoughthealer.org/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 </body>
 </html>
+

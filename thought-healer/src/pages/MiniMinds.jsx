@@ -1,5 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const miniMindsSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'MiniMinds',
+      applicationCategory: 'HealthApplication',
+      operatingSystem: 'Android',
+      url: 'https://thoughthealer.org/miniminds',
+      downloadUrl: 'https://play.google.com/store/apps/details?id=com.syneptlabs.miniminds',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR', availability: 'https://schema.org/InStock' },
+      description: "MiniMinds monitors your child's mental health with 50+ parameters including exam stress, loneliness, and anxiety. Personalized interventions by child psychologists.",
+      author: { '@type': 'Organization', name: 'ThoughtHealer' },
+      audience: { '@type': 'Audience', audienceType: 'Children and Parents' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is MiniMinds?',
+          acceptedAnswer: { '@type': 'Answer', text: "MiniMinds is a mental health app designed for children and adolescents. It monitors 50+ parameters including exam stress, loneliness, and anxiety, providing expert-curated interventions from licensed child psychologists." },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is MiniMinds safe for children?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Yes. MiniMinds is designed for children with parental oversight. It requires parental consent and all interventions are curated by licensed mental health professionals specializing in child psychology.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'What age group is MiniMinds for?',
+          acceptedAnswer: { '@type': 'Answer', text: 'MiniMinds is designed for children and adolescents. Parents or legal guardians must provide consent for the use of the app.' },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+        { '@type': 'ListItem', position: 2, name: 'MiniMinds', item: 'https://thoughthealer.org/miniminds' },
+      ],
+    },
+  ],
+};
 
 const MiniMinds = () => {
   const navigate = useNavigate();
@@ -151,6 +197,12 @@ const MiniMinds = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-blue-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
+      <SEOHead
+        title="MiniMinds — Children's Mental Health App | ThoughtHealer"
+        description="MiniMinds monitors your child's mental health with 50+ parameters including exam stress, loneliness and anxiety. Personalized interventions by licensed child psychologists."
+        canonical="https://thoughthealer.org/miniminds"
+        schema={miniMindsSchema}
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-dark-900/90 backdrop-blur-xl border-b border-dark-200/50 dark:border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -707,7 +759,7 @@ const MiniMinds = () => {
             </div>
           </div>
           <div className="border-t border-dark-700 pt-8 text-center text-dark-400 text-sm">
-            <p>&copy; 2025 MiniMinds by SyneptLabs. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} MiniMinds by ThoughtHealer. All rights reserved.</p>
           </div>
         </div>
       </footer>
