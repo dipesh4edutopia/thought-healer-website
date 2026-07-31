@@ -92,4 +92,91 @@
     <priority>0.2</priority>
   </url>
 
+  <!-- Blog listing page -->
+  <url>
+    <loc>https://thoughthealer.org/blog</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog posts -->
+  <url>
+    <loc>https://thoughthealer.org/blog/workplace-burnout-signs</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/workplace-stress-management</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/burnout-in-women-signs-causes-recovery</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/hormonal-mood-swings-natural-management</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/child-anxiety-signs-causes-parent-guide</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/understanding-adhd-in-children-signs-support-guide</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/helping-children-manage-big-emotions</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/dyslexia-in-children-early-signs-causes-parent-guide</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/early-signs-learning-disabilities-children</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/dyscalculia-explained-child-math-learning-disability</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
+
+
+
+
+
+
+
+

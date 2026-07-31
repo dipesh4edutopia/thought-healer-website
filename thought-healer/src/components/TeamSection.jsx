@@ -70,9 +70,9 @@ const TeamSection = () => {
 
               <div className="relative bg-white/80 dark:bg-dark-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-dark-200/50 dark:border-white/10 shadow-xl">
                 <div className={`h-56 sm:h-64 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-700 dark:to-dark-800 flex items-center justify-center overflow-hidden ${member.imagePosition || ''}`}>
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
+                  <img
+                    src={member.image}
+                    alt={member.name}
                     loading="lazy"
                     decoding="async"
                     width="400"

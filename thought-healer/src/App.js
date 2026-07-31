@@ -31,6 +31,10 @@ const LES           = React.lazy(() => import('./pages/LES'));
 const SubAdminLogin = React.lazy(() => import('./pages/SubAdminLogin'));
 const SubscriptionManagement = React.lazy(() => import('./pages/SubscriptionManagement'));
 
+// ─── Blog pages
+const Blog     = React.lazy(() => import('./pages/Blog'));
+const BlogPost = React.lazy(() => import('./pages/BlogPost'));
+
 // ─── Legal pages (low priority, always lazy)
 const PrivacyPolicy      = React.lazy(() => import('./pages/PrivacyPolicy'));
 const TermsAndConditions = React.lazy(() => import('./pages/TermsAndConditions'));
@@ -91,6 +95,10 @@ function App() {
             <Route path="/miniminds-signin" element={<MiniMindsSignin />} />
             <Route path="/miniminds-signup" element={<MiniMindsSignup />} />
             <Route path="/miniminds-otp" element={<MiniMindsOtp />} />
+
+            {/* Blog Routes */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
 
             {/* Sub-Admin Login */}
             <Route path="/sub-admin-login" element={<SubAdminLogin />} />

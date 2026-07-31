@@ -138,6 +138,7 @@ const Header = () => {
             <Link to="/" className="text-dark-900 dark:text-white font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Home</Link>
             <a href="#about" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">About Us</a>
             <a href="#team" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Doctors</a>
+            <Link to="/blog" className="text-dark-600 dark:text-dark-300 font-medium text-sm lg:text-base hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
             
             {/* Products Dropdown */}
             <div className="relative">

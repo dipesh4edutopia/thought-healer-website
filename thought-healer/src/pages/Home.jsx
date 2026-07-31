@@ -15,7 +15,7 @@ const homeSchema = {
   '@context': 'https://schema.org',
   '@type': 'MedicalBusiness',
   name: 'ThoughtHealer',
-  alternateName: 'SyneptLabs',
+  alternateName: 'Synept Lab Private Limited',
   url: 'https://thoughthealer.org',
   logo: 'https://thoughthealer.org/favicon.png',
   email: 'connect@thoughthealer.org',

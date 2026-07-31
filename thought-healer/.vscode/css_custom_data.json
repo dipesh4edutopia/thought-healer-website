@@ -1,0 +1,45 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Tailwind CSS directive. Inserts Tailwind's generated CSS for `base`, `components`, or `utilities` into your stylesheet.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/installation"
+        }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "Use @apply to inline any existing utility classes into your own custom CSS.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply"
+        }
+      ]
+    },
+    {
+      "name": "@layer",
+      "description": "Use @layer to add styles to Tailwind's base, components, or utilities layers.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer"
+        }
+      ]
+    },
+    {
+      "name": "@config",
+      "description": "Use @config to specify which config file Tailwind should use.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/configuration"
+        }
+      ]
+    }
+  ]
+}
