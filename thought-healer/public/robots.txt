@@ -1,8 +1,14 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ThoughtHealer robots.txt
+# Controls web crawlers, search engines, and AI search discovery engines.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# 1. General Search Engines (Google, Bing, Yahoo, DuckDuckGo, etc.)
 User-agent: *
 Allow: /
-
-# Block private/admin routes from Googlebot
+# Protect private, authentication, payment, and administrative routes
 Disallow: /admin/
+Disallow: /admin-dashboard
 Disallow: /sub-admin-login
 Disallow: /thoughtpro-payment
 Disallow: /thoughtpro-success
@@ -19,5 +25,143 @@ Disallow: /otp
 Disallow: /login
 Disallow: /signup
 
+# 2. OpenAI / ChatGPT Search (OAI-SearchBot)
+# Allows ChatGPT Search to index public pages and cite ThoughtHealer as a source in answer cards.
+# (Note: OAI-SearchBot is independent of GPTBot and does NOT train models)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+# 3. ChatGPT User-Triggered Browsing (ChatGPT-User)
+# Used when a user directly enters a ThoughtHealer URL in ChatGPT or asks ChatGPT to visit a page.
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+# 4. Perplexity Search (PerplexityBot & Perplexity-User)
+# Allows Perplexity to crawl, index, and cite ThoughtHealer in real-time answers.
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+# 5. Anthropic Claude (ClaudeBot & Claude-Web)
+# Allows Claude search citations and browsing.
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin/
+Disallow: /admin-dashboard
+Disallow: /sub-admin-login
+Disallow: /thoughtpro-payment
+Disallow: /thoughtpro-success
+Disallow: /thoughtpro-otp
+Disallow: /thoughtpro-signin
+Disallow: /thoughtpro-signup
+Disallow: /miniminds-payment
+Disallow: /miniminds-success
+Disallow: /miniminds-otp
+Disallow: /miniminds-signin
+Disallow: /miniminds-signup
+Disallow: /subscription-management
+Disallow: /otp
+Disallow: /login
+Disallow: /signup
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AI Model Pre-Training Crawlers (Optional Reference)
+# If you wish to opt-out of foundational LLM pre-training while still allowing
+# search citations in ChatGPT & Perplexity above, uncomment the lines below:
+# User-agent: GPTBot
+# Disallow: /
+# ─────────────────────────────────────────────────────────────────────────────
+
 # Sitemap location
 Sitemap: https://thoughthealer.org/sitemap.xml
+

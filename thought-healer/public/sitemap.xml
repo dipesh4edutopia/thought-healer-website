@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage — highest priority -->
+  <!-- Homepage â€” highest priority -->
   <url>
     <loc>https://thoughthealer.org/</loc>
     <lastmod>2026-07-29</lastmod>
@@ -103,80 +103,408 @@
   <!-- Blog posts -->
   <url>
     <loc>https://thoughthealer.org/blog/workplace-burnout-signs</loc>
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/workplace-stress-management</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/burnout-in-women-signs-causes-recovery</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/hormonal-mood-swings-natural-management</loc>
     <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/child-anxiety-signs-causes-parent-guide</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/understanding-adhd-in-children-signs-support-guide</loc>
-    <lastmod>2026-08-25</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/helping-children-manage-big-emotions</loc>
-    <lastmod>2026-08-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/dyslexia-in-children-early-signs-causes-parent-guide</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/early-signs-learning-disabilities-children</loc>
-    <lastmod>2026-09-12</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://thoughthealer.org/blog/dyscalculia-explained-child-math-learning-disability</loc>
-    <lastmod>2026-09-18</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://thoughthealer.org/blog/adhd-or-anxiety</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/can-adults-develop-adhd</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/do-i-have-adhd</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-do-i-know-if-i-have-adhd-or-anxiety</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/symptoms-of-adhd-in-adults</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-am-i-always-procrastinating</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-cant-i-concentrate</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/can-anxiety-cause-insomnia</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/can-anxiety-cause-physical-symptoms</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/do-i-have-ocd</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-do-i-know-if-i-have-anxiety</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-calm-down-when-feeling-anxious</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-stop-anxiety-attacks</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/what-are-the-symptoms-of-an-anxiety-disorder</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-am-i-overthinking-so-much</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-feel-anxious-for-no-reason</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-wake-up-feeling-anxious</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-does-my-heart-race-when-im-anxious</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/can-depression-go-away-on-its-own</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-do-i-know-if-im-depressed</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-get-out-of-depression</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-help-someone-with-depression</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/what-are-the-symptoms-of-depression</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-am-i-feeling-sad-all-the-time</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-feel-empty-inside</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-dont-i-enjoy-anything-anymore</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-many-hours-of-sleep-do-i-need</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-stop-overthinking-at-night</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-cant-i-sleep-at-night</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-do-i-help-someone-who-is-suicidal</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/what-should-i-do-during-a-panic-attack</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/what-should-i-do-if-i-feel-like-hurting-myself</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/are-intrusive-thoughts-normal</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-stop-intrusive-thoughts</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-cant-i-stop-thinking-about-something</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-have-unwanted-thoughts</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-deal-with-emotional-burnout</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-to-improve-my-mental-health</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-am-i-emotionally-exhausted</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-feel-like-nobody-understands-me</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-feel-lonely-even-when-im-around-people</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/why-do-i-get-angry-so-easily</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/do-i-need-medication-for-anxiety-or-depression</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-does-therapy-work</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/how-much-does-therapy-cost</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/should-i-see-a-therapist</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/what-should-i-talk-about-in-therapy</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thoughthealer.org/blog/psychologist-vs-psychiatrist</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
-
-
-
-
-
-
-
-

@@ -57,9 +57,9 @@ const LES = () => {
       const saved = localStorage.getItem('th-theme');
       if (saved === 'light') return false;
       if (saved === 'dark') return true;
-      return document.documentElement.classList.contains('dark');
+      return false; // default = light
     } catch {
-      return true;
+      return false; // default = light
     }
   });
 

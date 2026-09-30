@@ -5,7 +5,12 @@ const Header = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('th-theme');
+      return saved === 'dark'; // default = light (false) unless user explicitly chose dark
+    } catch { return false; }
+  });
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);

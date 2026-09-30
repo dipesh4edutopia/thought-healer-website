@@ -98,12 +98,7 @@ const ServicesSection = () => {
                     {service.description}
                   </p>
 
-                  {/* Animated line */}
-                  <div className={`w-12 h-0.5 bg-primary-500/30 dark:bg-primary-400/30 group-hover:w-full transition-all duration-300 mb-4`}></div>
 
-                  <Link to={service.link || '#'} className={`inline-flex items-center ${service.iconColor} dark:${service.iconColor} font-medium group-hover:translate-x-2 transition-transform duration-300`}>
-                    Learn more <i className="fas fa-arrow-right ml-2 text-sm"></i>
-                  </Link>
                 </div>
               </div>
             </div>

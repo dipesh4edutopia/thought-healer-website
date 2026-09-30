@@ -32,9 +32,9 @@ const HerMind = () => {
       const saved = localStorage.getItem('th-theme');
       if (saved === 'dark') return true;
       if (saved === 'light') return false;
-      return true;
+      return false; // default = light
     } catch {
-      return true;
+      return false; // default = light
     }
   });
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -251,12 +251,19 @@ const HerMind = () => {
                 Monitor pressing female issues like PCOS/PCOD, postpartum depression, body image concerns, and get personalized interventions tailored for you
               </p>
               <div className="flex justify-center sm:justify-start">
-                <button
-                  disabled
-                  className="text-white px-10 py-4 rounded-lg text-lg font-semibold inline-flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg opacity-75 cursor-not-allowed"
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.hermind"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 hover:-translate-y-0.5"
+                  style={{ background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)' }}
                 >
-                  Coming Soon
-                </button>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white flex-shrink-0">
+                    <path d="M3.18 23.76c.37.21.8.24 1.2.09l13.02-7.52-2.83-2.83-11.39 10.26zm-1.62-21.4a1.74 1.74 0 0 0-.06.49v17.3c0 .17.02.34.06.49l.07.07 9.69-9.69v-.23L1.49 2.3l-.07.06zm19.55 8.46-2.74-1.58-3.09 3.09 3.09 3.09 2.76-1.59a1.75 1.75 0 0 0 0-3.01zM4.38.15C3.98 0 3.55.03 3.18.24l.07.07 11.39 10.26 2.83-2.83L4.38.15z"/>
+                  </svg>
+                  Download on Google Play
+                  <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                </a>
               </div>
             </div>
             <div className="relative">

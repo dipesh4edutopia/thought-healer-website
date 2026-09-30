@@ -55,9 +55,9 @@ const MiniMinds = () => {
       const saved = localStorage.getItem('th-theme');
       if (saved === 'dark') return true;
       if (saved === 'light') return false;
-      return true;
+      return false; // default = light
     } catch {
-      return true;
+      return false; // default = light
     }
   });
   const [isMobileOpen, setIsMobileOpen] = useState(false);

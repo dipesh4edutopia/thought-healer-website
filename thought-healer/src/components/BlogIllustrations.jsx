@@ -621,6 +621,489 @@ export const LesDyscalculiaIllustration = ({ className = "w-full h-full" }) => (
   </svg>
 );
 
+// ── New: ADHD & Focus Illustration ─────────────────────────────────────────────
+export const AdhdFocusIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="adhd_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#1e1b4b" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#2e1065" />
+      </linearGradient>
+      <linearGradient id="adhd_glow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#f59e0b" />
+        <stop offset="100%" stopColor="#a855f7" />
+      </linearGradient>
+      <filter id="adhd_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#adhd_bg)" />
+    <circle cx="220" cy="180" r="170" fill="#f59e0b" opacity="0.18" filter="url(#adhd_blur)" />
+    <circle cx="580" cy="320" r="180" fill="#a855f7" opacity="0.2" filter="url(#adhd_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#f59e0b" strokeWidth="2" strokeOpacity="0.6" />
+    
+    <circle cx="400" cy="190" r="55" fill="url(#adhd_glow)" opacity="0.15" />
+    <circle cx="400" cy="190" r="44" fill="#0f172a" stroke="#f59e0b" strokeWidth="2.5" />
+    <circle cx="400" cy="190" r="18" fill="#f59e0b" opacity="0.3" />
+    <circle cx="400" cy="190" r="8" fill="#f59e0b" />
+    <path d="M 400 135 V 147 M 400 233 V 245 M 345 190 H 357 M 443 190 H 455" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
+
+    <path d="M 210 290 C 270 230, 310 330, 370 270 S 450 240, 500 290 S 550 250, 590 280" fill="none" stroke="url(#adhd_glow)" strokeWidth="3.5" strokeLinecap="round" />
+    
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#1e1b4b" stroke="#f59e0b" strokeWidth="1.5" />
+      <circle cx="20" cy="18" r="6" fill="#f59e0b" />
+      <text x="35" y="22" fill="#fef3c7" fontSize="11" fontFamily="sans-serif" fontWeight="bold">Executive Function</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#1e1b4b" stroke="#a855f7" strokeWidth="1.5" />
+      <circle cx="20" cy="18" r="6" fill="#a855f7" />
+      <text x="35" y="22" fill="#f3e8ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold">Dopamine Balance</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0f2fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Task Initiation</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#10b981" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Focus Flow</text>
+    </g>
+    <text x="400" y="375" fill="#f59e0b" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      ADHD & ATTENTION SCIENCE
+    </text>
+  </svg>
+);
+
+// ── New: Anxiety & Calm Illustration ───────────────────────────────────────────
+export const AnxietyCalmIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="anx_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0c4a6e" />
+        <stop offset="50%" stopColor="#082f49" />
+        <stop offset="100%" stopColor="#042f2e" />
+      </linearGradient>
+      <linearGradient id="anx_wave" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#38bdf8" />
+        <stop offset="100%" stopColor="#2dd4bf" />
+      </linearGradient>
+      <filter id="anx_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#anx_bg)" />
+    <circle cx="200" cy="200" r="160" fill="#0284c7" opacity="0.2" filter="url(#anx_blur)" />
+    <circle cx="600" cy="300" r="180" fill="#0d9488" opacity="0.22" filter="url(#anx_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.85" stroke="#38bdf8" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#anx_wave)" opacity="0.2" />
+    <circle cx="400" cy="180" r="36" fill="#0f172a" stroke="#38bdf8" strokeWidth="2.5" />
+    <path d="M 390 180 C 390 173, 410 173, 410 180 C 410 187, 390 187, 390 180" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" />
+
+    <path d="M 210 270 Q 280 230 350 270 T 490 270 T 590 270" fill="none" stroke="url(#anx_wave)" strokeWidth="4" strokeLinecap="round" />
+    <path d="M 210 300 Q 280 280 350 300 T 490 300 T 590 300" fill="none" stroke="#2dd4bf" strokeWidth="2" strokeDasharray="5 5" opacity="0.7" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#082f49" stroke="#38bdf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0f2fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Nervous System Reset</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#042f2e" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ccfbf1" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Vagus Stimulation</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#818cf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0e7ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Cortisol Regulation</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#34d399" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Serenity Response</text>
+    </g>
+    <text x="400" y="375" fill="#38bdf8" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      ANXIETY & SOMATIC REGULATION
+    </text>
+  </svg>
+);
+
+// ── New: Panic & Heart Regulation Illustration ─────────────────────────────────
+export const PanicHeartIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="panic_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#4c0519" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#111827" />
+      </linearGradient>
+      <linearGradient id="ecg_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#f43f5e" />
+        <stop offset="50%" stopColor="#fb923c" />
+        <stop offset="100%" stopColor="#2dd4bf" />
+      </linearGradient>
+      <filter id="panic_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#panic_bg)" />
+    <circle cx="240" cy="200" r="160" fill="#f43f5e" opacity="0.18" filter="url(#panic_blur)" />
+    <circle cx="560" cy="280" r="180" fill="#2dd4bf" opacity="0.18" filter="url(#panic_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#f43f5e" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="170" r="46" fill="#f43f5e" opacity="0.15" />
+    <circle cx="400" cy="170" r="34" fill="#0f172a" stroke="#f43f5e" strokeWidth="2.5" />
+    <path d="M 390 165 C 385 158, 375 160, 375 168 C 375 178, 400 188, 400 188 C 400 188, 425 178, 425 168 C 425 160, 415 158, 410 165 Z" fill="#f43f5e" />
+
+    {/* ECG wave: rapid spiked to rhythmic gentle sinus */}
+    <path d="M 200 270 H 260 L 270 230 L 285 310 L 300 240 L 315 285 L 330 270 H 390 Q 420 250 450 270 T 510 270 H 600" fill="none" stroke="url(#ecg_grad)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#4c0519" stroke="#f43f5e" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ffe4e6" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sympathetic Surge</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#042f2e" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ccfbf1" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Heart Pacing Return</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#fb923c" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ffedd5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Safe Reality Anchors</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0f2fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Slow Diaphragmatic</text>
+    </g>
+    <text x="400" y="375" fill="#fb7185" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      PANIC & PHYSICAL SYMPTOM PROTOCOLS
+    </text>
+  </svg>
+);
+
+// ── New: Depression & Mood Recovery Illustration ────────────────────────────────
+export const DepressionRecoveryIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="dep_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#1e1b4b" />
+        <stop offset="50%" stopColor="#090d16" />
+        <stop offset="100%" stopColor="#172554" />
+      </linearGradient>
+      <linearGradient id="sunrise_glow" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#6366f1" />
+        <stop offset="60%" stopColor="#818cf8" />
+        <stop offset="100%" stopColor="#fbbf24" />
+      </linearGradient>
+      <filter id="dep_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#dep_bg)" />
+    <circle cx="200" cy="300" r="160" fill="#4338ca" opacity="0.2" filter="url(#dep_blur)" />
+    <circle cx="600" cy="180" r="180" fill="#f59e0b" opacity="0.18" filter="url(#dep_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#6366f1" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#sunrise_glow)" opacity="0.2" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#818cf8" strokeWidth="2.5" />
+    <circle cx="400" cy="180" r="14" fill="#fbbf24" />
+
+    {/* Upward recovery trajectory curve */}
+    <path d="M 210 320 C 270 310, 330 300, 390 260 S 490 200, 590 160" fill="none" stroke="url(#sunrise_glow)" strokeWidth="4" strokeLinecap="round" />
+    <circle cx="590" cy="160" r="7" fill="#fbbf24" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0e7ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Behavioral Activation</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#451a03" stroke="#f59e0b" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#fef3c7" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Neuroplastic Ascent</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#a78bfa" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ede9fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Cognitive Reframing</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#34d399" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Safe Micro-Steps</text>
+    </g>
+    <text x="400" y="375" fill="#a5b4fc" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      DEPRESSION & MOOD RECOVERY
+    </text>
+  </svg>
+);
+
+// ── New: Sleep Health & Insomnia Illustration ──────────────────────────────────
+export const SleepHealthIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sleep_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#020617" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#064e3b" />
+      </linearGradient>
+      <linearGradient id="moon_glow" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#38bdf8" />
+        <stop offset="100%" stopColor="#34d399" />
+      </linearGradient>
+      <filter id="sleep_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#sleep_bg)" />
+    <circle cx="220" cy="180" r="160" fill="#06b6d4" opacity="0.18" filter="url(#sleep_blur)" />
+    <circle cx="580" cy="300" r="180" fill="#10b981" opacity="0.2" filter="url(#sleep_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#10b981" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#moon_glow)" opacity="0.15" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#10b981" strokeWidth="2.5" />
+    {/* Crescent Moon */}
+    <path d="M 405 165 C 395 168, 390 178, 393 188 C 396 198, 407 203, 417 199 C 412 201, 404 200, 399 194 C 394 188, 395 178, 405 165 Z" fill="#6ee7b7" />
+
+    {/* Delta Sleep Wave Line */}
+    <path d="M 210 280 C 270 240, 330 320, 390 280 S 510 240, 590 280" fill="none" stroke="url(#moon_glow)" strokeWidth="3.5" strokeLinecap="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#064e3b" stroke="#34d399" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Circadian Alignment</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#082f49" stroke="#38bdf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0f2fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Night Mind Quiet</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#6ee7b7" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ecfdf5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Delta Wave Rest</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#22d3ee" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#cffafe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sleep Architecture</text>
+    </g>
+    <text x="400" y="375" fill="#6ee7b7" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      SLEEP SCIENCE & INSOMNIA RECOVERY
+    </text>
+  </svg>
+);
+
+// ── New: Overthinking & Intrusive Thoughts Illustration ────────────────────────
+export const OverthinkingIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ot_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#1e1b4b" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#311042" />
+      </linearGradient>
+      <linearGradient id="clarity_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#d946ef" />
+        <stop offset="50%" stopColor="#818cf8" />
+        <stop offset="100%" stopColor="#38bdf8" />
+      </linearGradient>
+      <filter id="ot_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#ot_bg)" />
+    <circle cx="220" cy="220" r="160" fill="#d946ef" opacity="0.18" filter="url(#ot_blur)" />
+    <circle cx="580" cy="280" r="170" fill="#38bdf8" opacity="0.18" filter="url(#ot_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#d946ef" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#clarity_grad)" opacity="0.18" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#d946ef" strokeWidth="2.5" />
+    
+    {/* Unraveling knot into straight beam */}
+    <path d="M 210 280 Q 240 240 280 290 T 350 250 T 420 280 L 590 280" fill="none" stroke="url(#clarity_grad)" strokeWidth="3.5" strokeLinecap="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#311042" stroke="#d946ef" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#fae8ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Cognitive Defusion</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#082f49" stroke="#38bdf8" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#e0f2fe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Thought Unhooking</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#c084fc" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#f3e8ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Worry Observation</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#34d399" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Mental Clarity</text>
+    </g>
+    <text x="400" y="375" fill="#f0abfc" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      OVERTHINKING & INTRUSIVE THOUGHTS
+    </text>
+  </svg>
+);
+
+// ── New: Therapy & Clinical Treatment Illustration ─────────────────────────────
+export const TherapyIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="th_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#064e3b" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#083344" />
+      </linearGradient>
+      <linearGradient id="th_glow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#10b981" />
+        <stop offset="100%" stopColor="#06b6d4" />
+      </linearGradient>
+      <filter id="th_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#th_bg)" />
+    <circle cx="220" cy="190" r="160" fill="#10b981" opacity="0.18" filter="url(#th_blur)" />
+    <circle cx="580" cy="300" r="170" fill="#06b6d4" opacity="0.18" filter="url(#th_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#10b981" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#th_glow)" opacity="0.18" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#10b981" strokeWidth="2.5" />
+    
+    {/* Compassionate dialogue speech waves */}
+    <path d="M 385 170 C 385 162, 405 162, 405 170 C 405 178, 385 186, 385 190" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="400" cy="200" r="2.5" fill="#34d399" />
+
+    <path d="M 220 280 C 270 250, 330 310, 400 270 S 520 250, 580 280" fill="none" stroke="url(#th_glow)" strokeWidth="3.5" strokeLinecap="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Therapeutic Alliance</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#083344" stroke="#06b6d4" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#cffafe" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Evidence-Based CBT</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ccfbf1" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Psychology Insights</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#86efac" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#f0fdf4" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Clinical Guidance</text>
+    </g>
+    <text x="400" y="375" fill="#34d399" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      THERAPY, COUNSELING & CARE
+    </text>
+  </svg>
+);
+
+// ── New: Emotional Health & Relationships Illustration ─────────────────────────
+export const EmotionalHealthIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="eh_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#4c0519" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#2e1065" />
+      </linearGradient>
+      <linearGradient id="eh_glow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#f43f5e" />
+        <stop offset="50%" stopColor="#fb7185" />
+        <stop offset="100%" stopColor="#a855f7" />
+      </linearGradient>
+      <filter id="eh_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#eh_bg)" />
+    <circle cx="220" cy="200" r="160" fill="#f43f5e" opacity="0.18" filter="url(#eh_blur)" />
+    <circle cx="580" cy="280" r="170" fill="#a855f7" opacity="0.18" filter="url(#eh_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.88" stroke="#fb7185" strokeWidth="2" strokeOpacity="0.5" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#eh_glow)" opacity="0.18" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#fb7185" strokeWidth="2.5" />
+    
+    {/* Heart balance icon */}
+    <path d="M 390 175 C 385 168, 375 170, 375 178 C 375 188, 400 198, 400 198 C 400 198, 425 188, 425 178 C 425 170, 415 168, 410 175 Z" fill="#fb7185" />
+
+    <path d="M 210 280 C 270 250, 330 300, 400 270 S 520 250, 590 280" fill="none" stroke="url(#eh_glow)" strokeWidth="3.5" strokeLinecap="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#4c0519" stroke="#f43f5e" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ffe4e6" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Emotional Resilience</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#2e1065" stroke="#a855f7" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#f3e8ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Relational Healing</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#fda4af" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#fff1f2" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Burnout Recovery</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#c084fc" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#faf5ff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Self-Compassion</text>
+    </g>
+    <text x="400" y="375" fill="#fda4af" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      EMOTIONAL HEALTH & RELATIONSHIPS
+    </text>
+  </svg>
+);
+
+// ── New: Crisis Urgent Questions Illustration ──────────────────────────────────
+export const CrisisSupportIllustration = ({ className = "w-full h-full" }) => (
+  <svg className={className} viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="cr_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#450a0a" />
+        <stop offset="50%" stopColor="#0f172a" />
+        <stop offset="100%" stopColor="#1e293b" />
+      </linearGradient>
+      <linearGradient id="cr_beacon" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#ef4444" />
+        <stop offset="50%" stopColor="#f59e0b" />
+        <stop offset="100%" stopColor="#10b981" />
+      </linearGradient>
+      <filter id="cr_blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+    </defs>
+    <rect width="800" height="500" fill="url(#cr_bg)" />
+    <circle cx="220" cy="180" r="160" fill="#ef4444" opacity="0.2" filter="url(#cr_blur)" />
+    <circle cx="580" cy="300" r="170" fill="#10b981" opacity="0.18" filter="url(#cr_blur)" />
+
+    <rect x="160" y="80" width="480" height="340" rx="28" fill="#0f172a" fillOpacity="0.9" stroke="#ef4444" strokeWidth="2" strokeOpacity="0.6" />
+    
+    <circle cx="400" cy="180" r="50" fill="url(#cr_beacon)" opacity="0.18" />
+    <circle cx="400" cy="180" r="38" fill="#0f172a" stroke="#ef4444" strokeWidth="2.5" />
+    
+    {/* Safety Shield Icon */}
+    <path d="M 400 160 L 415 168 V 185 C 415 195, 400 202, 400 202 C 400 202, 385 195, 385 185 V 168 Z" fill="#ef4444" />
+
+    <path d="M 210 280 H 280 L 295 240 L 315 310 L 335 260 L 350 280 H 420 Q 470 260 520 280 H 590" fill="none" stroke="url(#cr_beacon)" strokeWidth="3.5" strokeLinecap="round" />
+
+    <g transform="translate(100, 120)">
+      <rect width="145" height="36" rx="18" fill="#450a0a" stroke="#ef4444" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#fee2e2" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">24/7 Lifeline Support</text>
+    </g>
+    <g transform="translate(555, 120)">
+      <rect width="145" height="36" rx="18" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#d1fae5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Safe Reality Anchors</text>
+    </g>
+    <g transform="translate(100, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#fca5a5" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#fff1f2" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Immediate Safety</text>
+    </g>
+    <g transform="translate(555, 340)">
+      <rect width="145" height="36" rx="18" fill="#0f172a" stroke="#34d399" strokeWidth="1.5" />
+      <text x="72" y="23" fill="#ecfdf5" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Calm Regulation</text>
+    </g>
+    <text x="400" y="375" fill="#fca5a5" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+      CRISIS SUPPORT & IMMEDIATE CARE
+    </text>
+  </svg>
+);
+
+
+
 
 
 

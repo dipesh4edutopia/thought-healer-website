@@ -55,7 +55,7 @@ const PreAuthorization      = React.lazy(() => import('./pages/admin/PreAuthoriz
 
 // ─── Loading fallback (lightweight — no external deps)
 const PageLoader = () => (
-  <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a' }}>
+  <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ffffff' }}>
     <div style={{ width: 48, height: 48, border: '4px solid #14b8a6', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
   </div>

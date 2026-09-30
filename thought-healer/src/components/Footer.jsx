@@ -23,21 +23,7 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Social Media Links */}
-            <div className="flex space-x-4">
-              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Facebook Page" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-facebook-f" aria-hidden="true"></i>
-              </a>
-              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Twitter Profile" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="https://thoughthealer.org" aria-label="ThoughtHealer LinkedIn Page" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-linkedin-in" aria-hidden="true"></i>
-              </a>
-              <a href="https://thoughthealer.org" aria-label="ThoughtHealer Instagram Profile" className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all duration-300">
-                <i className="fab fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
+
           </div>
 
           {/* Quick Links */}

@@ -54,10 +54,18 @@ const FaqItem = ({ question, answer }) => {
 
 // ── Category color map ───────────────────────────────────────────────────────
 const categoryColors = {
-  ThoughtPro: 'bg-teal-500/20 text-teal-400 border-teal-500/30',
-  MiniMinds:  'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  HerMind:    'bg-pink-500/20 text-pink-400 border-pink-500/30',
-  LES:        'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  ADHD:                  'bg-amber-500/20 text-amber-400 border-amber-500/30',
+  Anxiety:               'bg-sky-500/20 text-sky-400 border-sky-500/30',
+  Depression:            'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
+  Sleep:                 'bg-teal-500/20 text-teal-400 border-teal-500/30',
+  'Crisis Support':      'bg-red-500/20 text-red-400 border-red-500/30',
+  OCD:                   'bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30',
+  'Emotional Health':    'bg-rose-500/20 text-rose-400 border-rose-500/30',
+  'Therapy & Treatment': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  ThoughtPro:            'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  MiniMinds:             'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  HerMind:               'bg-pink-500/20 text-pink-400 border-pink-500/30',
+  LES:                   'bg-purple-500/20 text-purple-400 border-purple-500/30',
 };
 
 // ── Product CTA Banner Data Map ──────────────────────────────────────────────
@@ -127,35 +135,65 @@ const BlogPost = () => {
   // Related posts (same category, excluding current)
   const related = blogs.filter((b) => b.category === blog.category && b.slug !== slug).slice(0, 3);
 
-  // Article JSON-LD schema
+  // Article JSON-LD schema — MedicalWebPage + BreadcrumbList for E-E-A-T & AI citations
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: blog.title,
-    description: blog.excerpt,
-    image: `https://thoughthealer.org${blog.image}`,
-    datePublished: blog.date,
-    dateModified: blog.date,
-    author: {
-      '@type': 'Organization',
-      name: 'ThoughtHealer Team',
-      url: 'https://thoughthealer.org',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'ThoughtHealer',
-      logo: { '@type': 'ImageObject', url: 'https://thoughthealer.org/favicon.png' },
-    },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://thoughthealer.org/blog/${blog.slug}` },
-    keywords: blog.tags.join(', '),
-    ...(blog.faq && {
-      '@type': ['Article', 'FAQPage'],
-      mainEntity: blog.faq.map((f) => ({
-        '@type': 'Question',
-        name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
-      })),
-    }),
+    '@graph': [
+      {
+        '@type': ['Article', 'MedicalWebPage'],
+        headline: blog.title,
+        description: blog.excerpt,
+        image: `https://thoughthealer.org${blog.image}`,
+        datePublished: blog.date,
+        dateModified: blog.date,
+        // E-E-A-T: Actual author byline
+        author: {
+          '@type': 'Organization',
+          name: 'ThoughtHealer Clinical Team',
+          url: 'https://thoughthealer.org',
+        },
+        // E-E-A-T: Medical Expert Reviewer — critical for YMYL content
+        reviewedBy: {
+          '@type': 'Person',
+          name: 'Dr. Sandeep Jagtap',
+          jobTitle: 'Consultant Psychiatrist',
+          description: 'MD DPM — Psychiatry. Director, Aastha Hospital Chinchwad & Prerana Rehabilitation. 20+ years clinical experience.',
+          url: 'https://thoughthealer.org/#team',
+          alumniOf: { '@type': 'EducationalOrganization', name: 'Maharashtra Medical Council' },
+          hasCredential: { '@type': 'EducationalOccupationalCredential', credentialCategory: 'MD, DPM (Psychiatry)' },
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'ThoughtHealer',
+          logo: { '@type': 'ImageObject', url: 'https://thoughthealer.org/favicon.png' },
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://thoughthealer.org/blog/${blog.slug}` },
+        keywords: blog.tags.join(', '),
+        // FAQ schema merged when blog has FAQ entries
+        ...(blog.faq && blog.faq.length > 0 && {
+          speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.geo-quick-answer'] },
+        }),
+      },
+      // FAQ Page — enables Google & AI search FAQ rich results
+      ...(blog.faq && blog.faq.length > 0 ? [{
+        '@type': 'FAQPage',
+        mainEntity: blog.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
+      }] : []),
+      // BreadcrumbList — shows Google's breadcrumb trail in SERP
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thoughthealer.org/' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://thoughthealer.org/blog' },
+          { '@type': 'ListItem', position: 3, name: blog.category, item: `https://thoughthealer.org/blog` },
+          { '@type': 'ListItem', position: 4, name: blog.shortTitle || blog.title, item: `https://thoughthealer.org/blog/${blog.slug}` },
+        ],
+      },
+    ],
   };
 
   return (
@@ -194,7 +232,7 @@ const BlogPost = () => {
 
           {/* Category + reading time */}
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${categoryColors[blog.category]}`}>
+            <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${categoryColors[blog.category] || 'bg-primary-500/20 text-primary-400 border-primary-500/30'}`}>
               {blog.category}
             </span>
             <span className="text-dark-400 text-sm flex items-center gap-1.5">
@@ -210,13 +248,36 @@ const BlogPost = () => {
             {blog.title}
           </h1>
 
-          {/* Author */}
-          <div className="flex items-center gap-3 mt-6">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white font-bold text-sm">TH</div>
-            <div>
-              <p className="text-white font-medium text-sm">{blog.author}</p>
-              <p className="text-dark-400 text-xs">{blog.authorRole}</p>
+          {/* Author + Medical Review Byline (E-E-A-T badge) */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+            {/* Author */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">TH</div>
+              <div>
+                <p className="text-white font-medium text-sm">{blog.author}</p>
+                <p className="text-dark-400 text-xs">{blog.authorRole}</p>
+              </div>
             </div>
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-8 bg-dark-600" />
+            {/* Medical Review Badge */}
+            <a
+              href="/#team"
+              className="flex items-center gap-2.5 bg-white/8 hover:bg-white/14 border border-primary-400/30 rounded-xl px-3.5 py-2 transition-colors group"
+              aria-label="View reviewer profile"
+            >
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <i className="fas fa-user-md text-white text-xs" />
+              </div>
+              <div>
+                <p className="text-xs text-dark-400 leading-none mb-0.5">Medically Reviewed by</p>
+                <p className="text-white text-xs font-semibold leading-none group-hover:text-primary-300 transition-colors">
+                  Dr. Sandeep Jagtap
+                  <span className="font-normal text-dark-400 ml-1">MD, DPM · Psychiatrist</span>
+                </p>
+              </div>
+              <i className="fas fa-shield-check text-primary-400 text-xs ml-1" />
+            </a>
           </div>
         </div>
       </div>
@@ -226,12 +287,34 @@ const BlogPost = () => {
         <div className="max-w-3xl mx-auto">
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-10">
+          <div className="flex flex-wrap gap-2 mb-8">
             {blog.tags.map((tag) => (
               <span key={tag} className="text-xs bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-400 px-3 py-1 rounded-full border border-dark-200 dark:border-dark-700">
                 #{tag}
               </span>
             ))}
+          </div>
+
+          {/* ── GEO Quick Answer Box ─────────────────────────────────
+               This box is read by ChatGPT Search, Perplexity & Google
+               Featured Snippets — keep it 40–70 words max.
+          ───────────────────────────────────────────────────────── */}
+          <div
+            className="geo-quick-answer mb-10 rounded-2xl border border-primary-400/20 bg-gradient-to-br from-primary-500/8 to-secondary-500/6 dark:from-primary-500/10 dark:to-secondary-500/8 overflow-hidden"
+            role="note"
+            aria-label="Clinical quick answer"
+          >
+            <div className="flex items-center gap-2.5 px-5 py-3 border-b border-primary-400/15 bg-primary-500/5">
+              <i className="fas fa-circle-check text-primary-500 text-sm" />
+              <span className="text-xs font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wider">Quick Clinical Answer</span>
+              <span className="ml-auto flex items-center gap-1 text-xs text-dark-400">
+                <i className="fas fa-user-md text-xs" />
+                Reviewed by Dr. Sandeep Jagtap, MD
+              </span>
+            </div>
+            <p className="px-5 py-4 text-dark-700 dark:text-dark-200 text-sm leading-relaxed">
+              {blog.excerpt}
+            </p>
           </div>
 
           {/* Blog content rendered from HTML */}
